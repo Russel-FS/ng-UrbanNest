@@ -1,99 +1,105 @@
-<div class="max-w-[1500px] mx-auto px-8 flex-grow">
-    <!-- Seccion principal -->
-    <div class="min-h-[500px] flex flex-col items-center justify-center py-20 relative">
-        <div class="text-center space-y-6 max-w-3xl mx-auto mb-11" @fadeIn>
-            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-gray-900">
-                Encuentra tu próximo hogar perfecto
-            </h1>
-            <p class="text-gray-600 md:text-lg text-base">
-                Explora las mejores propiedades en la ciudad con la experiencia más intuitiva
-            </p>
+<div class="w-full flex-grow">
+    <!-- Sección principal ajustada -->
+    <div class="relative min-h-[85vh] max-h-[800px] flex flex-col items-center justify-center">
+        <!-- Background -->
+        <div class="absolute inset-0">
+            <img src="https://img10.naventcdn.com/home/images/Urbania/sell/desktop/dfp-venta.jpg" 
+                 alt="Fondo inmobiliario" 
+                 class="w-full h-full object-cover brightness-[0.85]">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-black/10"></div>
         </div>
-       
-        <!-- busqueda -->
-        <div class="w-full max-w-4xl mx-auto" @fadeIn>
-            <!-- Tabs -->
-            <div class="flex justify-center mb-6">
-                <div class="inline-flex p-1 bg-black/5 rounded-xl">
-                    <button type="button" 
-                            class="px-6 py-2.5 rounded-lg text-sm font-medium bg-white shadow-sm text-gray-900 transition-all duration-300 hover:shadow-md active:scale-95 cursor-pointer">
-                        Alquilar
-                    </button>
-                    <button type="button" 
-                            class="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 transition-all duration-300 hover:bg-white/50 active:scale-95 cursor-pointer">
-                        Comprar
-                    </button>
-                    <button type="button" 
-                            class="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 transition-all duration-300 hover:bg-white/50 active:scale-95 cursor-pointer">
-                        Proyectos
-                    </button>
-                </div>
+
+        <!-- Contenido principal -->
+        <div class="w-full max-w-[1500px] mx-auto px-8">
+            <div class="text-center space-y-6 max-w-3xl mx-auto mb-14" @fadeIn>
+                <h1 class="text-3xl md:text-6xl font-bold tracking-tight text-white drop-shadow-sm">
+                    Encuentra tu próximo<br class="hidden sm:block"> hogar perfecto
+                </h1>
+                <p class="text-gray-200 md:text-xl text-base font-light drop-shadow-sm max-w-2xl mx-auto">
+                    Explora las mejores propiedades en la ciudad con la experiencia más intuitiva
+                </p>
             </div>
 
-            <!-- caja de busqueda -->
-            <div class="bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-4 rounded-2xl border border-white/20 transition-all duration-300 hover:shadow-[0_15px_40px_rgb(0,0,0,0.15)]">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1 max-w-xs">
-                        <div class="relative group">
-                            <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
-                            </svg>
-                            <select class="w-full pl-12 pr-10 py-3.5 bg-black/[0.02] border-1 border-gray-200 rounded-xl text-gray-600 text-sm focus:ring-0 appearance-none cursor-pointer hover:bg-black/[0.04] transition-all duration-300 outline-none group-hover:bg-black/[0.04]">
-                                <option value="" selected disabled>Tipo de propiedad</option>
-                                <option value="departamento">Departamento</option>
-                                <option value="casa">Casa</option>
-                                <option value="duplex">Dúplex</option>
-                                <option value="penthouse">Penthouse</option>
-                                <option value="oficina">Oficina</option>
-                                <option value="local">Local Comercial</option>
-                                <option value="terreno">Terreno</option>
-                                <option value="hotel">Hotel</option>
-                            </select>
-                            <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform duration-300 group-hover:translate-y-[-45%]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </div>
+            <!-- Contenedor de búsqueda -->
+            <div class="w-full max-w-4xl mx-auto" @fadeIn>
+                <!-- Tabs -->
+                <div class="flex justify-center mb-6">
+                    <div class="inline-flex p-1 bg-white/10 backdrop-blur-md rounded-xl space-x-1">
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95">
+                            Alquilar
+                        </button>
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95">
+                            Comprar
+                        </button>
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95">
+                            Proyectos
+                        </button>
                     </div>
-                    <div class="flex-[2]">
-                        <div class="relative group">
-                            <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                            <input type="text" 
-                                   placeholder="Buscar por ubicación, tipo de propiedad..."
-                                   class="w-full pl-12 pr-4 py-3.5 bg-black/[0.02] border-0 rounded-xl text-sm focus:ring-0 placeholder-gray-400 transition-all duration-300 hover:bg-black/[0.04] cursor-text outline-none">
-                        </div>
-                    </div>
-                    <button type="button" 
-                            class="md:w-auto w-full bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900 shadow-lg shadow-gray-200/50 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
-                        Buscar
-                    </button>
                 </div>
 
-                <!-- Tags populares -->
-                <div class="flex flex-wrap gap-2 mt-4 px-1">
-                    <span class="text-xs text-gray-500">Popular:</span>
-                    <button class="text-xs text-gray-600 transition-all duration-300 hover:text-black hover:bg-black/5 px-3 py-1 rounded-full cursor-pointer active:scale-95">
-                        Departamentos
-                    </button>
-                    <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
-                        Casas
-                    </button>
-                    <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
-                        Penthouse
-                    </button>
-                    <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
-                        Oficinas
-                    </button>
+                <!-- Caja de búsqueda -->
+                <div class="bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 rounded-2xl border border-white/20">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 max-w-xs">
+                            <div class="relative group">
+                                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                                </svg>
+                                <select class="w-full pl-12 pr-10 py-3.5 bg-black/[0.02] border-0 rounded-xl text-gray-600 text-sm focus:ring-0 appearance-none cursor-pointer hover:bg-black/[0.04] transition-all duration-300 outline-none group-hover:bg-black/[0.04]">
+                                    <option value="" selected disabled>Tipo de propiedad</option>
+                                    <option value="departamento">Departamento</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="duplex">Dúplex</option>
+                                    <option value="penthouse">Penthouse</option>
+                                    <option value="oficina">Oficina</option>
+                                    <option value="local">Local Comercial</option>
+                                    <option value="terreno">Terreno</option>
+                                    <option value="hotel">Hotel</option>
+                                </select>
+                                <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform duration-300 group-hover:translate-y-[-45%]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex-[2]">
+                            <div class="relative group">
+                                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                <input type="text" 
+                                       placeholder="Buscar por ubicación, tipo de propiedad..."
+                                       class="w-full pl-12 pr-4 py-3.5 bg-black/[0.02] border-0 rounded-xl text-sm focus:ring-0 placeholder-gray-400 transition-all duration-300 hover:bg-black/[0.04] cursor-text outline-none">
+                            </div>
+                        </div>
+                        <button type="button" 
+                                class="md:w-auto w-full bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900 shadow-lg shadow-gray-200/50 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- Tags populares -->
+                    <div class="flex flex-wrap gap-2 mt-4 px-1">
+                        <span class="text-xs text-gray-500">Popular:</span>
+                        <button class="text-xs text-gray-600 transition-all duration-300 hover:text-black hover:bg-black/5 px-3 py-1 rounded-full cursor-pointer active:scale-95">
+                            Departamentos
+                        </button>
+                        <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
+                            Casas
+                        </button>
+                        <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
+                            Penthouse
+                        </button>
+                        <button class="text-xs text-gray-600 hover:text-black transition-colors hover:bg-black/5 px-3 py-1 rounded-full">
+                            Oficinas
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--Elemento decorativo-->
-        <div class="absolute inset-0 -z-10 overflow-hidden animate-gradient">
-             
-            <div class="absolute inset-0 bg-gradient-to-b from-gray-50/50 via-white/80 to-white/90 backdrop-blur-sm"></div>
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-100 rounded-full mix-blend-multiply filter blur-2xl opacity-20"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-100 rounded-full mix-blend-multiply filter blur-2xl opacity-20"></div>
-        </div>
+        </div> 
+        <!-- Fondo decoración inferior -->
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f5f5f7] to-transparent"></div>
     </div>
 </div>
