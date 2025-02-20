@@ -1,7 +1,6 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { animate, style, transition, trigger } from '@angular/animations'; 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
