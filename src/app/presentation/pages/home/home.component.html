@@ -1,0 +1,231 @@
+<div class="w-full flex-grow">
+    <!-- Sección principal ajustada -->
+    <div class="relative min-h-[85vh] max-h-[800px] flex flex-col items-center justify-center">
+        <!-- Background -->
+        <div class="absolute inset-0">
+            <img src="https://img10.naventcdn.com/home/images/Urbania/sell/desktop/dfp-venta.jpg" 
+                 alt="Fondo inmobiliario" 
+                 class="w-full h-full object-cover brightness-[0.85]">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/10"></div>
+        </div>
+       
+        <!-- Contenido principal -->
+        <div class="w-full max-w-[1500px] mx-auto px-8 z-10">
+            <div class="text-center space-y-6 max-w-3xl mx-auto mb-14" @fadeIn>
+                <h1 class="text-3xl md:text-6xl font-bold tracking-tight text-white drop-shadow-sm">
+                    Encuentra tu próximo<br class="hidden sm:block"> hogar perfecto
+                </h1>
+                <p class="text-gray-200 md:text-xl text-base font-light drop-shadow-sm max-w-2xl mx-auto">
+                    Explora las mejores propiedades en la ciudad con la experiencia más intuitiva
+                </p>
+            </div>
+           
+            <!-- Contenedor de búsqueda -->
+            <div class="w-full max-w-4xl mx-auto" @fadeIn>
+                <!-- Tabs -->
+                <div class="flex justify-center mb-6">
+                    <div class="inline-flex p-1 bg-white/10 backdrop-blur-md rounded-xl space-x-1">
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95">
+                            Alquilar
+                        </button>
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95">
+                            Comprar
+                        </button>
+                        <button type="button" 
+                                class="px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95">
+                            Proyectos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Caja de búsqueda -->
+                <div class="bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 rounded-2xl border border-white/20">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 max-w-xs">
+                            <div class="relative group">
+                                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                                </svg>
+                                <select class="w-full pl-12 pr-10 py-3.5 bg-black/[0.02] border-0 rounded-xl text-gray-600 text-sm focus:ring-0 appearance-none cursor-pointer hover:bg-black/[0.04] transition-all duration-300 outline-none group-hover:bg-black/[0.04]">
+                                    <option value="" selected disabled>Tipo de propiedad</option>
+                                    <option value="departamento">Departamento</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="duplex">Dúplex</option>
+                                    <option value="penthouse">Penthouse</option>
+                                    <option value="oficina">Oficina</option>
+                                    <option value="local">Local Comercial</option>
+                                    <option value="terreno">Terreno</option>
+                                    <option value="hotel">Hotel</option>
+                                </select>
+                                <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform duration-300 group-hover:translate-y-[-45%]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex-[2]">
+                            <div class="relative group">
+                                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                <input type="text" 
+                                       placeholder="Buscar por ubicación, tipo de propiedad..."
+                                       class="w-full pl-12 pr-4 py-3.5 bg-black/[0.02] border-0 rounded-xl text-sm focus:ring-0 placeholder-gray-400 transition-all duration-300 hover:bg-black/[0.04] cursor-text outline-none">
+                            </div>
+                        </div>
+                        <button type="button" 
+                                class="md:w-auto w-full bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900 shadow-lg shadow-gray-200/50 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- Tags populares -->
+                    <div class="flex flex-wrap gap-2 mt-4 px-1">
+                        <span class="text-xs text-gray-500">Popular:</span>
+                        <button class="text-xs text-gray-600 hover:text-white transition-all duration-300 hover:bg-gray-700 px-3 py-1 rounded-full cursor-pointer active:scale-95">
+                            Departamentos
+                        </button>
+                        <button class="text-xs text-gray-600 hover:text-white transition-all duration-300 hover:bg-gray-700 px-3 py-1 rounded-full cursor-pointer active:scale-95">
+                            Casas
+                        </button>
+                        <button class="text-xs text-gray-600 hover:text-white transition-all duration-300 hover:bg-gray-700 px-3 py-1 rounded-full cursor-pointer active:scale-95">
+                            Penthouse
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+
+<!-- Sección de navegación rápida -->
+<div class="bg-white py-16">
+    <div class="max-w-[1500px] mx-auto px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">¿Cómo podemos ayudarte?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Guía para alquilar -->
+            <a href="#" class="group flex flex-col items-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-300">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Guía para alquilar</h3>
+                <p class="text-sm text-gray-500 text-center">Todo lo que necesitas saber sobre el proceso de alquiler.</p>
+                <span class="mt-4 text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                    Leer más
+                    <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </span>
+            </a>
+
+            <!-- Publicar propiedad -->
+            <a href="#" class="group flex flex-col items-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-300">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+                    <svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Publicar propiedad</h3>
+                <p class="text-sm text-gray-500 text-center">Publica tu propiedad en menos de 10 minutos.</p>
+                <span class="mt-4 text-green-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                    Comenzar
+                    <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </span>
+            </a>
+ 
+            <!-- Centro de ayuda -->
+            <a href="#" class="group flex flex-col items-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-300">
+                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+                    <svg class="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Centro de ayuda</h3>
+                <p class="text-sm text-gray-500 text-center">Resuelve todas tus dudas aquí.</p>
+                <span class="mt-4 text-orange-600 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                    Ir al centro
+                    <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Sección de listados destacados -->
+<div class="bg-gray-50 py-16">
+    <div class="max-w-[1500px] mx-auto px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Listados de inmuebles que te pueden interesar</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> 
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Departamentos en alquiler más vistos</h3>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Ver más →</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Los inmuebles recién publicados</h3>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Ver más →</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Inmuebles que bajaron de precio</h3>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Ver más →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+<!-- Sección CTA de propietarios -->
+<div class="bg-gray-50 py-16">
+    <div class="max-w-[1500px] mx-auto px-8">
+        <div class="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">¿Eres propietario?</h2>
+                    <p class="text-gray-600 mb-6">Publica tu propiedad en minutos y accede a nuestro proceso de verificación premium.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Proceso de validación en 24h
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Soporte de agentes verificados
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Dashboard de seguimiento
+                        </li>
+                    </ul>
+                    <button class="bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900">
+                        Publicar propiedad
+                    </button>
+                </div>
+                <div class="hidden md:block">
+                    <img src="https://th.bing.com/th/id/R.c008f01fadfa2c48d15f80764e363ce6?rik=hOR55vV1ajoV5g&pid=ImgRaw&r=0" alt="Gestión de propiedades" class="w-full max-w-md mx-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

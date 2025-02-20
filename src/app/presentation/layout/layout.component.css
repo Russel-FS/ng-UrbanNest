@@ -1,0 +1,60 @@
+/* Asegura transiciones suaves */
+.sidebar-transition {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilos personalizados para scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ajustes para el menú móvil */
+@media (max-width: 768px) {
+    .mobile-menu {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.open {
+        transform: translateX(0);
+    }
+}
+
+/* Efecto hover para las tarjetas de propiedades */
+.property-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Animación para el loading state */
+.loading-skeleton {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
