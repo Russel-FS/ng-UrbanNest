@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center" @fadeAnimation>
   <div class="max-w-md w-full bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_40px_rgb(0,0,0,0.08)] p-10 space-y-8 border border-white/40">
     <!-- Header seccion -->
     <div class="text-center">
@@ -110,7 +110,7 @@
 
       <p class="text-center text-sm text-gray-500">
         ¿Ya tienes una cuenta?
-        <a routerLink="/auth/login" class="font-medium text-black hover:text-gray-600 transition-all duration-300 hover:underline ml-1">
+        <a [routerLink]="['/auth/login']" class="font-medium text-black hover:text-gray-600 transition-all duration-300 hover:underline ml-1">
           Inicia sesión aquí
         </a>
       </p>

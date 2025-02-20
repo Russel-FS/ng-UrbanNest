@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +9,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterModule],
+  imports: [ReactiveFormsModule,RouterModule],
+   animations: [
+      trigger('fadeAnimation', [
+        transition(':enter', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          animate(
+            '500ms ease-in-out',
+            style({ opacity: 1, transform: 'translateY(0)' })
+          ),
+        ]),
+      ]),
+    ],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
