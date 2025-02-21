@@ -1,0 +1,31 @@
+<div class="system-config-container">
+  <h2>Configuración del Sistema</h2>
+  
+  <form class="config-form">
+    <div class="form-section">
+      <h3>Configuración de Imágenes</h3>
+      <div class="form-group">
+        <label>Tamaño máximo de imagen (MB)</label>
+        <input type="number" [(ngModel)]="systemSettings.maxImageSize" name="maxImageSize">
+      </div>
+      <div class="form-group">
+        <label>Máximo de imágenes por propiedad</label>
+        <input type="number" [(ngModel)]="systemSettings.maxImagesPerProperty" name="maxImages">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Criterios de Validación</h3>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" 
+                 [(ngModel)]="systemSettings.validationCriteria.requiresDocumentation"
+                 name="requiresDocs">
+          Requerir documentación legal
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-save" (click)="saveSettings()">Guardar Configuración</button>
+  </form>
+</div>

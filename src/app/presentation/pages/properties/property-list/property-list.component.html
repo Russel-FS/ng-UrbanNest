@@ -1,0 +1,15 @@
+<div class="property-list-container">
+  <div class="filters-section">
+    <h2>Filtros</h2>
+    <div class="filter-controls">
+      <!-- Filtros aquí -->
+    </div>
+  </div>
+  
+  <div class="properties-grid">
+    <app-property-card
+      *ngFor="let property of properties"
+      [property]="property"
+    ></app-property-card>
+  </div>
+</div>

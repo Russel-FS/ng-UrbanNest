@@ -1,0 +1,20 @@
+<div class="review-container">
+  <div class="property-details">
+    <!-- Detalles de la propiedad -->
+  </div>
+
+  <div class="review-checklist">
+    <h3>Criterios de Revisión</h3>
+    <div *ngFor="let criteria of reviewCriteria" class="criteria-item">
+      <input type="checkbox" 
+             [id]="criteria.id" 
+             [(ngModel)]="criteria.checked">
+      <label [for]="criteria.id">{{criteria.label}}</label>
+    </div>
+  </div>
+
+  <div class="review-actions">
+    <button class="btn-approve" (click)="submitReview()">Aprobar</button>
+    <button class="btn-reject" (click)="submitReview()">Rechazar</button>
+  </div>
+</div>

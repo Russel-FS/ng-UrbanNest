@@ -1,0 +1,19 @@
+<div class="property-card">
+  <div class="property-image">
+    <img [src]="property?.mainImage || 'assets/images/placeholder.jpg'" 
+         [alt]="property?.title">
+    <app-status-badge [status]="property?.status"></app-status-badge>
+  </div>
+  
+  <div class="property-info">
+    <h3>{{property?.title}}</h3>
+    <p class="price">{{property?.price | currency}}</p>
+    <p class="location">{{property?.location}}</p>
+    
+    <div class="property-features">
+      <span><i class="icon-bed"></i> {{property?.bedrooms}}</span>
+      <span><i class="icon-bath"></i> {{property?.bathrooms}}</span>
+      <span><i class="icon-size"></i> {{property?.size}}m²</span>
+    </div>
+  </div>
+</div>

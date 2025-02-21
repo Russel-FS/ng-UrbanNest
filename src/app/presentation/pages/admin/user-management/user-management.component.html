@@ -1,0 +1,33 @@
+<div class="user-management-container">
+  <div class="actions-bar">
+    <button class="btn-primary" (click)="createUser()">
+      Crear Usuario
+    </button>
+  </div>
+
+  <div class="users-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Rol</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.role}}</td>
+          <td>
+            <app-status-badge [status]="user.status"></app-status-badge>
+          </td>
+          <td class="actions">
+            <button (click)="resetPassword(user.id)">Resetear Contraseña</button>
+            <button (click)="updateRole(user.id, 'newRole')">Cambiar Rol</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
