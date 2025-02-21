@@ -5,8 +5,27 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-system-config',
   templateUrl: './system-config.component.html',
-  styleUrls: ['./system-config.component.scss'] ,
-  imports: [CommonModule,FormsModule]
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.5s ease-out;
+    }
+  `]
 })
 export class SystemConfigComponent {
   systemSettings = {
@@ -19,7 +38,15 @@ export class SystemConfigComponent {
     }
   };
 
-  saveSettings() {
-    // Lógica para guardar configuración
+  async saveSettings() {
+    try {
+      // Simular guardado
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // logica para guardar la configuración
+       
+      console.log('Configuración guardada exitosamente');
+    } catch (error) {
+      console.error('Error al guardar la configuración:', error);
+    }
   }
 }

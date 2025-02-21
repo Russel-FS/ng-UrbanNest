@@ -8,14 +8,17 @@ import { adminRoutes } from './presentation/pages/admin/admin.routes';
 import { agentRoutes } from './presentation/pages/agent/agent.routes';
 
 export const routes: Routes = [
+  // Rutas de administración
   {
     path: 'admin',
     children: adminRoutes,
   },
+  // Rutas de agentes
   {
     path: 'agent',
     children: agentRoutes,
   },
+  // Rutas principales
   {
     path: '',
     component: LayoutComponent,
@@ -30,6 +33,7 @@ export const routes: Routes = [
       },
     ],
   },
+  // Rutas de autenticación
   {
     path: 'auth/login',
     component: LoginComponent,
@@ -38,6 +42,7 @@ export const routes: Routes = [
     path: 'auth/register',
     component: RegisterComponent,
   },
+  // Redirección por defecto
   {
     path: '',
     redirectTo: 'admin',

@@ -1,31 +1,96 @@
-<div class="system-config-container">
-  <h2>Configuración del Sistema</h2>
-  
-  <form class="config-form">
-    <div class="form-section">
-      <h3>Configuración de Imágenes</h3>
-      <div class="form-group">
-        <label>Tamaño máximo de imagen (MB)</label>
-        <input type="number" [(ngModel)]="systemSettings.maxImageSize" name="maxImageSize">
-      </div>
-      <div class="form-group">
-        <label>Máximo de imágenes por propiedad</label>
-        <input type="number" [(ngModel)]="systemSettings.maxImagesPerProperty" name="maxImages">
-      </div>
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 p-6">
+  <div class="max-w-4xl mx-auto transform transition-all duration-500 hover:scale-[1.01]">
+    <!-- Header Section -->
+    <div class="bg-white rounded-t-2xl shadow-sm p-8 border-b border-gray-100">
+      <h2 class="text-4xl font-light text-emerald-800 animate-fade-in">Configuración del Sistema</h2>
+      <p class="text-slate-600 mt-2 animate-slide-up">Administra las preferencias y parámetros del sistema</p>
     </div>
 
-    <div class="form-section">
-      <h3>Criterios de Validación</h3>
-      <div class="form-group">
-        <label>
-          <input type="checkbox" 
-                 [(ngModel)]="systemSettings.validationCriteria.requiresDocumentation"
-                 name="requiresDocs">
-          Requerir documentación legal
-        </label>
-      </div>
-    </div>
+    <!-- Form Container -->
+    <div class="bg-white rounded-b-2xl shadow-lg p-8">
+      <form class="space-y-8">
+        <!-- Imagen -->
+        <div class="bg-slate-50 rounded-xl p-6 transform transition-all duration-300 hover:shadow-md">
+          <h3 class="text-xl font-medium text-emerald-700 mb-6 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Configuración de Imágenes
+          </h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-2 transform transition-all duration-300 hover:-translate-y-1">
+              <label class="block text-sm font-medium text-emerald-700">Tamaño máximo (MB)</label>
+              <input 
+                type="number" 
+                [(ngModel)]="systemSettings.maxImageSize" 
+                name="maxImageSize"
+                class="w-full px-4 py-3 bg-white border-0 rounded-xl focus:ring-2 focus:ring-emerald-500 transition-all duration-300">
+            </div>
 
-    <button class="btn-save" (click)="saveSettings()">Guardar Configuración</button>
-  </form>
+            <div class="space-y-2 transform transition-all duration-300 hover:-translate-y-1">
+              <label class="block text-sm font-medium text-emerald-700">Máximo de imágenes</label>
+              <input 
+                type="number" 
+                [(ngModel)]="systemSettings.maxImagesPerProperty" 
+                name="maxImages"
+                class="w-full px-4 py-3 bg-white border-0 rounded-xl focus:ring-2 focus:ring-emerald-500 transition-all duration-300">
+            </div>
+          </div>
+        </div>
+
+        <!-- Validation-->
+        <div class="bg-slate-50 rounded-xl p-6 transform transition-all duration-300 hover:shadow-md">
+          <h3 class="text-xl font-medium text-emerald-700 mb-6 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Criterios de Validación
+          </h3>
+
+          <div class="space-y-4">
+            <label class="flex items-center space-x-3 group cursor-pointer">
+              <div class="relative">
+                <input 
+                  type="checkbox" 
+                  [(ngModel)]="systemSettings.validationCriteria.requiresDocumentation"
+                  name="requiresDocs"
+                  class="peer sr-only">
+                <div class="w-10 h-6 bg-gray-200 rounded-full peer-focus:ring-4 peer-focus:ring-emerald-200 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+              </div>
+              <span class="text-slate-700 group-hover:text-emerald-700 transition-colors duration-200">
+                Requerir documentación legal
+              </span>
+            </label>
+
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-emerald-700">Resolución mínima</label>
+              <input 
+                type="text" 
+                [(ngModel)]="systemSettings.validationCriteria.minImageResolution"
+                name="minResolution"
+                class="w-full px-4 py-3 bg-white border-0 rounded-xl focus:ring-2 focus:ring-emerald-500 transition-all duration-300">
+            </div>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="flex justify-end">
+          <button 
+            (click)="saveSettings()"
+            class="group px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 flex items-center transform hover:-translate-y-1">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="h-5 w-5 mr-2 transform transition-transform group-hover:scale-110" 
+                 viewBox="0 0 20 20" 
+                 fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span class="transform transition-all group-hover:translate-x-1">
+              Guardar Cambios
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
