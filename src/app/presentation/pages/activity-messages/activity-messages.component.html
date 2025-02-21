@@ -1,0 +1,48 @@
+<div class="w-full bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div class="max-w-[1500px] mx-auto px-8 py-12">
+        <div class="flex items-center justify-between mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+                Centro de mensajes
+                <span class="block text-sm font-normal text-gray-500 mt-2">Gestiona tus comunicaciones de forma efectiva</span>
+            </h1>
+            <div class="flex items-center gap-4">
+                <button class="bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </button>
+                <button class="bg-black text-white px-6 py-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <i class="fas fa-plus mr-2"></i> Nuevo mensaje
+                </button>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <nav class="bg-white rounded-2xl shadow-sm p-3 mb-8 backdrop-blur-lg bg-opacity-90">
+            <ul class="flex flex-wrap gap-3">
+                <li *ngFor="let section of sections">
+                    <button [ngClass]="{'bg-black text-white shadow-lg': activeSection === section.id, 
+                                      'text-gray-600 hover:bg-gray-50': activeSection !== section.id}"
+                            (click)="setActiveSection(section.id)"
+                            class="px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                        <i [class]="'fas ' + section.icon"></i>
+                        {{section.name}}
+                        <span *ngIf="section.count" 
+                              [ngClass]="{'bg-white text-black': activeSection === section.id,
+                                        'bg-gray-200 text-gray-700': activeSection !== section.id}"
+                              class="ml-2 px-2 py-0.5 rounded-full text-xs">
+                            {{section.count}}
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </nav> 
+
+        <!-- Contenido -->
+        <div [ngSwitch]="activeSection" class="min-h-[400px] transition-all duration-300">
+            <app-contacts *ngSwitchCase="'contacts'" @fadeAnimation></app-contacts>
+            <app-favorites *ngSwitchCase="'favorites'" @fadeAnimation></app-favorites>
+            <app-history *ngSwitchCase="'history'" @fadeAnimation></app-history>
+            <app-discarded *ngSwitchCase="'discarded'" @fadeAnimation></app-discarded>
+            <app-searches *ngSwitchCase="'searches'" @fadeAnimation></app-searches>
+        </div>
+    </div>
+</div>
