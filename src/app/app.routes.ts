@@ -5,12 +5,17 @@ import { LoginComponent } from './presentation/pages/auth/login/login.component'
 import { RegisterComponent } from './presentation/pages/auth/register/register.component';
 import { ActivityMessagesComponent } from './presentation/pages/activity-messages/activity-messages.component';
 import { adminRoutes } from './presentation/pages/admin/admin.routes';
+import { agentRoutes } from './presentation/pages/agent/agent.routes';
 
 export const routes: Routes = [
   {
     path: 'admin',
     children: adminRoutes,
-  }, 
+  },
+  {
+    path: 'agent',
+    children: agentRoutes,
+  },
   {
     path: '',
     component: LayoutComponent,
@@ -32,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'auth/register',
     component: RegisterComponent,
-  }, 
+  },
   {
     path: '',
     redirectTo: 'admin',
