@@ -1,0 +1,82 @@
+<div [ngClass]="isGridView ? 'grid-card' : 'list-card'" 
+     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+  
+  <!-- Grid View -->
+  <div *ngIf="isGridView" class="relative">
+    <div class="aspect-[4/3] relative overflow-hidden">
+      <img [src]="property?.images[0] || 'assets/images/placeholder.jpg'" 
+           [alt]="property?.title"
+           class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+      
+      <div class="absolute top-3 left-3">
+        <app-status-badge [status]="property?.status"></app-status-badge>
+      </div>
+      
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+        <p class="text-white font-semibold text-lg">{{property?.price | currency}}</p>
+      </div>
+    </div>
+    
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900 mb-2">{{property?.title}}</h3>
+      <p class="text-gray-600 text-sm mb-3">{{property?.location}}</p>
+      
+      <div class="flex items-center gap-4 text-sm text-gray-500">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          {{property?.features?.bedrooms}} hab
+        </span>
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          {{property?.features?.bathrooms}} baños
+        </span>
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+          </svg>
+          {{property?.features?.area}}m²
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- List View -->
+  <div *ngIf="!isGridView" class="flex">
+    <div class="w-48 relative">
+      <img [src]="property?.images[0] || 'assets/images/placeholder.jpg'" 
+           [alt]="property?.title"
+           class="w-full h-full object-cover">
+      <div class="absolute top-3 left-3">
+        <app-status-badge [status]="property?.status"></app-status-badge>
+      </div>
+    </div>
+    
+    <div class="flex-1 p-4">
+      <div class="flex justify-between items-start mb-2">
+        <h3 class="font-medium text-gray-900">{{property?.title}}</h3>
+        <p class="font-semibold text-lg">{{property?.price | currency}}</p>
+      </div>
+      
+      <p class="text-gray-600 text-sm mb-3">{{property?.location}}</p>
+      
+      <div class="flex items-center gap-6 text-sm text-gray-500">
+        <span class="flex items-center gap-1">
+          {{property?.features?.bedrooms}} habitaciones
+        </span>
+        <span class="flex items-center gap-1">
+          {{property?.features?.bathrooms}} baños
+        </span>
+        <span class="flex items-center gap-1">
+          {{property?.features?.area}}m²
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

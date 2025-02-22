@@ -1,0 +1,233 @@
+<div class="min-h-screen bg-[#f8fafc] p-8">
+  <div class="max-w-8xl mx-auto space-y-8">
+    <!-- Background -->
+    <div class="relative min-h-[40vh] flex flex-col items-center justify-center mb-8">
+      <div class="absolute inset-0">
+        <img src="https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg" 
+             alt="Properties background" 
+             class="w-full h-full object-cover brightness-[0.85]">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/10"></div>
+      </div>
+
+      <!--  busqueda Header -->
+      <div class="w-full max-w-[1500px] mx-auto px-8 z-10">
+        <div class="text-center space-y-6 max-w-3xl mx-auto mb-8">
+          <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-white drop-shadow-sm">
+            Explora Nuestras Propiedades
+          </h1>
+          <p class="text-gray-200 md:text-xl text-base font-light drop-shadow-sm">
+            Encuentra el espacio perfecto para ti entre nuestra selección premium
+          </p>
+        </div>
+
+        <!-- barra de busqueda -->
+        <div class="w-full max-w-4xl mx-auto">
+          <div class="bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6 rounded-2xl border border-white/20">
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- tipo de propiedad -->
+              <div class="flex-1 max-w-xs">
+                <div class="relative group">
+                  <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                  <select [(ngModel)]="filterOptions.type" 
+                          class="w-full pl-12 pr-10 py-3.5 bg-black/[0.02] border-0 rounded-xl text-gray-600 text-sm focus:ring-0 appearance-none cursor-pointer hover:bg-black/[0.04] transition-all">
+                    <option *ngFor="let type of propertyTypes" [value]="type.value">
+                      {{type.label}}
+                    </option>
+                  </select>
+                  <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform duration-300 group-hover:translate-y-[-45%]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- busqueda input -->
+              <div class="flex-[2]">
+                <div class="relative group">
+                  <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                  <input type="text" 
+                         [(ngModel)]="searchQuery"
+                         placeholder="Buscar por ubicación, características..."
+                         class="w-full pl-12 pr-4 py-3.5 bg-black/[0.02] border-0 rounded-xl text-sm focus:ring-0 placeholder-gray-400 transition-all duration-300 hover:bg-black/[0.04]">
+                </div>
+              </div>
+
+              <!-- Search Button -->
+              <button 
+                (click)="searchProperties()"
+                class="md:w-auto w-full bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900 shadow-lg shadow-gray-200/50 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- filtros -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100/50 mb-8">
+      <div class="p-8">
+        <!-- Header de filtros -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div class="flex items-center gap-4">
+            <h2 class="text-2xl font-light text-gray-900">Filtros</h2>
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              {{properties.length}} propiedades encontradas
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-4">
+            <button 
+              (click)="toggleViewMode()"
+              class="p-2.5 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path *ngIf="viewMode === 'grid'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                <path *ngIf="viewMode === 'list'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+              </svg>
+            </button>
+            <button
+              (click)="resetFilters()"
+              class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all text-sm">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              Limpiar filtros
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor de filtros -->
+        <div class="grid gap-8">
+          <!-- Filtros principales -->
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Tipo de propiedad -->
+            <div class="space-y-3">
+              <label class="block text-sm font-medium text-gray-700">Tipo de propiedad</label>
+              <div class="flex flex-wrap gap-2">
+                <button *ngFor="let type of propertyTypes"
+                        (click)="filterOptions.type = type.value"
+                        [class]="filterOptions.type === type.value ? 
+                                 'bg-black text-white' : 
+                                 'bg-gray-50 text-gray-600 hover:bg-gray-100'"
+                        class="px-4 py-2 rounded-xl text-sm transition-all duration-300">
+                  {{type.label}}
+                </button>
+              </div>
+            </div>
+
+            <!-- Rango de precio -->
+            <div class="space-y-3">
+              <label class="block text-sm font-medium text-gray-700">Rango de precio</label>
+              <div class="flex items-center gap-3">
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                  <input type="number" 
+                         [(ngModel)]="filterOptions.price.min"
+                         placeholder="Mínimo"
+                         class="w-full pl-7 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all text-sm">
+                </div>
+                <span class="text-gray-300">—</span>
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                  <input type="number" 
+                         [(ngModel)]="filterOptions.price.max"
+                         placeholder="Máximo"
+                         class="w-full pl-7 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all text-sm">
+                </div>
+              </div>
+            </div>
+
+            <!-- Características -->
+            <div class="space-y-3">
+              <label class="block text-sm font-medium text-gray-700">Características</label>
+              <div class="grid grid-cols-3 gap-3">
+                <div class="relative">
+                  <select [(ngModel)]="filterOptions.features.minBedrooms"
+                          class="w-full appearance-none pl-9 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all text-sm">
+                    <option value="0">Hab.</option>
+                    <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}+ hab</option>
+                  </select>
+                  <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                  </svg>
+                </div>
+                <div class="relative">
+                  <select [(ngModel)]="filterOptions.features.minBathrooms"
+                          class="w-full appearance-none pl-9 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all text-sm">
+                    <option value="0">Baños</option>
+                    <option *ngFor="let n of [1,2,3,4]" [value]="n">{{n}}+ baños</option>
+                  </select>
+                  <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                  </svg>
+                </div>
+                <div class="relative">
+                  <input type="number" 
+                         [(ngModel)]="filterOptions.features.minArea"
+                         placeholder="m²"
+                         class="w-full pl-9 pr-4 py-2.5 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all text-sm">
+                  <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botón de aplicar filtros -->
+          <div class="flex justify-end pt-4 border-t border-gray-100">
+            <button 
+              (click)="applyFilters()"
+              class="inline-flex items-center px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 group">
+              <span class="text-sm font-medium">Aplicar filtros</span>
+              <svg class="w-4 h-4 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Resultado de busqueda -->
+    <div class="relative">
+      <!-- Loading -->
+      <div *ngIf="isLoading" 
+           class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-black rounded-full animate-bounce"></div>
+          <div class="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-.3s]"></div>
+          <div class="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-.5s]"></div>
+        </div>
+      </div>
+
+      <!-- Properties Grid -->
+      <div [ngClass]="viewMode === 'grid' ? 
+                     'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6' : 
+                     'space-y-4'">
+        <app-property-card
+          *ngFor="let property of properties"
+          [property]="property"
+          [viewMode]=" viewMode"
+          class="transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+        </app-property-card>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && properties.length === 0" 
+           class="text-center py-16 bg-white rounded-2xl border border-dashed border-gray-200">
+        <div class="max-w-sm mx-auto">
+          <svg class="w-12 h-12 mx-auto text-[#94a3b8] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <h3 class="text-lg font-medium text-[#334155] mb-2">Sin resultados</h3>
+          <p class="text-[#64748b] text-sm">Ajusta los filtros para encontrar más propiedades</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
