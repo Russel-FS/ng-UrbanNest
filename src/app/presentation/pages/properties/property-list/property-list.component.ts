@@ -92,7 +92,7 @@ export class PropertyListComponent implements OnInit {
         bathrooms: 2,
         area: 150
       },
-      images: ["https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg"]
+      images: ["image1.jpg", "image2.jpg", "image3.jpg"]
     },
  
   ];
@@ -193,7 +193,7 @@ export class PropertyListComponent implements OnInit {
             bathrooms: 2,
             area: 180
           },
-          images: ['apartment1.jpg', 'apartment2.jpg']
+          images: ['https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg', 'apartment2.jpg']
         },
     
       ];
