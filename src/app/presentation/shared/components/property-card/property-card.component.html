@@ -2,7 +2,7 @@
      class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
   
   <!-- Grid View -->
-  <div *ngIf="isGridView" class="relative" @cardAnimation>
+  <div *ngIf="isGridView" class="relative">
     <div class="aspect-[4/3] relative overflow-hidden">
       <img [src]="property?.images[0] || 'assets/images/placeholder.jpg'" 
            [alt]="property?.title"
@@ -48,7 +48,7 @@
   </div>
 
   <!-- List View -->
-  <div *ngIf="!isGridView" class="flex" @cardAnimation>
+  <div *ngIf="!isGridView" class="flex">
     <div class="w-48 relative">
       <img [src]="property?.images[0] || 'assets/images/placeholder.jpg'" 
            [alt]="property?.title"
