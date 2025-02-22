@@ -7,6 +7,7 @@ import { ActivityMessagesComponent } from './presentation/pages/activity-message
 import { adminRoutes } from './presentation/pages/admin/admin.routes';
 import { agentRoutes } from './presentation/pages/agent/agent.routes';
 import { PropertyFormComponent } from './presentation/pages/properties/property-form/property-form.component';
+import { PropertyListComponent } from './presentation/pages/properties/property-list/property-list.component';
 
 export const routes: Routes = [
   // Rutas de administración
@@ -43,9 +44,13 @@ export const routes: Routes = [
     path: 'auth/register',
     component: RegisterComponent,
   },
-  { 
+  {
     path: 'property-form',
-    component : PropertyFormComponent 
+    component: PropertyFormComponent,
+  },
+  {
+    path: 'property-list',
+    component: PropertyListComponent,
   },
   // Redirección por defecto
   {
@@ -53,5 +58,4 @@ export const routes: Routes = [
     redirectTo: 'admin',
     pathMatch: 'full',
   },
-   
 ];

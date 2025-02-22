@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
       padding: 4px 8px;
       border-radius: 4px;
       font-size: 12px;
+      background-color: #f0f0f0;
     }
   `]
 })
