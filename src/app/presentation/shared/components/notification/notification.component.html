@@ -1,0 +1,84 @@
+<div [@notificationState]="visible ? 'visible' : 'hidden'"
+     (@notificationState.done)="onAnimationDone($event)"
+     (mouseenter)="onMouseEnter()"
+     (mouseleave)="onMouseLeave()"
+     class="fixed bottom-4 right-4 flex items-start max-w-sm w-full overflow-hidden rounded-lg shadow-lg"
+     [ngClass]="{
+       'bg-emerald-50 border border-emerald-200': type === 'success',
+       'bg-red-50 border border-red-200': type === 'error',
+       'bg-amber-50 border border-amber-200': type === 'warning',
+       'bg-blue-50 border border-blue-200': type === 'info'
+     }">
+  
+  <!-- Icon -->
+  <div class="flex-shrink-0 p-4">
+    <svg class="w-6 h-6"
+         [ngClass]="{
+           'text-emerald-600': type === 'success',
+           'text-red-600': type === 'error',
+           'text-amber-600': type === 'warning',
+           'text-blue-600': type === 'info'
+         }"
+         xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+      <path stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            [attr.d]="getIcon()"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 p-4">
+    <p class="text-sm"
+       [ngClass]="{
+         'text-emerald-900': type === 'success',
+         'text-red-900': type === 'error',
+         'text-amber-900': type === 'warning',
+         'text-blue-900': type === 'info'
+       }">
+      {{message}}
+    </p>
+  </div>
+
+  <!-- Close Button -->
+  <button (click)="close()"
+          class="flex-shrink-0 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-tr-lg rounded-br-lg"
+          [ngClass]="{
+            'hover:bg-emerald-100 focus:ring-emerald-500': type === 'success',
+            'hover:bg-red-100 focus:ring-red-500': type === 'error',
+            'hover:bg-amber-100 focus:ring-amber-500': type === 'warning',
+            'hover:bg-blue-100 focus:ring-blue-500': type === 'info'
+          }">
+    <svg class="w-5 h-5"
+         [ngClass]="{
+           'text-emerald-500': type === 'success',
+           'text-red-500': type === 'error',
+           'text-amber-500': type === 'warning',
+           'text-blue-500': type === 'info'
+         }"
+         xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+      <path stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- Progress Bar -->
+  <div *ngIf="autoClose"
+       class="absolute bottom-0 left-0 h-1 transition-all duration-100"
+       [ngClass]="{
+         'bg-emerald-500': type === 'success',
+         'bg-red-500': type === 'error',
+         'bg-amber-500': type === 'warning',
+         'bg-blue-500': type === 'info'
+       }"
+       [style.width.%]="progress">
+  </div>
+</div>

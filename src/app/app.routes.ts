@@ -8,6 +8,7 @@ import { adminRoutes } from './presentation/pages/admin/admin.routes';
 import { agentRoutes } from './presentation/pages/agent/agent.routes';
 import { PropertyFormComponent } from './presentation/pages/properties/property-form/property-form.component';
 import { PropertyListComponent } from './presentation/pages/properties/property-list/property-list.component';
+import { NotificationComponent } from './presentation/shared/components/notification/notification.component';
 
 export const routes: Routes = [
   // Rutas de administración
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'property-list',
     component: PropertyListComponent,
+  },
+  { 
+    path: 'noty',
+    component: NotificationComponent
   },
   // Redirección por defecto
   {
