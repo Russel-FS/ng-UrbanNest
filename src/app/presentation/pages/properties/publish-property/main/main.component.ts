@@ -9,6 +9,6 @@ import { ProgressTrackerComponent } from "../../../../shared/components/progress
 })
 export class MainComponent {
 
-  currentStep: number = 1;
+  currentStep: number = 2;
   
 }

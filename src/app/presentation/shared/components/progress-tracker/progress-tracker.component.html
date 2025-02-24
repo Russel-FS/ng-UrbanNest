@@ -7,7 +7,7 @@
         <!-- Círculo -->
         <div
           [ngClass]="{
-            'bg-blue-950 ring-4 ring-white shadow-xl scale-110': isCurrent(
+            'bg-blue-950 ring-3 ring-white shadow-xl scale-110': isCurrent(
               step.number
             ),
             'bg-gradient-to-tr from-gray-700 to-gray-800': isCompleted(
@@ -16,7 +16,7 @@
             'bg-white/80 backdrop-blur-sm':
               !isCompleted(step.number) && !isCurrent(step.number)
           }"
-          class="relative rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center transition-all duration-500 ease-out hover:scale-105 shadow-lg"
+          class="relative rounded-full h-6 w-6 md:h-8 md:w-8 flex items-center justify-center transition-all duration-500 ease-out hover:scale-105 shadow-lg"
         >
           <!-- icono o número -->
           <span
@@ -25,7 +25,7 @@
               'text-gray-700':
                 !isCompleted(step.number) && !isCurrent(step.number)
             }"
-            class="text-base md:text-lg font-bold"
+            class="text-sm md:text-base font-bold"
           >
             {{ step.number }}
           </span>
@@ -58,7 +58,7 @@
             ),
             'bg-gray-200': !isCompleted(step.number)
           }"
-          class="absolute top-4 md:top-6 -translate-y-1/2 left-[calc(50%+20px)] w-full h-[2px] transition-all duration-1000"
+          class="absolute top-3 md:top-4.5 -translate-y-1/2 left-[calc(50%+16px)] w-full h-[2px] transition-all duration-1000"
         ></div>
       </div>
     </ng-container>
