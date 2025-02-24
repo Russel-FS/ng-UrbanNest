@@ -6,10 +6,9 @@ import { RegisterComponent } from './presentation/pages/auth/register/register.c
 import { ActivityMessagesComponent } from './presentation/pages/activity-messages/activity-messages.component';
 import { adminRoutes } from './presentation/pages/admin/admin.routes';
 import { agentRoutes } from './presentation/pages/agent/agent.routes';
-import { PropertyFormComponent } from './presentation/pages/properties/publish-property/property-form/property-form.component';
 import { PropertyListComponent } from './presentation/pages/properties/property-list/property-list.component';
-import { NotificationComponent } from './presentation/shared/components/notification/notification.component';
 import { AccountSetupFormComponent } from './presentation/pages/properties/publish-property/account-setup-form/account-setup-form.component';
+import { MainComponent } from './presentation/pages/properties/publish-property/main/main.component';
 
 export const routes: Routes = [
   // Rutas de administración
@@ -35,10 +34,14 @@ export const routes: Routes = [
         path: 'activity-messages',
         component: ActivityMessagesComponent,
       },
-      { 
+      {
         path: 'account-setup',
-        component: AccountSetupFormComponent
-      }
+        component: AccountSetupFormComponent,
+      },
+      {
+        path: 'property-main',
+        component: MainComponent,
+      },
     ],
   },
   // Rutas de autenticación
@@ -51,17 +54,10 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'property-form',
-    component: PropertyFormComponent,
-  },
-  {
     path: 'property-list',
     component: PropertyListComponent,
   },
-  { 
-    path: 'noty',
-    component: NotificationComponent
-  },
+
   // Redirección por defecto
   {
     path: '',

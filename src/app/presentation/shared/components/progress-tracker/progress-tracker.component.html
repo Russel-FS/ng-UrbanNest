@@ -1,0 +1,70 @@
+<div
+  class="max-w-full p-4 bg-white border border-gray-100 mt-1 shadow-lg shadow-gray-200"
+>
+  <div class="flex items-center justify-between max-w-7xl mx-auto relative">
+    <ng-container *ngFor="let step of steps; let last = last">
+      <div class="relative flex flex-col items-center flex-1 group">
+        <!-- Círculo -->
+        <div
+          [ngClass]="{
+            'bg-blue-950 ring-4 ring-white shadow-xl scale-110': isCurrent(
+              step.number
+            ),
+            'bg-gradient-to-tr from-gray-700 to-gray-800': isCompleted(
+              step.number
+            ),
+            'bg-white/80 backdrop-blur-sm':
+              !isCompleted(step.number) && !isCurrent(step.number)
+          }"
+          class="relative rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center transition-all duration-500 ease-out hover:scale-105 shadow-lg"
+        >
+          <!-- icono o número -->
+          <span
+            [ngClass]="{
+              'text-white': isCompleted(step.number) || isCurrent(step.number),
+              'text-gray-700':
+                !isCompleted(step.number) && !isCurrent(step.number)
+            }"
+            class="text-base md:text-lg font-bold"
+          >
+            {{ step.number }}
+          </span>
+
+          <!-- Efecto hover -->
+          <div
+            class="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+        </div>
+
+        <!-- Texto con animación -->
+        <div
+          class="mt-4 text-[11px] md:text-xs font-medium transition-all duration-300 ease-out transform"
+          [ngClass]="{
+            'text-blue-950 scale-105 font-bold': isCurrent(step.number),
+            'text-gray-900': isCompleted(step.number),
+            'text-gray-400':
+              !isCompleted(step.number) && !isCurrent(step.number)
+          }"
+        >
+          {{ step.name }}
+        </div>
+
+        <!-- Línea conectora -->
+        <div
+          *ngIf="!last"
+          [ngClass]="{
+            'bg-gradient-to-r from-indigo-600 to-purple-600': isCompleted(
+              step.number
+            ),
+            'bg-gray-200': !isCompleted(step.number)
+          }"
+          class="absolute top-4 md:top-6 -translate-y-1/2 left-[calc(50%+20px)] w-full h-[2px] transition-all duration-1000"
+        ></div>
+      </div>
+    </ng-container>
+  </div>
+
+  <button (click)="IncrementStep()" > 
+    <span class="text-sm font-medium text-blue-950">aumentar</span>
+  </button>
+</div>
