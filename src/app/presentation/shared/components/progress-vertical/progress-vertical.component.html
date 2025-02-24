@@ -2,8 +2,8 @@
   <div class="bg-[#f2f6f7] p-2 rounded-lg mb-1 space-y-2">
     <ng-container *ngFor="let step of steps; let last = last">
       <div>
-        <button 
-          class="flex items-center px-3 py-2 text-xs md:text-sm font-medium w-full rounded-lg text-left transition-all duration-300 ease-in-out text-[#4d6492] hover:text-[#324162]"
+        <button
+          class="flex items-center px-3 py-2 text-xs md:text-sm font-medium w-full rounded-lg transition-colors ease-in-out text-[#4d6492] hover:text-[#324162]"
           [class]="
             isCurrent(step.number)
               ? 'bg-[#ffffff] text-blue-950'
@@ -20,7 +20,7 @@
           <span>{{ step.name }}</span>
           <!--svg de check con fondo verde-->
           <svg
-            *ngIf="step.isCompleted"
+            *ngIf="isCompleted(step.number) || isCurrent(step.number)"
             [ngClass]="
               isCurrent(step.number) ? 'text-green-500' : 'text-gray-400'
             "

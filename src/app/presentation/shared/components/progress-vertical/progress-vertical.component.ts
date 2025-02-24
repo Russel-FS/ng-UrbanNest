@@ -11,8 +11,7 @@ export class ProgressVerticalComponent {
   @Input() steps: {
     number: number;
     name: string;
-    icon?: string;
-    isCompleted: boolean; 
+    icon?: string; 
   }[] = [];
   @Input() currentStep: number = 1;
 
@@ -21,21 +20,17 @@ export class ProgressVerticalComponent {
       {
         number: 1,
         name: 'Tipo de propiedad',
-        icon: 'icon1',
-        isCompleted: true,
-        
+        icon: 'icon1', 
       },
       {
         number: 2,
         name: 'Ubicación',
-        icon: 'icon2',
-        isCompleted: true, 
+        icon: 'icon2', 
       },
       {
         number: 3,
         name: 'Características',
-        icon: 'icon 3',
-        isCompleted: false, 
+        icon: 'icon 3',  
       },
     ];
   }
@@ -44,5 +39,8 @@ export class ProgressVerticalComponent {
     return this.currentStep === step;
   }
  
+  isCompleted(step: number): boolean {
+    return this.currentStep > step;
+  }
 
 }
