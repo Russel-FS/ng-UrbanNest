@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-50 p-6">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Map Section -->
+      <!-- Mapa  -->
       <div class="location-card">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ubicación en el mapa</h2>
         <div class="relative">
@@ -23,12 +23,12 @@
         </p>
       </div>
 
-      <!-- Form Section -->
+      <!-- Form  -->
       <div class="location-card">
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">¿Dónde está ubicado tu inmueble?</h2>
         
         <form [formGroup]="locationForm" class="space-y-6">
-          <!-- Street and Number -->
+          <!-- Calle y Número -->
           <div class="space-y-2">
             <label for="street" class="block text-sm font-medium text-gray-700">Ingresa calle y número</label>
             <div class="relative">
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <!-- Address Details -->
+          <!-- Direccion -->
           <div class="space-y-2">
             <label for="address" class="block text-sm font-medium text-gray-700">Ingresa una dirección</label>
             <input
@@ -60,7 +60,7 @@
             >
           </div>
 
-          <!-- Department and Province -->
+          <!-- Departamento y Provincia -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="space-y-2">
               <label for="department" class="block text-sm font-medium text-gray-700">Departamento</label>

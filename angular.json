@@ -21,9 +21,17 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
+              { 
                 "glob": "**/*",
                 "input": "public"
+              }, 
+              {
+                "glob": "**/*",
+                "input": "src/assets/"
+              },
+              {
+                "glob": "**/*", 
+                "input": "./node_modules/leaflet/dist/images" 
               }
             ],
             "styles": [

@@ -77,9 +77,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
 
   searchLocation(): void {
     const street = this.locationForm.get('street')?.value;
-    const department = this.locationForm.get('department')?.value;
-    // Here you would typically use a geocoding service to find the location
-    // For now, we'll just pan to the default location
+    const department = this.locationForm.get('department')?.value; 
     this.map.setView([this.defaultLat, this.defaultLng], 15);
   }
 
