@@ -20,12 +20,27 @@
       </p>
       <!-- Tipo de Propiedad -->
       <app-type-property
+        *ngIf="currentStep === 1"
         (nextStepEvent)="nextStep()"
         (previousStepEvent)="backStep()"
       >
       </app-type-property>
-      
+
       <!-- Ubicación -->
+      <app-location
+        *ngIf="currentStep === 2"
+        (nextStepEvent)="nextStep()"
+        (previousStepEvent)="backStep()"
+      >
+      </app-location>
+
+      <!-- Caracteristicas -->
+      <app-characteristics
+        *ngIf="currentStep === 3"
+        (nextStepEvent)="nextStep()"
+        (previousStepEvent)="backStep()"
+      >
+      </app-characteristics>
     </div>
   </div>
 </div>
