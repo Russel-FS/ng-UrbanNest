@@ -1,33 +1,24 @@
 import { Component } from '@angular/core';
 import { ProgressTrackerComponent } from "../../../../shared/components/progress-tracker/progress-tracker.component";
 import { ProgressVerticalComponent } from "../../../../shared/components/progress-vertical/progress-vertical.component";
+import { PropertyDetailsComponent } from "../property-details/property-details.component";
  
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ProgressTrackerComponent, ProgressVerticalComponent],
+  imports: [ProgressTrackerComponent, PropertyDetailsComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  currentStep: number = 2;
-  subStep: number = 0;
-  selectedOperationType: string = '';
-  selectedPropertyType: string = '';
-
-  onOperationTypeChange(value: string) {
-    this.selectedOperationType = value;
+  currentStep: number = 1;
+  
+  currentIncrement(): void {
+    this.currentStep++;
   }
 
-  onPropertyTypeChange(value: string) {
-    this.selectedPropertyType = value;
+  currentDecrement(): void {
+    this.currentStep--;
   }
 
-  onContinue() {
-    // Implementar lógica para continuar
-  }
-
-  onSaveAndExit() {
-    // Implementar lógica para guardar y salir
-  }
 }
