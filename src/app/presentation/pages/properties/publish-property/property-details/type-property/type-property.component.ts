@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProgressVerticalServiceService } from '../../../../../../core/services/progress-vertical-service.service';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+ 
 @Component({
   selector: 'app-type-property',
   imports: [],
@@ -8,17 +7,19 @@ import { ProgressVerticalServiceService } from '../../../../../../core/services/
   styleUrl: './type-property.component.css',
 })
 export class TypePropertyComponent implements OnInit {
-  constructor(
-    private progressVerticalService: ProgressVerticalServiceService
+
+  @Output() nextStepEvent = new EventEmitter<void>();
+  @Output() previousStepEvent = new EventEmitter<void>();
+  constructor( 
   ) {}
 
   ngOnInit(): void {}
 
   nextStep(): void {
-    this.progressVerticalService.nextStep();
+     this.nextStepEvent.emit();
   }
 
   backStep(): void {
-    this.progressVerticalService.backStep();
+    this.previousStepEvent.emit();
   }
 }

@@ -3,7 +3,9 @@
     <!-- Progress Tracker Vertical -->
     <div class="w-64 p-6 hidden md:block">
       <h3 class="text-lg font-semibold mb-6 text-gray-800">Progreso</h3>
-      <app-progress-vertical [currentStep]="currentStep"></app-progress-vertical>
+      <app-progress-vertical
+        [currentStep]="currentStep"
+      ></app-progress-vertical>
     </div>
 
     <!-- Contenido Principal -->
@@ -17,7 +19,12 @@
         Cuéntanos, ¿qué quieres publicar?
       </p>
       <!-- Tipo de Propiedad -->
-      <app-type-property></app-type-property>
+      <app-type-property
+        (nextStepEvent)="nextStep()"
+        (previousStepEvent)="backStep()"
+      >
+      </app-type-property>
+      
       <!-- Ubicación -->
     </div>
   </div>

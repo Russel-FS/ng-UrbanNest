@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgressVerticalComponent } from '../../../../shared/components/progress-vertical/progress-vertical.component';
 import { TypePropertyComponent } from './type-property/type-property.component';
-import { ProgressVerticalServiceService } from '../../../../../core/services/progress-vertical-service.service';
 
 @Component({
   selector: 'app-property-details',
@@ -10,18 +9,16 @@ import { ProgressVerticalServiceService } from '../../../../../core/services/pro
   styleUrl: './property-details.component.css',
 })
 export class PropertyDetailsComponent implements OnInit {
-
   currentStep: number = 1;
-  constructor(
-    private progressVerticalService: ProgressVerticalServiceService
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.progressVerticalService.progressBackStep$.subscribe(() => {
-       this.currentStep--;
-    });
-    this.progressVerticalService.progressNextStep$.subscribe(() => {
-        this.currentStep++;
-    });
+  ngOnInit(): void {}
+
+  nextStep() {
+    this.currentStep++;
+  }
+
+  backStep() {
+    this.currentStep--;
   }
 }
