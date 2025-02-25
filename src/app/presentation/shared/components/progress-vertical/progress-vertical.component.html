@@ -1,0 +1,42 @@
+<div>
+  <div class="bg-[#f2f6f7] p-2 rounded-lg mb-1 space-y-2">
+    <ng-container *ngFor="let step of steps; let last = last">
+      <div>
+        <button
+          class="flex items-center px-3 py-2 text-xs md:text-sm font-medium w-full rounded-lg transition-colors ease-in-out text-[#4d6492] hover:text-[#324162]"
+          [class]="
+            isCurrent(step.number)
+              ? 'bg-[#ffffff] text-blue-950'
+              : 'bg-[#f2f6f7] text-gray-600'
+          "
+        >
+          <!-- Estilo para el paso actual -->
+          <span
+            *ngIf="isCurrent(step.number)"
+            class="border-l-2 border-[#3569b8] pl-2 w-2 h-5"
+          >
+          </span>
+          <!-- Datos del paso -->
+          <span>{{ step.name }}</span>
+          <!--svg de check con fondo verde-->
+          <svg
+            *ngIf="isCompleted(step.number)"
+            [ngClass]="
+              isCurrent(step.number) ? 'text-green-500' : 'text-gray-400'
+            "
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 ml-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

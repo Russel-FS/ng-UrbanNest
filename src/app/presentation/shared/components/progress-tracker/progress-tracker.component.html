@@ -1,5 +1,5 @@
 <div
-  class="max-w-full p-4 bg-white border border-gray-100 mt-1 shadow-lg shadow-gray-200"
+  class="max-w-full p-4 bg-white border border-gray-100 mt-5 shadow-[0_4px_10px_rgb(0,0,0,0.08)] shadow-gray-200"
 >
   <div class="flex items-center justify-between max-w-7xl mx-auto relative">
     <ng-container *ngFor="let step of steps; let last = last">
@@ -7,7 +7,7 @@
         <!-- Círculo -->
         <div
           [ngClass]="{
-            'bg-blue-950 ring-3 ring-white shadow-xl scale-110': isCurrent(
+            'bg-blue-950 ring-3 ring-white shadow-xl scale-100': isCurrent(
               step.number
             ),
             'bg-gradient-to-tr from-gray-700 to-gray-800': isCompleted(
@@ -44,7 +44,7 @@
             'text-gray-900': isCompleted(step.number),
             'text-gray-400':
               !isCompleted(step.number) && !isCurrent(step.number)
-          }"
+          }" 
         >
           {{ step.name }}
         </div>
@@ -53,7 +53,7 @@
         <div
           *ngIf="!last"
           [ngClass]="{
-            'bg-gradient-to-r from-indigo-600 to-purple-600': isCompleted(
+            'bg-gradient-to-r from-blue-950 to-blue-800': isCompleted(
               step.number
             ),
             'bg-gray-200': !isCompleted(step.number)
