@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgressTrackerServiceService } from '../../../../../../core/services/progress-tracker-service.service';
- 
+import { ProgressVerticalServiceService } from '../../../../../../core/services/progress-vertical-service.service';
+
 @Component({
   selector: 'app-type-property',
   imports: [],
@@ -8,15 +8,17 @@ import { ProgressTrackerServiceService } from '../../../../../../core/services/p
   styleUrl: './type-property.component.css',
 })
 export class TypePropertyComponent implements OnInit {
-  constructor(private progressTrackerService: ProgressTrackerServiceService) {}
+  constructor(
+    private progressVerticalService: ProgressVerticalServiceService
+  ) {}
 
   ngOnInit(): void {}
 
   nextStep(): void {
-    this.progressTrackerService.nextStep();
+    this.progressVerticalService.nextStep();
   }
 
   backStep(): void {
-    this.progressTrackerService.backStep();
+    this.progressVerticalService.backStep();
   }
 }
