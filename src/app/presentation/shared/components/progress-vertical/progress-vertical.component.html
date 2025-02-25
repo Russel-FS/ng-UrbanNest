@@ -20,7 +20,7 @@
           <span>{{ step.name }}</span>
           <!--svg de check con fondo verde-->
           <svg
-            *ngIf="isCompleted(step.number) || isCurrent(step.number)"
+            *ngIf="isCompleted(step.number)"
             [ngClass]="
               isCurrent(step.number) ? 'text-green-500' : 'text-gray-400'
             "
