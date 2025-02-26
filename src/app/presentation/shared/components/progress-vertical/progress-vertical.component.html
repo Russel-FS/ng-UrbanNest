@@ -15,17 +15,14 @@
             *ngIf="isCurrent(step.number)"
             class="border-l-2 border-[#3569b8] pl-2 w-2 h-5"
           >
-          </span> 
+          </span>
           <!-- Datos del paso -->
           <span>{{ step.name }}</span>
           <!--svg de check con fondo verde-->
           <svg
             *ngIf="isCompleted(step.number)"
-            [ngClass]="
-              isCurrent(step.number) ? 'text-green-500' : 'text-gray-400'
-            "
             xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 ml-2"
+            class="h-4 w-4 ml-2 text-green-500"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
