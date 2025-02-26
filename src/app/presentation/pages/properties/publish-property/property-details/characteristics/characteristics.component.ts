@@ -26,15 +26,24 @@ export class CharacteristicsComponent implements OnInit {
       halfBathrooms: [0],
       bathrooms: [0],
       parkingSpaces: [0],
-      builtArea: [0, [Validators.min(0)]],
-      totalArea: [0, [Validators.min(0)]],
+      builtArea: [
+        0,
+        [Validators.required, Validators.min(1), Validators.max(99999)],
+      ],
+      totalArea: [
+        0,
+        [Validators.required, Validators.min(1), Validators.max(999999)],
+      ],
       propertyAge: this.fb.group({
         isNew: [false],
         underConstruction: [false],
         years: [0, [Validators.min(0)]],
       }),
       price: this.fb.group({
-        propertyPrice: [0, [Validators.required, Validators.min(0)]],
+        propertyPrice: [
+          0,
+          [Validators.required, Validators.min(1), Validators.max(999999999)],
+        ],
         maintenance: [0, [Validators.min(0)]],
         currency: ['USD'],
       }),
@@ -71,5 +80,21 @@ export class CharacteristicsComponent implements OnInit {
 
   backStep(): void {
     this.previousStepEvent.emit();
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const control = this.characteristicsForm.get(fieldName);
+    if (!control) return '';
+    if (control.hasError('required')) return 'Este campo es requerido';
+    if (control.hasError('min')) return 'El valor debe ser mayor a 0';
+    if (control.hasError('max')) {
+      if (fieldName === 'builtArea')
+        return 'El área construida no puede exceder 99,999 m²';
+      if (fieldName === 'totalArea')
+        return 'El área total no puede exceder 999,999 m²';
+      if (fieldName.includes('propertyPrice'))
+        return 'El precio no puede exceder 999,999,999 USD';
+    }
+    return '';
   }
 }

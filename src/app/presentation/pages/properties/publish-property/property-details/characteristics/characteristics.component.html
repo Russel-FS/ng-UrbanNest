@@ -117,13 +117,21 @@
       <label class="block text-sm font-medium text-gray-700"
         >Área construida (m²)</label
       >
-      <div class="flex items-center">
+      <div class="flex flex-col">
         <input
           type="number"
           formControlName="builtArea"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
           min="0"
+          [ngClass]="{
+            'border-red-500': characteristicsForm.get('builtArea')?.errors && 
+                            characteristicsForm.get('builtArea')?.touched
+          }"
         />
+        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('builtArea')?.errors && 
+                                                       characteristicsForm.get('builtArea')?.touched">
+          {{ getErrorMessage('builtArea') }}
+        </span>
       </div>
     </div>
 
@@ -132,13 +140,21 @@
       <label class="block text-sm font-medium text-gray-700"
         >Área total (m²)</label
       >
-      <div class="flex items-center">
+      <div class="flex flex-col">
         <input
           type="number"
           formControlName="totalArea"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
           min="0"
+          [ngClass]="{
+            'border-red-500': characteristicsForm.get('totalArea')?.errors && 
+                            characteristicsForm.get('totalArea')?.touched
+          }"
         />
+        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('totalArea')?.errors && 
+                                                       characteristicsForm.get('totalArea')?.touched">
+          {{ getErrorMessage('totalArea') }}
+        </span>
       </div>
     </div>
   </div>
@@ -196,19 +212,24 @@
       <label class="block text-sm font-medium text-gray-700"
         >Precio del inmueble (USD)</label
       >
-      <div class="flex items-center">
-        <span class="absolute ml-3 text-gray-500">$</span>
-        <input
-          type="number"
-          formControlName="propertyPrice"
-          class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
-          min="0"
-          [ngClass]="{
-            'border-red-500':
-              characteristicsForm.get('price.propertyPrice')?.errors &&
-              characteristicsForm.get('price.propertyPrice')?.touched
-          }"
-        />
+      <div class="flex flex-col">
+        <div class="relative">
+          <span class="absolute ml-3 text-gray-500 top-1/2 transform -translate-y-1/2">$</span>
+          <input
+            type="number"
+            formControlName="propertyPrice"
+            class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+            min="0"
+            [ngClass]="{
+              'border-red-500': characteristicsForm.get('price.propertyPrice')?.errors && 
+                              characteristicsForm.get('price.propertyPrice')?.touched
+            }"
+          />
+        </div>
+        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('price.propertyPrice')?.errors && 
+                                                       characteristicsForm.get('price.propertyPrice')?.touched">
+          {{ getErrorMessage('price.propertyPrice') }}
+        </span>
       </div>
     </div>
 
