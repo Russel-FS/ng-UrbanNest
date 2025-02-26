@@ -12,7 +12,7 @@ import { CharacteristicsComponent } from "./characteristics/characteristics.comp
   styleUrls: ['./property-details.component.css'],
 })
 export class PropertyDetailsComponent implements OnInit {
-  currentStep: number = 1;
+  currentStep: number = 3;
   constructor() {}
 
   ngOnInit(): void {}
