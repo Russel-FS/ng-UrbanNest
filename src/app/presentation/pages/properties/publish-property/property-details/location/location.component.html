@@ -45,38 +45,28 @@
         <form [formGroup]="locationForm" class="space-y-6">
           <!-- Calle y Número -->
           <div class="space-y-2">
-            <label for="street" class="block text-sm font-medium text-gray-700"
-              >Ingresa calle y número</label
-            >
+            <label for="street" class="block text-sm font-medium text-gray-700">
+              Ingresa calle y número
+            </label>
             <div class="relative">
               <input
                 id="street"
                 type="text"
                 formControlName="street"
+                (input)="onSearchInput($event)"
                 class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                 placeholder="Ej: Av. La Marina 123"
               />
-              <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
+              
+              <!-- Lista de sugerencias -->
+              <div @fadeIn *ngIf="showSuggestions" class="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+                <ul class="max-h-60 overflow-auto">
+                  <li *ngFor="let suggestion of suggestions"
+                      (click)="selectSuggestion(suggestion)" 
+                      class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm">
+                    {{ suggestion.display_name }}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
