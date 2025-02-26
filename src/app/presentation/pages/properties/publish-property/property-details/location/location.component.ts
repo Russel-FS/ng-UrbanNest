@@ -4,6 +4,7 @@ import {
   OnInit,
   Output,
   AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -14,7 +15,7 @@ import {
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { GeocodingService } from '../../../../../../core/services/geocoding.service';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import {
   animate,
   state,
@@ -22,6 +23,18 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+
+interface LocationDetails {
+  address?: {
+    road?: string;
+    house_number?: string;
+    suburb?: string;
+    state?: string;
+    region?: string;
+    city?: string;
+    town?: string;
+  };
+}
 
 @Component({
   selector: 'app-location',
@@ -34,39 +47,39 @@ import {
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(10px)' }),
         animate(
-          '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+          '300ms cubic-bezier(0.35, 0, 0.25, 1)',
           style({ opacity: 1, transform: 'translateY(0)' })
         ),
       ]),
       transition(':leave', [
         style({ opacity: 1, transform: 'translateY(0)' }),
         animate(
-          '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+          '300ms cubic-bezier(0.35, 0, 0.25, 1)',
           style({ opacity: 0, transform: 'translateY(10px)' })
         ),
       ]),
     ]),
   ],
 })
-export class LocationComponent implements OnInit, AfterViewInit {
+export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() nextStepEvent = new EventEmitter<void>();
   @Output() previousStepEvent = new EventEmitter<void>();
 
   locationForm: FormGroup;
   private map!: L.Map;
   private marker: L.Marker | null = null;
-
-  // Default coordinates (Peru)
-  private defaultLat = -12.046374;
-  private defaultLng = -77.042793;
-
-  departments = ['Lima', 'Arequipa', 'Cusco', 'Trujillo', 'Piura'];
-  provinces: { [key: string]: string[] } = {
-    Lima: ['Lima', 'Callao', 'Huaral', 'Cañete'],
-    Arequipa: ['Arequipa', 'Camaná', 'Islay'],
+  private destroy$ = new Subject<void>();
+  private readonly mapConfig = {
+    defaultLocation: { lat: -12.046374, lng: -77.042793 }, // Peru
+    zoom: 13,
+    tileLayer: {
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '© OpenStreetMap contributors',
+    },
   };
 
-  // Observable para manejar la entrada de búsqueda
+  departments = ['Lima', 'Arequipa', 'Cusco', 'Trujillo', 'Piura'];
+ 
   searchInput = new Subject<string>();
   suggestions: any[] = [];
   showSuggestions = false;
@@ -75,22 +88,15 @@ export class LocationComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private geocodingService: GeocodingService
   ) {
+    this.setupSearchStream();
+
     this.locationForm = this.fb.group({
       street: ['', Validators.required],
       address: ['', Validators.required],
-      department: ['', Validators.required],
-      province: ['', Validators.required],
+      department: ['', Validators.required], 
       latitude: [''],
       longitude: [''],
     });
-
-    // Configurar stream de búsqueda
-    this.geocodingService
-      .createAddressSearchStream(this.searchInput)
-      .subscribe((results) => {
-        this.suggestions = results;
-        this.showSuggestions = results.length > 0;
-      });
   }
 
   ngOnInit(): void {}
@@ -99,62 +105,95 @@ export class LocationComponent implements OnInit, AfterViewInit {
     this.initializeMap();
   }
 
-  private initializeMap(): void {
-    this.map = L.map('map').setView([this.defaultLat, this.defaultLng], 13);
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    if (this.map) {
+      this.map.remove();
+    }
+  }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
+  private setupSearchStream(): void {
+    this.geocodingService
+      .createAddressSearchStream(this.searchInput)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((results) => {
+        this.suggestions = results;
+        this.showSuggestions = results.length > 0;
+      });
+  }
+
+  private initializeMap(): void {
+    const { defaultLocation, zoom, tileLayer } = this.mapConfig;
+
+    this.map = L.map('map').setView(
+      [defaultLocation.lat, defaultLocation.lng],
+      zoom
+    );
+
+    L.tileLayer(tileLayer.url, {
+      attribution: tileLayer.attribution,
     }).addTo(this.map);
 
+    this.setupMapClickHandler();
+  }
+
+  private setupMapClickHandler(): void {
     this.map.on('click', (e: L.LeafletMouseEvent) => {
-      this.updateMarker(e.latlng);
+      this.updateMarkerAndForm(e.latlng);
     });
   }
 
-  // Actualizar el marcador y el formulario con la ubicación seleccionada
-  private async updateMarker(latlng: L.LatLng): Promise<void> {
+  private async updateMarkerAndForm(latlng: L.LatLng): Promise<void> {
+    this.updateMarker(latlng);
+    this.updateFormCoordinates(latlng);
+    await this.updateLocationDetails(latlng);
+  }
+
+  private updateMarker(latlng: L.LatLng): void {
     if (this.marker) {
       this.map.removeLayer(this.marker);
     }
-
     this.marker = L.marker(latlng).addTo(this.map);
+  }
+
+  private updateFormCoordinates(latlng: L.LatLng): void {
     this.locationForm.patchValue({
       latitude: latlng.lat,
       longitude: latlng.lng,
     });
+  }
 
-    // Obtener información de la ubicación usando Nominatim
+  private async updateLocationDetails(latlng: L.LatLng): Promise<void> {
     try {
       const data = await this.geocodingService.getLocationDetails(
         latlng.lat,
         latlng.lng
       );
-
-      // Actualizar el formulario con la información obtenida
-      if (data.address) {
-        this.locationForm.patchValue({
-          street: data.address.road || '',
-          address: [
-            data.address.house_number,
-            data.address.road,
-            data.address.suburb,
-          ]
-            .filter(Boolean)
-            .join(', '),
-          department: this.matchDepartment(
-            data.address.state || data.address.region || ''
-          ),
-          province: data.address.city || data.address.town || '',
-        });
-      }
+      this.updateFormWithLocationData(data);
     } catch (error) {
       console.error('Error getting location details:', error);
     }
   }
 
-  // Método para encontrar el departamento más cercano
+  private updateFormWithLocationData(data: LocationDetails): void {
+    if (data.address) {
+      const { address } = data;
+      this.locationForm.patchValue({
+        street: address.road || '',
+        address: this.formatAddress(address),
+        department: this.matchDepartment(address.state || address.region || ''), 
+      });
+    }
+  }
+
+  private formatAddress(address: LocationDetails['address']): string {
+    return [address?.house_number, address?.road, address?.suburb]
+      .filter(Boolean)
+      .join(', ');
+  }
+
   private matchDepartment(state: string): string {
-    // Encontrar el departamento más cercano en nuestra lista
     return (
       this.departments.find((dept) =>
         state.toLowerCase().includes(dept.toLowerCase())
@@ -163,20 +202,22 @@ export class LocationComponent implements OnInit, AfterViewInit {
   }
 
   onDepartmentChange(): void {
-    const department = this.locationForm.get('department')?.value;
     this.locationForm.patchValue({ province: '' });
   }
-  // Método para buscar la ubicación
+
   searchLocation(): void {
     const street = this.locationForm.get('street')?.value;
     const department = this.locationForm.get('department')?.value;
-    this.map.setView([this.defaultLat, this.defaultLng], 15);
+
+    if (street && department) {
+      const searchQuery = `${street}, ${department}, Perú`;
+      this.searchInput.next(searchQuery);
+    }
   }
 
-  // Método para manejar la entrada de búsqueda
   onSearchInput(event: any): void {
     const query = event.target.value;
-    if (query.length >= 3) {
+    if (query.length >= 2) {
       this.searchInput.next(query);
     } else {
       this.suggestions = [];
@@ -184,15 +225,15 @@ export class LocationComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Método para seleccionar una sugerencia
   selectSuggestion(suggestion: any): void {
+    const latlng = L.latLng(suggestion.lat, suggestion.lon);
+
     this.locationForm.patchValue({
       street: suggestion.display_name,
       latitude: suggestion.lat,
       longitude: suggestion.lon,
     });
 
-    const latlng = L.latLng(suggestion.lat, suggestion.lon);
     this.map.setView(latlng, 16);
     this.updateMarker(latlng);
 
@@ -200,18 +241,13 @@ export class LocationComponent implements OnInit, AfterViewInit {
     this.suggestions = [];
   }
 
-  // Navegación entre pasos
   nextStep(): void {
     if (this.locationForm.valid) {
       this.nextStepEvent.emit();
     }
   }
-  // Método para retroceder al paso anterior
+
   backStep(): void {
     this.previousStepEvent.emit();
-  }
-  // Método para guardar y salir
-  saveAndExit(): void {
-    console.log('Form data:', this.locationForm.value);
   }
 }

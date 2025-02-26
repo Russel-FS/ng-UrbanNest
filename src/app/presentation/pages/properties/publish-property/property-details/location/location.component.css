@@ -1,0 +1,96 @@
+/* Estilos para el mapa */
+.map-container {
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* Animaciones */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+/* Estilos para las sugerencias */
+.suggestions-container {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.suggestions-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.suggestions-container::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+/* Estilos para inputs y selects cuando están en foco */
+input:focus, select:focus {
+  outline: none; 
+  border-color: transparent;
+}
+
+/* Estilos para botones */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Estilos para el formulario */
+form {
+  max-width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  #map {
+    height: 300px;
+  }
+}
+
+/* Animación para el marcador del mapa */
+.leaflet-marker-icon {
+  transition: all 0.3s ease-in-out;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Mejoras de accesibilidad */
+input::placeholder,
+select::placeholder {
+  color: #9CA3AF;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
