@@ -79,14 +79,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   departments = ['Lima', 'Arequipa', 'Cusco', 'Trujillo', 'Piura'];
-  provinces: Record<string, string[]> = {
-    Lima: ['Lima', 'Callao', 'Huaral', 'Cañete'],
-    Arequipa: ['Arequipa', 'Camaná', 'Islay'],
-    Cusco: ['Cusco', 'Urubamba', 'Calca'],
-    Trujillo: ['Trujillo', 'Otuzco', 'Ascope'],
-    Piura: ['Piura', 'Sullana', 'Talara'],
-  };
-
+ 
   searchInput = new Subject<string>();
   suggestions: any[] = [];
   showSuggestions = false;
@@ -100,8 +93,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
     this.locationForm = this.fb.group({
       street: ['', Validators.required],
       address: ['', Validators.required],
-      department: ['', Validators.required],
-      province: ['', Validators.required],
+      department: ['', Validators.required], 
       latitude: [''],
       longitude: [''],
     });
@@ -190,8 +182,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
       this.locationForm.patchValue({
         street: address.road || '',
         address: this.formatAddress(address),
-        department: this.matchDepartment(address.state || address.region || ''),
-        province: address.city || address.town || '',
+        department: this.matchDepartment(address.state || address.region || ''), 
       });
     }
   }
