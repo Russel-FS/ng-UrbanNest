@@ -1,8 +1,27 @@
-import { Component, EventEmitter, OnInit, Output, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  AfterViewInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import * as L from 'leaflet'; 
+import * as L from 'leaflet';
 import { GeocodingService } from '../../../../../../core/services/geocoding.service';
+import { Subject } from 'rxjs';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-location',
@@ -10,6 +29,24 @@ import { GeocodingService } from '../../../../../../core/services/geocoding.serv
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './location.component.html',
   styleUrl: './location.component.css',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate(
+          '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'translateY(0)' }),
+        animate(
+          '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({ opacity: 0, transform: 'translateY(10px)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class LocationComponent implements OnInit, AfterViewInit {
   @Output() nextStepEvent = new EventEmitter<void>();
@@ -29,6 +66,11 @@ export class LocationComponent implements OnInit, AfterViewInit {
     Arequipa: ['Arequipa', 'Camaná', 'Islay'],
   };
 
+  // Observable para manejar la entrada de búsqueda
+  searchInput = new Subject<string>();
+  suggestions: any[] = [];
+  showSuggestions = false;
+
   constructor(
     private fb: FormBuilder,
     private geocodingService: GeocodingService
@@ -41,6 +83,14 @@ export class LocationComponent implements OnInit, AfterViewInit {
       latitude: [''],
       longitude: [''],
     });
+
+    // Configurar stream de búsqueda
+    this.geocodingService
+      .createAddressSearchStream(this.searchInput)
+      .subscribe((results) => {
+        this.suggestions = results;
+        this.showSuggestions = results.length > 0;
+      });
   }
 
   ngOnInit(): void {}
@@ -75,7 +125,10 @@ export class LocationComponent implements OnInit, AfterViewInit {
 
     // Obtener información de la ubicación usando Nominatim
     try {
-      const data = await this.geocodingService.getLocationDetails(latlng.lat, latlng.lng);
+      const data = await this.geocodingService.getLocationDetails(
+        latlng.lat,
+        latlng.lng
+      );
 
       // Actualizar el formulario con la información obtenida
       if (data.address) {
@@ -113,11 +166,38 @@ export class LocationComponent implements OnInit, AfterViewInit {
     const department = this.locationForm.get('department')?.value;
     this.locationForm.patchValue({ province: '' });
   }
-
+  // Método para buscar la ubicación
   searchLocation(): void {
     const street = this.locationForm.get('street')?.value;
     const department = this.locationForm.get('department')?.value;
     this.map.setView([this.defaultLat, this.defaultLng], 15);
+  }
+
+  // Método para manejar la entrada de búsqueda
+  onSearchInput(event: any): void {
+    const query = event.target.value;
+    if (query.length >= 3) {
+      this.searchInput.next(query);
+    } else {
+      this.suggestions = [];
+      this.showSuggestions = false;
+    }
+  }
+
+  // Método para seleccionar una sugerencia
+  selectSuggestion(suggestion: any): void {
+    this.locationForm.patchValue({
+      street: suggestion.display_name,
+      latitude: suggestion.lat,
+      longitude: suggestion.lon,
+    });
+
+    const latlng = L.latLng(suggestion.lat, suggestion.lon);
+    this.map.setView(latlng, 16);
+    this.updateMarker(latlng);
+
+    this.showSuggestions = false;
+    this.suggestions = [];
   }
 
   // Navegación entre pasos
@@ -126,11 +206,11 @@ export class LocationComponent implements OnInit, AfterViewInit {
       this.nextStepEvent.emit();
     }
   }
-
+  // Método para retroceder al paso anterior
   backStep(): void {
     this.previousStepEvent.emit();
   }
-
+  // Método para guardar y salir
   saveAndExit(): void {
     console.log('Form data:', this.locationForm.value);
   }

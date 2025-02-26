@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  from,
+} from 'rxjs';
 
 interface GeocodingCache {
   [key: string]: {
@@ -95,5 +103,37 @@ export class GeocodingService {
         setTimeout(resolve, provider.rateLimit - timeSinceLastRequest)
       );
     }
+  }
+
+  // Método para buscar direcciones
+  async searchAddress(query: string): Promise<any[]> {
+    if (!query.trim()) return [];
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      query
+    )}&countrycodes=pe&limit=5`;
+
+    try {
+      await this.waitForRateLimit('OpenStreetMap');
+      const response = await fetch(url);
+      const data = await response.json();
+      return data.map((item: any) => ({
+        display_name: item.display_name,
+        lat: parseFloat(item.lat),
+        lon: parseFloat(item.lon),
+      }));
+    } catch (error) {
+      console.error('Error searching address:', error);
+      return [];
+    }
+  }
+
+  // debounced para la búsqueda de direcciones
+  createAddressSearchStream(searchInput: Subject<string>): Observable<any[]> {
+    return searchInput.pipe(
+      debounceTime(200), // tiempo de espera 200ms
+      distinctUntilChanged(), /// solo emite si el valor ha cambiado
+      switchMap((query) => from(this.searchAddress(query)))// realiza la búsqueda de direcciones
+    );
   }
 }
