@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Leaflet Map Styles */
+
+.map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 400px;
+  z-index: 1;
+}
+
+.location-card {
+  background-color: white;
+  border-radius: 12px;
+}
