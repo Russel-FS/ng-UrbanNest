@@ -1,11 +1,311 @@
-<p>characteristics works!</p>
+<div class="max-w-2xl mx-auto p-6" [formGroup]="characteristicsForm">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+    Cuéntanos un poco más de tu inmueble
+  </h2>
 
-<div class="space-x-2">
-    <button class="p-3 bg-blue-950 text-white rounded-lg" (click)="nextStep()">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Dormitorios -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Dormitorios (opcional)</label
+      >
+      <div class="flex items-center space-x-4">
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('bedrooms', false)"
+        >
+          -
+        </button>
+        <span class="text-lg font-medium w-8 text-center">{{
+          characteristicsForm.get("bedrooms")?.value
+        }}</span>
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('bedrooms', true)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <!-- Medio baño -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Medio baño (opcional)</label
+      >
+      <div class="flex items-center space-x-4">
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('halfBathrooms', false)"
+        >
+          -
+        </button>
+        <span class="text-lg font-medium w-8 text-center">{{
+          characteristicsForm.get("halfBathrooms")?.value
+        }}</span>
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('halfBathrooms', true)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <!-- Baños -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Baños (opcional)</label
+      >
+      <div class="flex items-center space-x-4">
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('bathrooms', false)"
+        >
+          -
+        </button>
+        <span class="text-lg font-medium w-8 text-center">{{
+          characteristicsForm.get("bathrooms")?.value
+        }}</span>
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('bathrooms', true)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <!-- Estacionamientos -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Estacionamientos (opcional)</label
+      >
+      <div class="flex items-center space-x-4">
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('parkingSpaces', false)"
+        >
+          -
+        </button>
+        <span class="text-lg font-medium w-8 text-center">{{
+          characteristicsForm.get("parkingSpaces")?.value
+        }}</span>
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+          (click)="updateCounter('parkingSpaces', true)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Superficie -->
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">Superficie</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Área construida -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Área construida (m²)</label
+      >
+      <div class="flex items-center">
+        <input
+          type="number"
+          formControlName="builtArea"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+          min="0"
+        />
+      </div>
+    </div>
+
+    <!-- Área total -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Área total (m²)</label
+      >
+      <div class="flex items-center">
+        <input
+          type="number"
+          formControlName="totalArea"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+          min="0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Antigüedad -->
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">Antigüedad</h3>
+  <div class="space-y-4 mb-8" formGroupName="propertyAge">
+    <div class="flex flex-wrap gap-4">
+      <label class="flex items-center space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          formControlName="isNew"
+          class="w-4 h-4 text-blue-950 rounded focus:ring-blue-950"
+        />
+        <span class="text-sm text-gray-700">A estrenar</span>
+      </label>
+
+      <label class="flex items-center space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          formControlName="underConstruction"
+          class="w-4 h-4 text-blue-950 rounded focus:ring-blue-950"
+        />
+        <span class="text-sm text-gray-700">En construcción</span>
+      </label>
+    </div>
+
+    <!-- Años de antigüedad -->
+    <div
+      class="space-y-2 max-w-xs"
+      *ngIf="
+        !characteristicsForm.get('propertyAge.isNew')?.value &&
+        !characteristicsForm.get('propertyAge.underConstruction')?.value
+      "
+    >
+      <label class="block text-sm font-medium text-gray-700"
+        >Años de antigüedad</label
+      >
+      <div class="flex items-center">
+        <input
+          type="number"
+          formControlName="years"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+          min="0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Precio -->
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">Precio</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" formGroupName="price">
+    <!-- Precio del inmueble -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Precio del inmueble (USD)</label
+      >
+      <div class="flex items-center">
+        <span class="absolute ml-3 text-gray-500">$</span>
+        <input
+          type="number"
+          formControlName="propertyPrice"
+          class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+          min="0"
+          [ngClass]="{
+            'border-red-500':
+              characteristicsForm.get('price.propertyPrice')?.errors &&
+              characteristicsForm.get('price.propertyPrice')?.touched
+          }"
+        />
+      </div>
+    </div>
+
+    <!-- Mantenimiento -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Mantenimiento (opcional) (USD)</label
+      >
+      <div class="flex items-center">
+        <span class="absolute ml-3 text-gray-500">$</span>
+        <input
+          type="number"
+          formControlName="maintenance"
+          class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+          min="0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Descripción del inmueble -->
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">Describe el inmueble</h3>
+  <div class="space-y-6 mb-8" formGroupName="description">
+    <!-- Título -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Título del aviso</label
+      >
+      <input
+        type="text"
+        formControlName="title"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+        [ngClass]="{
+          'border-red-500':
+            characteristicsForm.get('description.title')?.errors &&
+            characteristicsForm.get('description.title')?.touched
+        }"
+        placeholder="Ej: Hermosa casa en zona residencial"
+      />
+    </div>
+
+    <!-- Descripción completa -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700"
+        >Descripción completa</label
+      >
+      <div class="relative">
+        <textarea
+          formControlName="fullDescription"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent min-h-[150px]"
+          [ngClass]="{
+            'border-red-500':
+              characteristicsForm.get('description.fullDescription')?.errors &&
+              characteristicsForm.get('description.fullDescription')?.touched
+          }"
+          placeholder="Describe detalladamente tu inmueble. Mínimo 150 caracteres."
+        ></textarea>
+        <div class="absolute bottom-2 right-2 text-sm text-gray-500">
+          {{
+            characteristicsForm.get("description.fullDescription")?.value
+              ?.length || 0
+          }}/150
+        </div>
+      </div>
+      <p
+        class="text-sm text-gray-500"
+        *ngIf="
+          characteristicsForm.get('description.fullDescription')?.value
+            ?.length < 150
+        "
+      >
+        Necesitas escribir al menos
+        {{
+          150 -
+            (characteristicsForm.get("description.fullDescription")?.value
+              ?.length || 0)
+        }}
+        caracteres más
+      </p>
+    </div>
+  </div>
+
+  <div class="flex justify-end space-x-4">
+    <button
+      type="button"
+      class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+      (click)="backStep()"
+    >
+      Atrás
+    </button>
+    <button
+      type="button"
+      class="px-6 py-2 bg-blue-950 text-white rounded-lg hover:bg-blue-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="!characteristicsForm.valid"
+      (click)="nextStep()"
+    >
       Siguiente
     </button>
-    <button class="p-3 bg-blue-950 text-white rounded-lg" (click)="backStep()">
-      Atras
-    </button>
   </div>
-  
+</div>
