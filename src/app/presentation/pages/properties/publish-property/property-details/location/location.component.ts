@@ -1,18 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  AfterViewInit,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import * as L from 'leaflet';
+import * as L from 'leaflet'; 
+import { GeocodingService } from '../../../../../../core/services/geocoding.service';
 
 @Component({
   selector: 'app-location',
@@ -39,7 +29,10 @@ export class LocationComponent implements OnInit, AfterViewInit {
     Arequipa: ['Arequipa', 'Camaná', 'Islay'],
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private geocodingService: GeocodingService
+  ) {
     this.locationForm = this.fb.group({
       street: ['', Validators.required],
       address: ['', Validators.required],
@@ -82,10 +75,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
 
     // Obtener información de la ubicación usando Nominatim
     try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latlng.lat}&lon=${latlng.lng}`
-      );
-      const data = await response.json();
+      const data = await this.geocodingService.getLocationDetails(latlng.lat, latlng.lng);
 
       // Actualizar el formulario con la información obtenida
       if (data.address) {
