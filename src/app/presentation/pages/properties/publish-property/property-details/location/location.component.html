@@ -1,17 +1,17 @@
-<div class="min-h-screen p-2 md:p-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 gap-8">
-      <!-- Mapa  -->
-      <div class="location-card p-2 shadow">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+<div class="min-h-screen bg-gray-50 p-4 md:p-8">
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+      <!-- Mapa -->
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-gray-800">
           Ubicación en el mapa
         </h2>
-        <div class="relative p-2">
-          <div id="map" class="map-container"></div>
+        <div class="relative rounded-xl overflow-hidden border border-gray-200">
+          <div id="map" class="h-[400px] w-full"></div>
           <div class="absolute top-4 right-4 z-10">
             <button
               (click)="searchLocation()"
-              class="bg-white px-4 py-2 flex items-center space-x-2"
+              class="bg-white rounded-lg shadow-sm px-4 py-2 flex items-center space-x-2 hover:bg-gray-50 transition-all duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,26 +27,26 @@
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              <span class="text-gray-600">Buscar</span>
+              <span class="text-gray-700 font-medium">Buscar</span>
             </button>
           </div>
         </div>
-        <p class="mt-4 text-sm text-gray-600">
+        <p class="text-sm text-gray-600">
           Haz clic en el mapa para marcar la ubicación exacta de tu inmueble
         </p>
       </div>
 
-      <!-- Form  -->
-      <div class="p-3">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-          ¿Dónde está ubicado tu inmueble?
+      <!-- Formulario -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800">
+          Detalles de ubicación
         </h2>
 
         <form [formGroup]="locationForm" class="space-y-6">
           <!-- Calle y Número -->
           <div class="space-y-2">
             <label for="street" class="block text-sm font-medium text-gray-700">
-              Ingresa calle y número
+              Calle y número
             </label>
             <div class="relative">
               <input
@@ -54,16 +54,17 @@
                 type="text"
                 formControlName="street"
                 (input)="onSearchInput($event)"
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 placeholder="Ej: Av. La Marina 123"
               />
               
-              <!-- Lista de sugerencias -->
-              <div @fadeIn *ngIf="showSuggestions" class="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
-                <ul class="max-h-60 overflow-auto">
+              <!-- Sugerencias con animación -->
+              <div @fadeIn *ngIf="showSuggestions" 
+                   class="absolute z-50 w-full mt-1 bg-white rounded-lg border border-gray-200 shadow-lg">
+                <ul class="max-h-60 overflow-auto rounded-lg">
                   <li *ngFor="let suggestion of suggestions"
                       (click)="selectSuggestion(suggestion)" 
-                      class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm">
+                      class="px-4 py-3 hover:bg-blue-50 cursor-pointer text-sm text-gray-700 border-b border-gray-100 last:border-b-0">
                     {{ suggestion.display_name }}
                   </li>
                 </ul>
@@ -71,16 +72,16 @@
             </div>
           </div>
 
-          <!-- Direccion -->
+          <!-- Dirección detallada -->
           <div class="space-y-2">
-            <label for="address" class="block text-sm font-medium text-gray-700"
-              >Ingresa una dirección</label
-            >
+            <label for="address" class="block text-sm font-medium text-gray-700">
+              Dirección detallada
+            </label>
             <input
               id="address"
               type="text"
               formControlName="address"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
               placeholder="Ej: Dpto 501, Torre B"
             />
           </div>
@@ -88,16 +89,14 @@
           <!-- Departamento y Provincia -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="space-y-2">
-              <label
-                for="department"
-                class="block text-sm font-medium text-gray-700"
-                >Departamento</label
-              >
+              <label for="department" class="block text-sm font-medium text-gray-700">
+                Departamento
+              </label>
               <select
                 id="department"
                 formControlName="department"
                 (change)="onDepartmentChange()"
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
               >
                 <option value="">Selecciona un departamento</option>
                 <option *ngFor="let dept of departments" [value]="dept">
@@ -107,23 +106,17 @@
             </div>
 
             <div class="space-y-2">
-              <label
-                for="province"
-                class="block text-sm font-medium text-gray-700"
-                >Provincia</label
-              >
+              <label for="province" class="block text-sm font-medium text-gray-700">
+                Provincia
+              </label>
               <select
                 id="province"
                 formControlName="province"
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
               >
                 <option value="">Selecciona una provincia</option>
                 <option
-                  *ngFor="
-                    let province of provinces[
-                      locationForm.get('department')?.value
-                    ] || []
-                  "
+                  *ngFor="let province of provinces[locationForm.get('department')?.value] || []"
                   [value]="province"
                 >
                   {{ province }}
@@ -132,12 +125,12 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Botones de acción -->
           <div class="flex justify-between items-center pt-6">
             <button
               type="button"
               (click)="backStep()"
-              class="px-6 py-2.5 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition duration-300 flex items-center space-x-2"
+              class="px-6 py-2.5 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-300 flex items-center space-x-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -156,30 +149,28 @@
               <span>Atrás</span>
             </button>
 
-            <div class="">
-              <button
-                type="submit"
-                (click)="nextStep()"
-                [disabled]="!locationForm.valid"
-                class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+            <button
+              type="submit"
+              (click)="nextStep()"
+              [disabled]="!locationForm.valid"
+              class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+            >
+              <span>Continuar</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <span>Continuar</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
           </div>
         </form>
       </div>
