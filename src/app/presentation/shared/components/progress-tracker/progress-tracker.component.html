@@ -6,6 +6,7 @@
       <div class="relative flex flex-col items-center flex-1 group">
         <!-- Círculo -->
         <div
+          (click)="goToStep(step.number)"
           [ngClass]="{
             'bg-blue-950 ring-3 ring-white shadow-xl scale-100': isCurrent(
               step.number
