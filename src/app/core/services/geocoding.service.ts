@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Observable,
-  Subject,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  from,
-} from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap, from } from 'rxjs';
 
 interface GeocodingCache {
   [key: string]: {
@@ -133,7 +126,7 @@ export class GeocodingService {
     return searchInput.pipe(
       debounceTime(200), // tiempo de espera 200ms
       distinctUntilChanged(), /// solo emite si el valor ha cambiado
-      switchMap((query) => from(this.searchAddress(query)))// realiza la búsqueda de direcciones
+      switchMap((query) => from(this.searchAddress(query))) // realiza la búsqueda de direcciones
     );
   }
 }

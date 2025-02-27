@@ -43,7 +43,7 @@ export class MainComponent implements OnInit {
     if (this.currentStep >= 1) {
       this.currentStep--;
     }
-  } 
+  }
   updateCurrentStep(step: number): void {
     this.currentStep = step;
   }

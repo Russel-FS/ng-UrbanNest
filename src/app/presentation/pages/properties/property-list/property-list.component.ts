@@ -23,7 +23,8 @@ interface Property {
   templateUrl: './property-list.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule, PropertyCardComponent],
-  styles: [`
+  styles: [
+    `
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -76,7 +77,8 @@ interface Property {
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
-  `]
+  `,
+  ],
 })
 export class PropertyListComponent implements OnInit {
   properties: Property[] = [
@@ -90,11 +92,10 @@ export class PropertyListComponent implements OnInit {
       features: {
         bedrooms: 3,
         bathrooms: 2,
-        area: 150
+        area: 150,
       },
-      images: ["image1.jpg", "image2.jpg", "image3.jpg"]
+      images: ['image1.jpg', 'image2.jpg', 'image3.jpg'],
     },
- 
   ];
 
   filterOptions = {
@@ -104,8 +105,8 @@ export class PropertyListComponent implements OnInit {
     features: {
       minBedrooms: 0,
       minBathrooms: 0,
-      minArea: 0
-    }
+      minArea: 0,
+    },
   };
 
   propertyTypes = [
@@ -113,14 +114,14 @@ export class PropertyListComponent implements OnInit {
     { value: 'house', label: 'Casas' },
     { value: 'apartment', label: 'Apartamentos' },
     { value: 'office', label: 'Oficinas' },
-    { value: 'land', label: 'Terrenos' }
+    { value: 'land', label: 'Terrenos' },
   ];
 
   statusTypes = [
     { value: 'all', label: 'Todos' },
     { value: 'available', label: 'Disponible' },
     { value: 'sold', label: 'Vendido' },
-    { value: 'pending', label: 'En Proceso' }
+    { value: 'pending', label: 'En Proceso' },
   ];
 
   isLoading = false;
@@ -131,8 +132,7 @@ export class PropertyListComponent implements OnInit {
   async applyFilters() {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-     
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } finally {
       this.isLoading = false;
     }
@@ -146,8 +146,8 @@ export class PropertyListComponent implements OnInit {
       features: {
         minBedrooms: 0,
         minBathrooms: 0,
-        minArea: 0
-      }
+        minArea: 0,
+      },
     };
     this.applyFilters();
   }
@@ -155,8 +155,7 @@ export class PropertyListComponent implements OnInit {
   async searchProperties() {
     this.isLoading = true;
     try {
-    
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 800));
     } finally {
       this.isLoading = false;
     }
@@ -168,18 +167,16 @@ export class PropertyListComponent implements OnInit {
 
   sortProperties(option: string) {
     this.sortOption = option;
-    
   }
 
   ngOnInit() {
- 
     this.loadProperties();
   }
 
   private async loadProperties() {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       this.properties = [
         {
           id: '1',
@@ -191,11 +188,13 @@ export class PropertyListComponent implements OnInit {
           features: {
             bedrooms: 3,
             bathrooms: 2,
-            area: 180
+            area: 180,
           },
-          images: ['https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg', 'apartment2.jpg']
+          images: [
+            'https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg',
+            'apartment2.jpg',
+          ],
         },
-    
       ];
     } finally {
       this.isLoading = false;

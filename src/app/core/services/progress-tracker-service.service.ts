@@ -12,7 +12,7 @@ export class ProgressTrackerServiceService {
   // Observable para retroceder un paso
   private progressBackSource = new Subject<void>();
   progressBackStep$ = this.progressBackSource.asObservable();
-  
+
   // Variable para almacenar el paso actual máximo alcanzado
   private maxReachedStep = new BehaviorSubject<number>(1);
   maxReachedStep$ = this.maxReachedStep.asObservable();
@@ -32,7 +32,7 @@ export class ProgressTrackerServiceService {
   backStep(): void {
     this.progressBackSource.next();
   }
- 
+
   /**
    * Actualiza el paso máximo alcanzado.
    * @param step el número del paso alcanzado

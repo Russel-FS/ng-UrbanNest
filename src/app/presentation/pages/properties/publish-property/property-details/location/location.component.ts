@@ -1,28 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  AfterViewInit,
-  OnDestroy,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, AfterViewInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { GeocodingService } from '../../../../../../core/services/geocoding.service';
 import { Subject, takeUntil } from 'rxjs';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 interface LocationDetails {
   address?: {
@@ -79,21 +61,18 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   departments = ['Lima', 'Arequipa', 'Cusco', 'Trujillo', 'Piura'];
- 
+
   searchInput = new Subject<string>();
   suggestions: any[] = [];
   showSuggestions = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private geocodingService: GeocodingService
-  ) {
+  constructor(private fb: FormBuilder, private geocodingService: GeocodingService) {
     this.setupSearchStream();
 
     this.locationForm = this.fb.group({
       street: ['', Validators.required],
       address: ['', Validators.required],
-      department: ['', Validators.required], 
+      department: ['', Validators.required],
       latitude: [''],
       longitude: [''],
     });
@@ -126,10 +105,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeMap(): void {
     const { defaultLocation, zoom, tileLayer } = this.mapConfig;
 
-    this.map = L.map('map').setView(
-      [defaultLocation.lat, defaultLocation.lng],
-      zoom
-    );
+    this.map = L.map('map').setView([defaultLocation.lat, defaultLocation.lng], zoom);
 
     L.tileLayer(tileLayer.url, {
       attribution: tileLayer.attribution,
@@ -166,10 +142,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private async updateLocationDetails(latlng: L.LatLng): Promise<void> {
     try {
-      const data = await this.geocodingService.getLocationDetails(
-        latlng.lat,
-        latlng.lng
-      );
+      const data = await this.geocodingService.getLocationDetails(latlng.lat, latlng.lng);
       this.updateFormWithLocationData(data);
     } catch (error) {
       console.error('Error getting location details:', error);
@@ -182,23 +155,17 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
       this.locationForm.patchValue({
         street: address.road || '',
         address: this.formatAddress(address),
-        department: this.matchDepartment(address.state || address.region || ''), 
+        department: this.matchDepartment(address.state || address.region || ''),
       });
     }
   }
 
   private formatAddress(address: LocationDetails['address']): string {
-    return [address?.house_number, address?.road, address?.suburb]
-      .filter(Boolean)
-      .join(', ');
+    return [address?.house_number, address?.road, address?.suburb].filter(Boolean).join(', ');
   }
 
   private matchDepartment(state: string): string {
-    return (
-      this.departments.find((dept) =>
-        state.toLowerCase().includes(dept.toLowerCase())
-      ) || ''
-    );
+    return this.departments.find((dept) => state.toLowerCase().includes(dept.toLowerCase())) || '';
   }
 
   onDepartmentChange(): void {
