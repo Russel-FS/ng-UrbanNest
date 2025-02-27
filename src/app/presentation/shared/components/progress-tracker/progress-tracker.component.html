@@ -8,12 +8,10 @@
         <div
           (click)="goToStep(step.number)"
           [ngClass]="{
-            'bg-blue-950 ring-3 ring-white shadow-xl scale-100 cursor-pointer': isCurrent(
-              step.number
-            ),
-            'bg-gradient-to-tr from-gray-700 to-gray-800 cursor-pointer': isCompleted(
-              step.number
-            ),
+            'bg-blue-950 ring-3 ring-white shadow-xl scale-100 cursor-pointer':
+              isCurrent(step.number),
+            'bg-gradient-to-tr from-gray-700 to-gray-800 cursor-pointer':
+              isCompleted(step.number),
             'bg-white/80 backdrop-blur-sm':
               !isCompleted(step.number) && !isCurrent(step.number)
           }"

@@ -1,14 +1,10 @@
 <div class="max-w-2xl mx-auto p-6" [formGroup]="characteristicsForm">
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-    Cuéntanos un poco más de tu inmueble
-  </h2>
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Cuéntanos un poco más de tu inmueble</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     <!-- Dormitorios -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Dormitorios (opcional)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Dormitorios (opcional)</label>
       <div class="flex items-center space-x-4">
         <button
           type="button"
@@ -18,7 +14,7 @@
           -
         </button>
         <span class="text-lg font-medium w-8 text-center">{{
-          characteristicsForm.get("bedrooms")?.value
+          characteristicsForm.get('bedrooms')?.value
         }}</span>
         <button
           type="button"
@@ -32,9 +28,7 @@
 
     <!-- Medio baño -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Medio baño (opcional)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Medio baño (opcional)</label>
       <div class="flex items-center space-x-4">
         <button
           type="button"
@@ -44,7 +38,7 @@
           -
         </button>
         <span class="text-lg font-medium w-8 text-center">{{
-          characteristicsForm.get("halfBathrooms")?.value
+          characteristicsForm.get('halfBathrooms')?.value
         }}</span>
         <button
           type="button"
@@ -58,9 +52,7 @@
 
     <!-- Baños -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Baños (opcional)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Baños (opcional)</label>
       <div class="flex items-center space-x-4">
         <button
           type="button"
@@ -70,7 +62,7 @@
           -
         </button>
         <span class="text-lg font-medium w-8 text-center">{{
-          characteristicsForm.get("bathrooms")?.value
+          characteristicsForm.get('bathrooms')?.value
         }}</span>
         <button
           type="button"
@@ -84,9 +76,7 @@
 
     <!-- Estacionamientos -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Estacionamientos (opcional)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Estacionamientos (opcional)</label>
       <div class="flex items-center space-x-4">
         <button
           type="button"
@@ -96,7 +86,7 @@
           -
         </button>
         <span class="text-lg font-medium w-8 text-center">{{
-          characteristicsForm.get("parkingSpaces")?.value
+          characteristicsForm.get('parkingSpaces')?.value
         }}</span>
         <button
           type="button"
@@ -114,9 +104,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     <!-- Área construida -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Área construida (m²)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Área construida (m²)</label>
       <div class="flex flex-col">
         <input
           type="number"
@@ -124,12 +112,18 @@
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
           min="0"
           [ngClass]="{
-            'border-red-500': characteristicsForm.get('builtArea')?.errors && 
-                            characteristicsForm.get('builtArea')?.touched
+            'border-red-500':
+              characteristicsForm.get('builtArea')?.errors &&
+              characteristicsForm.get('builtArea')?.touched
           }"
         />
-        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('builtArea')?.errors && 
-                                                       characteristicsForm.get('builtArea')?.touched">
+        <span
+          class="text-sm text-red-500 mt-1"
+          *ngIf="
+            characteristicsForm.get('builtArea')?.errors &&
+            characteristicsForm.get('builtArea')?.touched
+          "
+        >
           {{ getErrorMessage('builtArea') }}
         </span>
       </div>
@@ -137,9 +131,7 @@
 
     <!-- Área total -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Área total (m²)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Área total (m²)</label>
       <div class="flex flex-col">
         <input
           type="number"
@@ -147,12 +139,18 @@
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
           min="0"
           [ngClass]="{
-            'border-red-500': characteristicsForm.get('totalArea')?.errors && 
-                            characteristicsForm.get('totalArea')?.touched
+            'border-red-500':
+              characteristicsForm.get('totalArea')?.errors &&
+              characteristicsForm.get('totalArea')?.touched
           }"
         />
-        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('totalArea')?.errors && 
-                                                       characteristicsForm.get('totalArea')?.touched">
+        <span
+          class="text-sm text-red-500 mt-1"
+          *ngIf="
+            characteristicsForm.get('totalArea')?.errors &&
+            characteristicsForm.get('totalArea')?.touched
+          "
+        >
           {{ getErrorMessage('totalArea') }}
         </span>
       </div>
@@ -190,9 +188,7 @@
         !characteristicsForm.get('propertyAge.underConstruction')?.value
       "
     >
-      <label class="block text-sm font-medium text-gray-700"
-        >Años de antigüedad</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Años de antigüedad</label>
       <div class="flex items-center">
         <input
           type="number"
@@ -209,9 +205,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" formGroupName="price">
     <!-- Precio del inmueble -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Precio del inmueble (USD)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Precio del inmueble (USD)</label>
       <div class="flex flex-col">
         <div class="relative">
           <span class="absolute ml-3 text-gray-500 top-1/2 transform -translate-y-1/2">$</span>
@@ -221,13 +215,19 @@
             class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
             min="0"
             [ngClass]="{
-              'border-red-500': characteristicsForm.get('price.propertyPrice')?.errors && 
-                              characteristicsForm.get('price.propertyPrice')?.touched
+              'border-red-500':
+                characteristicsForm.get('price.propertyPrice')?.errors &&
+                characteristicsForm.get('price.propertyPrice')?.touched
             }"
           />
         </div>
-        <span class="text-sm text-red-500 mt-1" *ngIf="characteristicsForm.get('price.propertyPrice')?.errors && 
-                                                       characteristicsForm.get('price.propertyPrice')?.touched">
+        <span
+          class="text-sm text-red-500 mt-1"
+          *ngIf="
+            characteristicsForm.get('price.propertyPrice')?.errors &&
+            characteristicsForm.get('price.propertyPrice')?.touched
+          "
+        >
           {{ getErrorMessage('price.propertyPrice') }}
         </span>
       </div>
@@ -235,9 +235,7 @@
 
     <!-- Mantenimiento -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Mantenimiento (opcional) (USD)</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Mantenimiento (opcional) (USD)</label>
       <div class="flex items-center">
         <span class="absolute ml-3 text-gray-500">$</span>
         <input
@@ -255,9 +253,7 @@
   <div class="space-y-6 mb-8" formGroupName="description">
     <!-- Título -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Título del aviso</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Título del aviso</label>
       <input
         type="text"
         formControlName="title"
@@ -273,9 +269,7 @@
 
     <!-- Descripción completa -->
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700"
-        >Descripción completa</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Descripción completa</label>
       <div class="relative">
         <textarea
           formControlName="fullDescription"
@@ -288,25 +282,15 @@
           placeholder="Describe detalladamente tu inmueble. Mínimo 150 caracteres."
         ></textarea>
         <div class="absolute bottom-2 right-2 text-sm text-gray-500">
-          {{
-            characteristicsForm.get("description.fullDescription")?.value
-              ?.length || 0
-          }}/150
+          {{ characteristicsForm.get('description.fullDescription')?.value?.length || 0 }}/150
         </div>
       </div>
       <p
         class="text-sm text-gray-500"
-        *ngIf="
-          characteristicsForm.get('description.fullDescription')?.value
-            ?.length < 150
-        "
+        *ngIf="characteristicsForm.get('description.fullDescription')?.value?.length < 150"
       >
         Necesitas escribir al menos
-        {{
-          150 -
-            (characteristicsForm.get("description.fullDescription")?.value
-              ?.length || 0)
-        }}
+        {{ 150 - (characteristicsForm.get('description.fullDescription')?.value?.length || 0) }}
         caracteres más
       </p>
     </div>
