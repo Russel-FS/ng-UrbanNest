@@ -1,9 +1,15 @@
 <div class="min-h-screen bg-gradient-to-br from-white to-gray-50">
-  
   <div class="mt-1">
-    <app-progress-tracker [currentStep]="currentStep"></app-progress-tracker>
+    <app-progress-tracker [currentStep]="currentStep"  (updateStepEvent)="updateCurrentStep($event)"></app-progress-tracker>
   </div>
- 
-   <app-property-details></app-property-details>
- 
+
+  <!-- Contenido Principal -->
+  <app-property-details *ngIf="currentStep === 1"></app-property-details>
+  <!-- Multimedia -->
+  <app-multimedia *ngIf="currentStep === 2"></app-multimedia>
+  <!-- Extras -->
+  <app-extras *ngIf="currentStep === 3"></app-extras>
+  <!-- Publicar -->
+  <app-publish *ngIf="currentStep === 4"></app-publish>
+  
 </div>

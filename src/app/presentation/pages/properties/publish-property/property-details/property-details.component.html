@@ -37,7 +37,7 @@
       <!-- Caracteristicas -->
       <app-characteristics
         *ngIf="currentStep === 3"
-        (nextStepEvent)="nextStep()"
+        (nextStepEvent)="continue()"
         (previousStepEvent)="backStep()"
       >
       </app-characteristics>

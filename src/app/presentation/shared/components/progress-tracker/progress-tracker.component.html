@@ -8,10 +8,10 @@
         <div
           (click)="goToStep(step.number)"
           [ngClass]="{
-            'bg-blue-950 ring-3 ring-white shadow-xl scale-100': isCurrent(
+            'bg-blue-950 ring-3 ring-white shadow-xl scale-100 cursor-pointer': isCurrent(
               step.number
             ),
-            'bg-gradient-to-tr from-gray-700 to-gray-800': isCompleted(
+            'bg-gradient-to-tr from-gray-700 to-gray-800 cursor-pointer': isCompleted(
               step.number
             ),
             'bg-white/80 backdrop-blur-sm':
@@ -45,7 +45,7 @@
             'text-gray-900': isCompleted(step.number),
             'text-gray-400':
               !isCompleted(step.number) && !isCurrent(step.number)
-          }" 
+          }"
         >
           {{ step.name }}
         </div>
@@ -64,5 +64,4 @@
       </div>
     </ng-container>
   </div>
- 
 </div>

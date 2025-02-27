@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProgressTrackerServiceService } from '../../../../core/services/progress-tracker-service.service';
 
@@ -10,7 +10,7 @@ import { ProgressTrackerServiceService } from '../../../../core/services/progres
   styleUrl: './progress-tracker.component.css',
 })
 export class ProgressTrackerComponent implements OnInit {
-  
+  @Output() updateStepEvent = new EventEmitter<number>();
   @Input() currentStep: number = 1;
   @Input() steps: {
     number: number;
@@ -48,6 +48,7 @@ export class ProgressTrackerComponent implements OnInit {
     if (step <= this.maxReachedStep) {
       this.currentStep = step;
       this.updateStepsCompletion();
+      this.updateStepEvent.emit(step);
     }
   }
 
