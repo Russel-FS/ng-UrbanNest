@@ -7,25 +7,37 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './system-config.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  styles: [`
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+  styles: [
+    `
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
 
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
 
-    .animate-slide-up {
-      animation: slideUp 0.5s ease-out;
-    }
-  `]
+      .animate-slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+    `,
+  ],
 })
 export class SystemConfigComponent {
   systemSettings = {
@@ -34,16 +46,16 @@ export class SystemConfigComponent {
     allowedImageTypes: ['jpg', 'png'],
     validationCriteria: {
       requiresDocumentation: true,
-      minImageResolution: '1024x768'
-    }
+      minImageResolution: '1024x768',
+    },
   };
 
   async saveSettings() {
     try {
       // Simular guardado
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       // logica para guardar la configuración
-       
+
       console.log('Configuración guardada exitosamente');
     } catch (error) {
       console.error('Error al guardar la configuración:', error);

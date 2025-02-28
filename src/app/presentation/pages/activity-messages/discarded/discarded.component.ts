@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-discarded',
   imports: [],
   templateUrl: './discarded.component.html',
-  styleUrl: './discarded.component.css'
+  styleUrl: './discarded.component.css',
 })
-export class DiscardedComponent {
-
-}
+export class DiscardedComponent {}

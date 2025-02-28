@@ -17,15 +17,21 @@ interface User {
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './user-management.component.html',
-  styles: [`
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
-  `]
+  styles: [
+    `
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+    `,
+  ],
 })
 export class UserManagementComponent {
   users: User[] = [
@@ -35,7 +41,7 @@ export class UserManagementComponent {
       email: 'flores@example.com',
       role: 'admin',
       status: 'active',
-      lastLogin: new Date()
+      lastLogin: new Date(),
     },
     {
       id: '2',
@@ -43,20 +49,18 @@ export class UserManagementComponent {
       email: 'Russel@example.com',
       role: 'agent',
       status: 'active',
-      lastLogin: new Date()
-    }
+      lastLogin: new Date(),
+    },
   ];
 
   isLoading = false;
 
-  async createUser() {
-   
-  }
+  async createUser() {}
 
   async resetPassword(userId: string) {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log('Resetear contraseña para:', userId);
     } finally {
       this.isLoading = false;
@@ -66,11 +70,10 @@ export class UserManagementComponent {
   async updateRole(userId: string, role: string) {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log('Actualizar rol:', userId, role);
     } finally {
       this.isLoading = false;
     }
   }
 }
-

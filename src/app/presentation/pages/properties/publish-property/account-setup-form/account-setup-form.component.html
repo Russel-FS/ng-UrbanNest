@@ -4,7 +4,8 @@
     <div class="text-center mb-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-3">Configura tu cuenta</h2>
       <p class="text-gray-600">
-        Completa tus datos de facturación y contacto para que los interesados puedan realizar consultas
+        Completa tus datos de facturación y contacto para que los interesados puedan realizar
+        consultas
       </p>
     </div>
 
@@ -15,29 +16,29 @@
         <div class="grid md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Nombre</label>
-            <input 
+            <input
               type="text"
               formControlName="firstName"
               class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
-              [ngClass]="{'ring-2 ring-red-500': getFieldError('firstName')}"
-              placeholder="Ingresa tu nombre">
-            <p *ngIf="getFieldError('firstName')" 
-               class="text-sm text-red-500 mt-1">
-              {{getFieldError('firstName')}}
+              [ngClass]="{ 'ring-2 ring-red-500': getFieldError('firstName') }"
+              placeholder="Ingresa tu nombre"
+            />
+            <p *ngIf="getFieldError('firstName')" class="text-sm text-red-500 mt-1">
+              {{ getFieldError('firstName') }}
             </p>
           </div>
-         <!-- Apellido -->
+          <!-- Apellido -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Apellido</label>
-            <input 
+            <input
               type="text"
               formControlName="lastName"
               class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
-              [ngClass]="{'ring-2 ring-red-500': getFieldError('lastName')}"
-              placeholder="Ingresa tu apellido">
-            <p *ngIf="getFieldError('lastName')" 
-               class="text-sm text-red-500 mt-1">
-              {{getFieldError('lastName')}}
+              [ngClass]="{ 'ring-2 ring-red-500': getFieldError('lastName') }"
+              placeholder="Ingresa tu apellido"
+            />
+            <p *ngIf="getFieldError('lastName')" class="text-sm text-red-500 mt-1">
+              {{ getFieldError('lastName') }}
             </p>
           </div>
         </div>
@@ -47,28 +48,28 @@
           <!-- Condición -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Condición</label>
-            <select 
+            <select
               formControlName="condition"
-              class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all">
-              <option *ngFor="let condition of conditions" 
-                      [value]="condition.value">
-                {{condition.label}}
+              class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
+            >
+              <option *ngFor="let condition of conditions" [value]="condition.value">
+                {{ condition.label }}
               </option>
             </select>
           </div>
           <!-- Documento -->
           <div class="space-y-2">
-            <label class="block text-sm font-medium text-gray-700">{{getDocumentLabel()}}</label>
-            <input 
+            <label class="block text-sm font-medium text-gray-700">{{ getDocumentLabel() }}</label>
+            <input
               type="text"
               formControlName="documentNumber"
               class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
-              [ngClass]="{'ring-2 ring-red-500': getFieldError('documentNumber')}"
+              [ngClass]="{ 'ring-2 ring-red-500': getFieldError('documentNumber') }"
               [placeholder]="'Ingresa tu ' + getDocumentLabel()"
-              [maxLength]="setupForm.get('condition')?.value === 'natural' ? 8 : 11">
-            <p *ngIf="getFieldError('documentNumber')" 
-               class="text-sm text-red-500 mt-1">
-              {{getFieldError('documentNumber')}}
+              [maxLength]="setupForm.get('condition')?.value === 'natural' ? 8 : 11"
+            />
+            <p *ngIf="getFieldError('documentNumber')" class="text-sm text-red-500 mt-1">
+              {{ getFieldError('documentNumber') }}
             </p>
           </div>
         </div>
@@ -77,15 +78,15 @@
         <div class="grid md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <label class="block text-sm font-medium text-gray-700">Teléfono móvil</label>
-            <input 
+            <input
               type="tel"
               formControlName="mobilePhone"
               class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
-              [ngClass]="{'ring-2 ring-red-500': getFieldError('mobilePhone')}"
-              placeholder="Ingresa tu número móvil">
-            <p *ngIf="getFieldError('mobilePhone')" 
-               class="text-sm text-red-500 mt-1">
-              {{getFieldError('mobilePhone')}}
+              [ngClass]="{ 'ring-2 ring-red-500': getFieldError('mobilePhone') }"
+              placeholder="Ingresa tu número móvil"
+            />
+            <p *ngIf="getFieldError('mobilePhone')" class="text-sm text-red-500 mt-1">
+              {{ getFieldError('mobilePhone') }}
             </p>
           </div>
 
@@ -94,43 +95,61 @@
               Teléfono adicional
               <span class="text-gray-500 text-xs">(opcional)</span>
             </label>
-            <input 
+            <input
               type="tel"
               formControlName="optionalPhone"
               class="w-full px-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-black/5 transition-all"
-              [ngClass]="{'ring-2 ring-red-500': getFieldError('optionalPhone')}"
-              placeholder="Ingresa otro número de contacto">
-            <p *ngIf="getFieldError('optionalPhone')" 
-               class="text-sm text-red-500 mt-1">
-              {{getFieldError('optionalPhone')}}
+              [ngClass]="{ 'ring-2 ring-red-500': getFieldError('optionalPhone') }"
+              placeholder="Ingresa otro número de contacto"
+            />
+            <p *ngIf="getFieldError('optionalPhone')" class="text-sm text-red-500 mt-1">
+              {{ getFieldError('optionalPhone') }}
             </p>
           </div>
         </div>
 
         <!-- Continue Button -->
         <div class="flex justify-end">
-          <button 
+          <button
             type="submit"
             [disabled]="setupForm.invalid || isSubmitting"
-            class="px-8 py-3 bg-black text-white rounded-xl hover:bg-gray-900 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
+            class="px-8 py-3 bg-black text-white rounded-xl hover:bg-gray-900 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          >
             <span>Continuar</span>
-            <svg *ngIf="!isSubmitting" 
-                 class="w-5 h-5" 
-                 fill="none" 
-                 viewBox="0 0 24 24" 
-                 stroke="currentColor">
-              <path stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    stroke-width="2" 
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            <svg
+              *ngIf="!isSubmitting"
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
             </svg>
-            <svg *ngIf="isSubmitting" 
-                 class="animate-spin h-5 w-5" 
-                 xmlns="http://www.w3.org/2000/svg" 
-                 fill="none" 
-                 viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg
+              *ngIf="isSubmitting"
+              class="animate-spin h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
           </button>
         </div>

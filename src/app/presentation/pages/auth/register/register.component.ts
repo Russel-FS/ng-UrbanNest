@@ -7,21 +7,17 @@ import { RouterModule } from '@angular/router';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [ReactiveFormsModule,RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   animations: [
     trigger('fadeAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '500ms ease-in-out',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
+        animate('500ms ease-in-out', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
     ]),
   ],
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
   showPassword = false;
 
@@ -32,7 +28,7 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required]],
       userType: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      terms: [false, [Validators.requiredTrue]]
+      terms: [false, [Validators.requiredTrue]],
     });
   }
 

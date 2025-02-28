@@ -3,9 +3,7 @@
     <!-- Progress Tracker Vertical -->
     <div class="w-64 p-6 hidden md:block">
       <h3 class="text-lg font-semibold mb-6 text-gray-800">Progreso</h3>
-      <app-progress-vertical
-        [currentStep]="currentStep"
-      ></app-progress-vertical>
+      <app-progress-vertical [currentStep]="currentStep"></app-progress-vertical>
     </div>
 
     <!-- Contenido Principal -->
@@ -15,9 +13,7 @@
       >
         ¡Hola Flores, empecemos a crear tu aviso!
       </h1>
-      <p class="text-gray-600 mb-8 text-lg">
-        Cuéntanos, ¿qué quieres publicar?
-      </p>
+      <p class="text-gray-600 mb-8 text-lg">Cuéntanos, ¿qué quieres publicar?</p>
       <!-- Tipo de Propiedad -->
       <app-type-property
         *ngIf="currentStep === 1"
@@ -37,7 +33,7 @@
       <!-- Caracteristicas -->
       <app-characteristics
         *ngIf="currentStep === 3"
-        (nextStepEvent)="nextStep()"
+        (nextStepEvent)="continue()"
         (previousStepEvent)="backStep()"
       >
       </app-characteristics>

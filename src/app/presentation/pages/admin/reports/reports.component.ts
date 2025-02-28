@@ -7,25 +7,37 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
   imports: [CommonModule, FormsModule],
-  styles: [`
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+  styles: [
+    `
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
 
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
 
-    .animate-slide-up {
-      animation: slideUp 0.5s ease-out;
-    }
-  `]
+      .animate-slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+    `,
+  ],
 })
 export class ReportsComponent {
   reportTypes = [

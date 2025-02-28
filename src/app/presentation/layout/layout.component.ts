@@ -7,7 +7,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, CommonModule,RouterModule],
+  imports: [RouterOutlet, CommonModule, RouterModule],
   standalone: true,
   animations: [
     trigger('fade', [
@@ -15,20 +15,26 @@ import { RouterModule, RouterOutlet } from '@angular/router';
         style({
           opacity: 0,
           transform: 'translateY(-10px) scale(0.98)',
-          transformOrigin: 'top'
+          transformOrigin: 'top',
         }),
-        animate('400ms cubic-bezier(0.35, 0, 0.25, 1)', style({
-          opacity: 1,
-          transform: 'translateY(0) scale(1)',
-        }))
+        animate(
+          '400ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({
+            opacity: 1,
+            transform: 'translateY(0) scale(1)',
+          })
+        ),
       ]),
       transition(':leave', [
-        animate('200ms cubic-bezier(0.35, 0, 0.25, 1)', style({
-          opacity: 0,
-          transform: 'translateY(-10px) scale(0.98)',
-        }))
-      ])
-    ])
+        animate(
+          '200ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({
+            opacity: 0,
+            transform: 'translateY(-10px) scale(0.98)',
+          })
+        ),
+      ]),
+    ]),
   ],
 })
 export class LayoutComponent {

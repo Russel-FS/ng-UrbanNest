@@ -7,11 +7,23 @@
           <h2 class="text-4xl font-light text-emerald-800 animate-fade-in">Gestión de Usuarios</h2>
           <p class="text-slate-600 mt-2 animate-slide-up">Administra los usuarios y sus permisos</p>
         </div>
-        <button 
+        <button
           (click)="createUser()"
-          class="group px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 flex items-center transform hover:-translate-y-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          class="group px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 flex items-center transform hover:-translate-y-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4v16m8-8H4"
+            />
           </svg>
           <span>Nuevo Usuario</span>
         </button>
@@ -32,46 +44,78 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
-            <tr *ngFor="let user of users" 
-                class="hover:bg-slate-50 transition-colors duration-200">
-              <td class="px-6 py-4 text-sm text-gray-700">{{user.name}}</td>
-              <td class="px-6 py-4 text-sm text-gray-700">{{user.email}}</td>
+            <tr *ngFor="let user of users" class="hover:bg-slate-50 transition-colors duration-200">
+              <td class="px-6 py-4 text-sm text-gray-700">{{ user.name }}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{{ user.email }}</td>
               <td class="px-6 py-4 text-sm text-gray-700">
-                <span class="px-3 py-1 rounded-full text-xs font-medium" 
-                      [ngClass]="{
-                        'bg-blue-100 text-blue-700': user.role === 'admin',
-                        'bg-green-100 text-green-700': user.role === 'agent'
-                      }">
-                  {{user.role}}
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-medium"
+                  [ngClass]="{
+                    'bg-blue-100 text-blue-700': user.role === 'admin',
+                    'bg-green-100 text-green-700': user.role === 'agent'
+                  }"
+                >
+                  {{ user.role }}
                 </span>
               </td>
               <td class="px-6 py-4">
-                <span class="px-3 py-1 rounded-full text-xs font-medium" 
-                      [ngClass]="{
-                        'bg-emerald-100 text-emerald-700': user.status === 'active',
-                        'bg-red-100 text-red-700': user.status === 'inactive',
-                        'bg-yellow-100 text-yellow-700': user.status === 'pending'
-                      }">
-                  {{user.status}}
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-medium"
+                  [ngClass]="{
+                    'bg-emerald-100 text-emerald-700': user.status === 'active',
+                    'bg-red-100 text-red-700': user.status === 'inactive',
+                    'bg-yellow-100 text-yellow-700': user.status === 'pending'
+                  }"
+                >
+                  {{ user.status }}
                 </span>
               </td>
               <td class="px-6 py-4">
                 <div class="flex space-x-2">
-                  <button 
+                  <button
                     (click)="resetPassword(user.id)"
                     class="p-2 text-slate-600 hover:text-emerald-600 rounded-lg hover:bg-emerald-50 transition-all duration-200"
-                    title="Resetear Contraseña">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                    title="Resetear Contraseña"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                      />
                     </svg>
                   </button>
-                  <button 
+                  <button
                     (click)="updateRole(user.id, 'newRole')"
                     class="p-2 text-slate-600 hover:text-emerald-600 rounded-lg hover:bg-emerald-50 transition-all duration-200"
-                    title="Cambiar Rol">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    title="Cambiar Rol"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
                     </svg>
                   </button>
                 </div>
