@@ -1,19 +1,45 @@
 <!-- multimedia seccion -->
-<div class="min-h-screen bg-white">
-  <div class="max-w-6xl mx-auto px-4 py-16 space-y-16">
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+  <div class="max-w-6xl mx-auto px-4 py-24 space-y-24">
     <!-- Header -->
-    <div class="text-center space-y-4">
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gray-900">Multimedia</h2>
-      <p class="text-base md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto">
-        Las imágenes son la primera impresión de tu propiedad. Haz que cada foto cuente.
+    <div class="text-center space-y-6">
+      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">Multimedia</h2>
+      <p class="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto font-light">
+        Las imágenes son la primera impresión de tu propiedad. Captura su esencia en cada detalle.
       </p>
     </div>
 
     <!-- Fotos Section -->
-    <section class="space-y-8">
-      <div class="text-center space-y-2">
-        <h3 class="text-xl font-medium text-gray-900">Fotografías</h3>
-        <p class="text-gray-500">3-10 fotos · JPG, PNG · 500px - 6000px</p>
+    <section class="space-y-12">
+      <div class="text-center space-y-6">
+        <div class="space-y-3">
+          <h3 class="text-2xl font-medium text-gray-900">Fotografías</h3>
+          <p class="text-gray-500 font-light">3-10 fotos · JPG, PNG · 500px - 6000px</p>
+        </div>
+
+        <!-- Sugerencias -->
+        <div class="max-w-2xl mx-auto bg-blue-50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start space-x-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-blue-600 mt-1 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p class="text-sm text-blue-900 leading-relaxed">
+              Para que tu inmueble tenga más visitas, te recomendamos cargar fotos nítidas y bien
+              iluminadas. Evita incluir bordes, logos, marcas de agua o textos promocionales.
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- Zona de soltar imagenes -->
@@ -113,7 +139,7 @@
             ></div>
             <button
               (click)="removeFile(i, 'photos')"
-              class="absolute top-3 right-3 p-1.5 bg-gray-900/75 hover:bg-gray-900/90 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+              class="absolute top-3 right-3 p-1.5 bg-gray-900/75 hover:bg-gray-900/50 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -216,19 +242,20 @@
             <div
               class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"
             ></div>
+            <!-- Botón de eliminar -->
             <button
               (click)="removeFile(i, 'plans')"
-              class="absolute top-3 right-3 p-2 backdrop-blur-md bg-black/20 hover:bg-black/30 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+              class="absolute top-3 right-3 p-1.5 bg-gray-900/75 hover:bg-gray-900/50 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4 text-white"
+                class="w-5 h-5 text-white"
+                fill="none"
                 viewBox="0 0 24 24"
-                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
               >
-                <path
-                  d="M6.293 6.293a1 1 0 011.414 0L12 10.586l4.293-4.293a1 1 111.414 1.414L13.414 12l4.293 4.293a1 1 01-1.414 1.414L12 13.414l-4.293 4.293a1 1 01-1.414-1.414L10.586 12 6.293 7.707a1 1 0 010-1.414z"
-                />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
