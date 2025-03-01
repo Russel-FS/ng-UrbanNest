@@ -24,6 +24,7 @@ export class ExtrasComponent implements OnInit {
     servicios: { id: string; label: string; checked: boolean }[];
     exteriores: { id: string; label: string; checked: boolean }[];
     areasComunes: { id: string; label: string; checked: boolean }[];
+    construccion: { id: string; label: string; checked: boolean }[];
   };
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -51,6 +52,13 @@ export class ExtrasComponent implements OnInit {
         { id: 'seguridad', label: 'Guardianía/Seguridad privada', checked: false },
         { id: 'alarma', label: 'Sistema de alarma', checked: false },
         { id: 'videoVigilancia', label: 'Video vigilancia', checked: false },
+      ],
+      construccion: [
+        { id: 'ascensor', label: 'Ascensor', checked: false },
+        { id: 'pisoMarmol', label: 'Piso de mármol', checked: false },
+        { id: 'pisoCeramica', label: 'Piso de cerámica', checked: false },
+        { id: 'pisoMadera', label: 'Piso de madera', checked: false },
+        { id: 'pisoPorcelanato', label: 'Piso de porcelanato', checked: false },
       ],
     };
   }
