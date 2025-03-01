@@ -21,17 +21,17 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              { 
+              {
                 "glob": "**/*",
                 "input": "public"
-              }, 
+              },
               {
                 "glob": "**/*",
                 "input": "src/assets/"
               },
               {
-                "glob": "**/*", 
-                "input": "./node_modules/leaflet/dist/images" 
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images"
               }
             ],
             "styles": [
@@ -66,6 +66,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "allowedHosts": [
+              "4200-russelfs-ngurbannest-nhyx7dxvl6c.ws-us118.gitpod.io"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "ng-UrbanNest:build:production"

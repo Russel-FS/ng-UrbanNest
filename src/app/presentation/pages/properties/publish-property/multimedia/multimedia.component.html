@@ -1,33 +1,266 @@
-<div class="space-y-4 mx-auto p-5">
-  <input
-    class="p-2 rounded-full bg-blue-950 text-white"
-    type="file"
-    accept="image/*"
-    (change)="onFileSelected($event)"
-    multiple
-  />
-
-  <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-4">
-    <div *ngFor="let preview of previews; let i = index" class="relative">
-      <img [src]="preview" class="w-full h-30 object-cover rounded-lg" alt="Preview" />
-      <button
-        (click)="removeFile(i)"
-        class="absolute top-0 right-0 p-1 bg-red-500 text-white hover:bg-red-600 rounded-full transition-colors cursor-pointer"
-      >
-        <!--svg icono de cerrar-->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="w-3 h-3"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M3.707 3.293a1 1 0 011.414 0L12 10.586l7.879-7.88a1 1 0 111.414 1.414L13.414 12l7.88 7.879a1 1 0 01-1.414 1.414L12 13.414l-7.879 7.88a1 1 0 01-1.414-1.414L10.586 12 2.707 4.121a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
+<!-- multimedia seccion -->
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+  <div class="max-w-6xl mx-auto px-4 py-24 space-y-24">
+    <!-- Header -->
+    <div class="text-center space-y-6">
+      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">Multimedia</h2>
+      <p class="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto font-light">
+        Las imágenes son la primera impresión de tu propiedad. Captura su esencia en cada detalle.
+      </p>
     </div>
+
+    <!-- Fotos Section -->
+    <section class="space-y-12">
+      <div class="text-center space-y-6">
+        <div class="space-y-3">
+          <h3 class="text-2xl font-medium text-gray-900">Fotografías</h3>
+          <p class="text-gray-500 font-light">3-10 fotos · JPG, PNG · 500px - 6000px</p>
+        </div>
+
+        <!-- Sugerencias -->
+        <div class="max-w-2xl mx-auto bg-blue-50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start space-x-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-blue-600 mt-1 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p class="text-sm text-blue-900 leading-relaxed">
+              Para que tu inmueble tenga más visitas, te recomendamos cargar fotos nítidas y bien
+              iluminadas. Evita incluir bordes, logos, marcas de agua o textos promocionales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zona de soltar imagenes -->
+      <div
+        class="relative border-[1px] rounded-2xl p-12 transition-all duration-300 ease-out"
+        [ngClass]="{
+          'border-gray-200 hover:border-gray-300 bg-gray-50/50': !isPhotoDragging,
+          'border-blue-500/50 bg-blue-50/50': isPhotoDragging
+        }"
+        (dragover)="onDragOver($event, 'photos')"
+        (dragleave)="onDragLeave($event, 'photos')"
+        (drop)="onDrop($event, 'photos')"
+      >
+        <div class="space-y-6">
+          <div class="flex justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+          <div class="text-center">
+            <input
+              #photoInput
+              id="photosInput"
+              type="file"
+              accept="image/jpeg,image/jpg,image/png"
+              (change)="onFileSelected($event, 'photos')"
+              multiple
+              class="hidden"
+            />
+            <button
+              (click)="photoInput.click()"
+              class="inline-flex items-center px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 bg-gray-900 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+            >
+              Agregar fotos
+            </button>
+            <p class="mt-3 text-gray-500">o arrastra y suelta aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div *ngIf="photoErrorMessage" class="text-red-500 text-sm text-center">
+        {{ photoErrorMessage }}
+      </div>
+
+      <!-- Grid de previsualización -->
+      <div
+        *ngIf="photoPreviews.length > 0"
+        class="grid grid-cols-2 md:grid-cols-4 gap-4"
+        cdkDropList
+        [cdkDropListData]="photoPreviews"
+        (cdkDropListDropped)="drop($event, 'photos')"
+        cdkDropListGroup
+      >
+        <div
+          *ngFor="let preview of photoPreviews; let i = index"
+          class="relative group cursor-move"
+          cdkDrag
+          [cdkDragData]="preview"
+        >
+          <div class="relative aspect-square overflow-hidden rounded-xl border border-gray-200">
+            <img
+              [src]="preview"
+              class="w-full h-full object-cover transition duration-300 ease-out group-hover:scale-105"
+              alt="Photo preview"
+            />
+            <!--Etiqueta principal-->
+            <div class="absolute top-0 left-0 right-0" *ngIf="i === 0">
+              <div
+                class="relative flex items-center space-x-2 py-2 px-3 bg-gray-900/75 rounded-tl-xl rounded-br-xl m-2 w-fit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 text-yellow-400"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 2l2.5 6.5H21l-5 4.5 1.5 7-6-4-6 4 1.5-7-5-4.5h6.5L12 2z" />
+                </svg>
+                <span class="text-white text-sm font-medium">Foto Principal</span>
+              </div>
+            </div>
+
+            <div
+              class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"
+            ></div>
+            <button
+              (click)="removeFile(i, 'photos')"
+              class="absolute top-3 right-3 p-1.5 bg-gray-900/75 hover:bg-gray-900/50 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos Section -->
+    <section class="space-y-8 pt-16 border-t border-gray-100">
+      <div class="text-center space-y-2">
+        <h3 class="text-xl font-medium text-gray-900">Planos</h3>
+        <p class="text-gray-500">Opcional · JPG, PNG · 500px - 6000px</p>
+      </div>
+
+      <!-- Zona de soltar planos -->
+      <div
+        class="relative border-[1px] rounded-2xl p-12 transition-all duration-300 ease-out"
+        [ngClass]="{
+          'border-gray-200 hover:border-gray-300 bg-gray-50/50': !isPlanDragging,
+          'border-blue-500/50 bg-blue-50/50': isPlanDragging
+        }"
+        (dragover)="onDragOver($event, 'plans')"
+        (dragleave)="onDragLeave($event, 'plans')"
+        (drop)="onDrop($event, 'plans')"
+      >
+        <div class="space-y-6">
+          <div class="flex justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+          </div>
+          <div class="text-center">
+            <input
+              #planInput
+              id="plansInput"
+              type="file"
+              accept="image/jpeg,image/jpg,image/png"
+              (change)="onFileSelected($event, 'plans')"
+              multiple
+              class="hidden"
+            />
+            <button
+              (click)="planInput.click()"
+              class="inline-flex items-center px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 bg-gray-900 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+            >
+              Agregar planos
+            </button>
+            <p class="mt-3 text-gray-500">o arrastra y suelta aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div *ngIf="planErrorMessage" class="text-red-500 text-sm text-center">
+        {{ planErrorMessage }}
+      </div>
+
+      <!-- Grid de previsualización de planos -->
+      <div
+        *ngIf="planPreviews.length > 0"
+        class="grid grid-cols-2 md:grid-cols-3 gap-4"
+        cdkDropList
+        [cdkDropListData]="planPreviews"
+        (cdkDropListDropped)="drop($event, 'plans')"
+        cdkDropListGroup
+      >
+        <div
+          *ngFor="let preview of planPreviews; let i = index"
+          class="relative group cursor-move"
+          cdkDrag
+          [cdkDragData]="preview"
+        >
+          <div class="relative aspect-square overflow-hidden rounded-xl bg-gray-50">
+            <img
+              [src]="preview"
+              class="w-full h-full object-contain transition duration-300 ease-out group-hover:scale-105"
+              alt="Floor plan preview"
+            />
+            <div
+              class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"
+            ></div>
+            <!-- Botón de eliminar -->
+            <button
+              (click)="removeFile(i, 'plans')"
+              class="absolute top-3 right-3 p-1.5 bg-gray-900/75 hover:bg-gray-900/50 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
