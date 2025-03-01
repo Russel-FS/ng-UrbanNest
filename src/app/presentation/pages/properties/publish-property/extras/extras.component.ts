@@ -64,7 +64,6 @@ export class ExtrasComponent implements OnInit {
   toggleCaracteristica(item: Caracteristica): void {
     item.checked = !item.checked;
     this.cdr.detectChanges();
-    this.closeSuggestions();
   }
 
   closeSuggestions(): void {
@@ -94,9 +93,24 @@ export class ExtrasComponent implements OnInit {
   }
   suggestions() {
     return Object.entries(this.caracteristicas).flatMap(([type, items]) =>
-      items.filter((item) => {
-        item.label.toLowerCase().includes(this.searchQuery);
-      })
+      items
+        .filter((item) => item.label.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        .map((item) => ({
+          ...item,
+          type,
+        }))
     );
+  }
+
+  selectedSuggestion(suggestion: Caracteristica) {
+    this.closeSuggestions();
+    Object.entries(this.caracteristicas).forEach(([type, items]) => {
+      const item = items.find(
+        (item) => item.label.toLowerCase() === suggestion.label.toLowerCase()
+      );
+      if (item) {
+        item.checked = true;
+      }
+    });
   }
 }

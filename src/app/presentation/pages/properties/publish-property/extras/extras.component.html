@@ -33,15 +33,15 @@
         </svg>
       </span>
       <!--Sugerencias-->
-      <div
-        class="absolute bottom-0 left-0 right-0 top-14 z-10"
-        *ngIf="isSuggestionsVisible && searchQuery"
-      >
+      <div class="absolute bottom-0 left-0 right-0 top-14 z-10" *ngIf="isSuggestionsVisible">
         <div class="border border-gray-200 max-h-52 overflow-y-auto rounded-xl bg-white shadow-lg">
+          <ng-container *ngIf="suggestions().length === 0">
+            <p class="p-2 text-sm text-gray-600">No se encontraron sugerencias</p>
+          </ng-container>
           <ul class="space-y-1">
             <li
               *ngFor="let suggestion of suggestions()"
-              (click)="toggleCaracteristica(suggestion)"
+              (click)="selectedSuggestion(suggestion)"
               class="text-sm text-gray-600 hover:bg-gray-50 p-2 pl-4 cursor-pointer transition-all duration-300"
             >
               {{ suggestion.label }}
