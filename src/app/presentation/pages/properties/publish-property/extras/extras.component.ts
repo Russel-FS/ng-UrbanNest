@@ -17,6 +17,7 @@ interface Caracteristica {
 })
 export class ExtrasComponent implements OnInit {
   searchQuery: string = '';
+  isSuggestionsVisible: boolean = false;
 
   caracteristicas: {
     generales: { id: string; label: string; checked: boolean }[];
@@ -54,18 +55,23 @@ export class ExtrasComponent implements OnInit {
     };
   }
   ngOnInit(): void {}
+
   onSearch(event: Event): void {
     this.searchQuery = (event.target as HTMLInputElement).value.toLowerCase();
-  }
-
-  filterCaracteristicas(items: any[]): any[] {
-    if (!this.searchQuery) return items;
-    return items.filter((item) => item?.label.toLowerCase().includes(this.searchQuery));
+    this.openSuggestions();
   }
 
   toggleCaracteristica(item: Caracteristica): void {
     item.checked = !item.checked;
     this.cdr.detectChanges();
+    this.closeSuggestions();
+  }
+
+  closeSuggestions(): void {
+    this.isSuggestionsVisible = false;
+  }
+  openSuggestions(): void{ 
+    this.isSuggestionsVisible = true;
   }
 
   badgets() {
@@ -74,7 +80,7 @@ export class ExtrasComponent implements OnInit {
         .filter((item) => item.checked)
         .map((item) => ({
           ...item,
-          type,
+          type, 
         }))
     );
   }
@@ -86,4 +92,16 @@ export class ExtrasComponent implements OnInit {
       item.checked = false;
     }
   }
+  suggestions() {
+    return Object.entries(this.caracteristicas).flatMap(([type, items]) =>
+      items.filter(item => {
+        const coincide = item.label.toLowerCase().includes(this.searchQuery);
+        if (coincide) {
+          item.type = type;
+        }
+        return coincide;
+      })
+    );
+  }
+  
 }

@@ -32,6 +32,23 @@
           />
         </svg>
       </span>
+      <!--Sugerencias-->
+      <div
+        class="absolute bottom-0 left-0 right-0 top-14 z-10"
+        *ngIf="isSuggestionsVisible && searchQuery"
+      >
+        <div class="border border-gray-200 max-h-52 overflow-y-auto rounded-xl bg-white shadow-lg">
+          <ul class="space-y-1">
+            <li
+              *ngFor="let suggestion of suggestions()"
+              (click)="toggleCaracteristica(suggestion)"
+              class="text-sm text-gray-600 hover:bg-gray-50 p-2 pl-4 cursor-pointer transition-all duration-300"
+            >
+              {{ suggestion.label }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!--Badges-->
@@ -72,7 +89,7 @@
         <h3 class="text-xl font-medium text-gray-900 mb-4">Características generales</h3>
         <div class="space-y-3">
           <label
-            *ngFor="let item of filterCaracteristicas(caracteristicas.generales)"
+            *ngFor="let item of caracteristicas.generales"
             class="flex items-center space-x-3 cursor-pointer group"
           >
             <input
@@ -93,7 +110,7 @@
         <h3 class="text-xl font-medium text-gray-900 mb-4">Servicios</h3>
         <div class="space-y-3">
           <label
-            *ngFor="let item of filterCaracteristicas(caracteristicas.servicios)"
+            *ngFor="let item of caracteristicas.servicios"
             class="flex items-center space-x-3 cursor-pointer group"
           >
             <input
@@ -114,7 +131,7 @@
         <h3 class="text-xl font-medium text-gray-900 mb-4">Exteriores</h3>
         <div class="space-y-3">
           <label
-            *ngFor="let item of filterCaracteristicas(caracteristicas.exteriores)"
+            *ngFor="let item of caracteristicas.exteriores"
             class="flex items-center space-x-3 cursor-pointer group"
           >
             <input
@@ -135,7 +152,7 @@
         <h3 class="text-xl font-medium text-gray-900 mb-4">Áreas comunes</h3>
         <div class="space-y-3">
           <label
-            *ngFor="let item of filterCaracteristicas(caracteristicas.areasComunes)"
+            *ngFor="let item of caracteristicas.areasComunes"
             class="flex items-center space-x-3 cursor-pointer group"
           >
             <input
