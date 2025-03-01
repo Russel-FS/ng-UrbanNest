@@ -70,7 +70,7 @@ export class ExtrasComponent implements OnInit {
   closeSuggestions(): void {
     this.isSuggestionsVisible = false;
   }
-  openSuggestions(): void{ 
+  openSuggestions(): void {
     this.isSuggestionsVisible = true;
   }
 
@@ -80,7 +80,7 @@ export class ExtrasComponent implements OnInit {
         .filter((item) => item.checked)
         .map((item) => ({
           ...item,
-          type, 
+          type,
         }))
     );
   }
@@ -94,14 +94,9 @@ export class ExtrasComponent implements OnInit {
   }
   suggestions() {
     return Object.entries(this.caracteristicas).flatMap(([type, items]) =>
-      items.filter(item => {
-        const coincide = item.label.toLowerCase().includes(this.searchQuery);
-        if (coincide) {
-          item.type = type;
-        }
-        return coincide;
+      items.filter((item) => {
+        item.label.toLowerCase().includes(this.searchQuery);
       })
     );
   }
-  
 }
