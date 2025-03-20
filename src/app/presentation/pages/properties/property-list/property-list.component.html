@@ -313,51 +313,123 @@
         *ngIf="isLoading"
         class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl z-10"
       >
-        <div class="flex items-center gap-3">
-          <div class="w-2 h-2 bg-black rounded-full animate-bounce"></div>
-          <div class="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-.3s]"></div>
-          <div class="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-.5s]"></div>
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative w-24 h-24">
+            <div
+              class="w-24 h-24 rounded-full border-t-2 border-b-2 border-black animate-spin"
+            ></div>
+            <div
+              class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm text-gray-500"
+            >
+              Buscando
+            </div>
+          </div>
+          <p class="text-sm text-gray-600">Encontrando las mejores propiedades...</p>
         </div>
       </div>
 
       <!-- Properties Grid -->
-      <div
-        [ngClass]="
-          viewMode === 'grid'
-            ? 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
-            : 'space-y-4'
-        "
-      >
-        <app-property-card
-          *ngFor="let property of properties"
-          [property]="property"
-          [viewMode]="viewMode"
-          class="transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-        >
-        </app-property-card>
-      </div>
+      <div class="space-y-6">
+        <!-- Header de resultados -->
+        <div class="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-600">{{ properties.length }} resultados</span>
+            <div class="h-4 w-px bg-gray-200"></div>
+            <button
+              (click)="toggleViewMode()"
+              class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-gray-50 text-sm text-gray-600"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  *ngIf="viewMode === 'grid'"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                />
+                <path
+                  *ngIf="viewMode === 'list'"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2"
+                />
+              </svg>
+              {{ viewMode === 'grid' ? 'Vista lista' : 'Vista cuadrícula' }}
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-600">Ordenar por:</span>
+            <select
+              [(ngModel)]="sortOption"
+              class="text-sm border-0 rounded-lg bg-gray-50 text-gray-600 focus:ring-0 cursor-pointer"
+            >
+              <option value="newest">Más recientes</option>
+              <option value="price_asc">Precio: menor a mayor</option>
+              <option value="price_desc">Precio: mayor a menor</option>
+            </select>
+          </div>
+        </div>
 
-      <!-- Empty State -->
-      <div
-        *ngIf="!isLoading && properties.length === 0"
-        class="text-center py-16 bg-white rounded-2xl border border-dashed border-gray-200"
-      >
-        <div class="max-w-sm mx-auto">
-          <svg
-            class="w-12 h-12 mx-auto text-[#94a3b8] mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <!-- Grid de propiedades -->
+        <div
+          [ngClass]="{
+            'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6': viewMode === 'grid',
+            'space-y-4': viewMode === 'list'
+          }"
+          class="min-h-[400px]"
+        >
+          <app-property-card
+            *ngFor="let property of properties"
+            [property]="property"
+            [viewMode]="viewMode"
+            class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <h3 class="text-lg font-medium text-[#334155] mb-2">Sin resultados</h3>
-          <p class="text-[#64748b] text-sm">Ajusta los filtros para encontrar más propiedades</p>
+          </app-property-card>
+        </div>
+
+        <!-- Empty State con nuevo diseño -->
+        <div
+          *ngIf="!isLoading && properties.length === 0"
+          class="bg-white rounded-xl border border-dashed border-gray-200 p-12 text-center"
+        >
+          <div class="max-w-sm mx-auto space-y-6">
+            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+              <svg
+                class="w-10 h-10 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-lg font-medium text-gray-900">No encontramos resultados</h3>
+              <p class="text-sm text-gray-500">
+                Intenta ajustar los filtros o realizar una búsqueda diferente
+              </p>
+            </div>
+            <button
+              (click)="resetFilters()"
+              class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              Limpiar filtros
+            </button>
+          </div>
         </div>
       </div>
     </div>

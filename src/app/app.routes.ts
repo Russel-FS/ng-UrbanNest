@@ -43,7 +43,7 @@ export const routes: Routes = [
             component: MainComponent,
           },
           {
-            path: 'list',
+            path: 'search',
             component: PropertyListComponent,
           },
           {
