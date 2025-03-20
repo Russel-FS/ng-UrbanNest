@@ -39,14 +39,14 @@
             <p class="p-2 text-sm text-gray-600">No se encontraron sugerencias</p>
           </ng-container>
           <ul class="space-y-1">
-            <li 
+            <li
               @fadeInOut
               *ngFor="let suggestion of suggestions()"
               (click)="selectedSuggestion(suggestion)"
               class="text-sm text-gray-600 hover:bg-gray-50 p-2 pl-4 cursor-pointer transition-all duration-300"
             >
               {{ suggestion.label }}
-            </li> 
+            </li>
           </ul>
         </div>
       </div>
@@ -187,6 +187,21 @@
           </label>
         </div>
       </div>
+    </div>
+    <!-- Botones de navegación -->
+    <div class="flex justify-between pt-4">
+      <button
+        (click)="back()"
+        class="px-6 py-3 rounded-lg bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-all duration-200 transform hover:scale-105"
+      >
+        Atras
+      </button>
+      <button
+        (click)="continue()"
+        class="bg-gradient-to-r from-blue-900 to-blue-950 text-white font-medium hover:from-blue-900 hover:to-blue-950 px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
+      >
+        Continuar
+      </button>
     </div>
   </div>
 </div>

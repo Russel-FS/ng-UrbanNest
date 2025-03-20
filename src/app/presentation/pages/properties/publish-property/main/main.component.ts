@@ -22,7 +22,7 @@ import { PublishComponent } from '../publish/publish.component';
   styleUrl: './main.component.css',
 })
 export class MainComponent implements OnInit {
-  currentStep: number = 2;
+  currentStep: number = 4;
 
   constructor(private progressTrackerService: ProgressTrackerServiceService) {}
 

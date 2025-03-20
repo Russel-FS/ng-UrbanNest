@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ProgressTrackerServiceService } from '../../../../../core/services/progress-tracker-service.service';
 
 interface Caracteristica {
   id: string;
@@ -47,7 +48,10 @@ export class ExtrasComponent implements OnInit {
     construccion: { id: string; label: string; checked: boolean }[];
   };
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private progressTrackerService: ProgressTrackerServiceService
+  ) {
     this.caracteristicas = {
       generales: [
         { id: 'mascotas', label: 'Permite mascotas', checked: true },
@@ -140,5 +144,12 @@ export class ExtrasComponent implements OnInit {
         item.checked = true;
       }
     });
+  }
+
+  continue(): void {
+    this.progressTrackerService.nextStep();
+  }
+  back(): void {
+    this.progressTrackerService.backStep();
   }
 }

@@ -1,1 +1,73 @@
-<p>publish works!</p>
+<div class="min-h-screen bg-white">
+  <div class="max-w-5xl mx-auto px-4 py-24">
+    <!-- Header con animación sutil -->
+    <div class="space-y-6 mb-16 text-center">
+      <h2 class="text-5xl font-light tracking-tight text-gray-900">
+        Todo listo para publicar
+      </h2>
+      <p class="text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
+        Revisa los detalles una última vez antes de hacer visible tu propiedad al mundo
+      </p>
+    </div>
+
+    <!-- Resumen con diseño minimalista -->
+    <div class="grid gap-12">
+      <!-- Sección de Información Principal -->
+      <div class="space-y-8">
+        <div class="flex items-baseline border-b border-gray-100 pb-6">
+          <h3 class="text-4xl font-light text-gray-900">{{ property.type }}</h3>
+          <span class="ml-4 text-lg text-gray-400">{{ property.location }}</span>
+        </div>
+
+        <!-- Grid de detalles -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Características -->
+          <div class="space-y-6">
+            <h4 class="text-sm uppercase tracking-wider text-gray-400">Características</h4>
+            <ul class="space-y-4">
+              <li *ngFor="let char of property.characteristics" 
+                  class="text-lg text-gray-600 font-light flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                <span>{{ char }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Multimedia -->
+          <div class="space-y-6">
+            <h4 class="text-sm uppercase tracking-wider text-gray-400">Multimedia</h4>
+            <div class="space-y-4">
+              <p class="text-lg text-gray-600 font-light flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                <span>{{ property.photos.length }} fotografías</span>
+              </p>
+              <p class="text-lg text-gray-600 font-light flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                <span>{{ property.plans.length }} planos</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje de éxito con animación -->
+      <div *ngIf="publishMessage" 
+           class="bg-green-50 rounded-2xl p-8 text-center transform transition-all duration-500 ease-out"
+           [@fadeInOut]>
+        <p class="text-green-600 text-xl font-light">{{ publishMessage }}</p>
+      </div>
+
+      <!-- Botones con diseño minimalista -->
+      <div class="flex justify-center space-x-6 pt-8">
+        <button (click)="back()"
+                class="px-12 py-4 text-gray-600 hover:text-gray-900 font-light text-lg transition-colors duration-300">
+          Regresar
+        </button>
+        <button (click)="publish()"
+                class="px-8 py-2 bg-gray-900 text-white font-light text-lg rounded-full hover:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          Publicar ahora
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
