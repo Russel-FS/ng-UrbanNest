@@ -1,47 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PropertyCardComponent } from '../../../shared/components/property-card/property-card.component';
-
-interface Property {
-  id: string;
-  title: string;
-  price: number;
-  location: string;
-  type: 'house' | 'apartment' | 'office' | 'land';
-  status: 'available' | 'sold' | 'pending';
-  features: {
-    bedrooms: number;
-    bathrooms: number;
-    area: number;
-  };
-  images: String[];
-}
 
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule, PropertyCardComponent],
-  styleUrls: ['./property-list.component.css'],
+  styleUrls: ['./property-list.component.scss'],
 })
 export class PropertyListComponent implements OnInit {
-  properties: Property[] = [
-    {
-      id: '1',
-      title: 'Casa Moderna en Centro',
-      price: 250000,
-      location: 'Centro, Ciudad',
-      type: 'house',
-      status: 'available',
-      features: {
-        bedrooms: 3,
-        bathrooms: 2,
-        area: 150,
-      },
-      images: ['image1.jpg', 'image2.jpg', 'image3.jpg'],
-    },
-  ];
+  // Props y estado
+  properties: Property[] = [];
+  isLoading = false;
+  searchQuery = '';
+  sortOption = 'newest';
+  viewMode: 'grid' | 'list' = 'grid';
+  showMobileFilters = false;
 
   filterOptions = {
     status: 'all',
@@ -62,22 +39,112 @@ export class PropertyListComponent implements OnInit {
     { value: 'land', label: 'Terrenos' },
   ];
 
-  statusTypes = [
-    { value: 'all', label: 'Todos' },
-    { value: 'available', label: 'Disponible' },
-    { value: 'sold', label: 'Vendido' },
-    { value: 'pending', label: 'En Proceso' },
-  ];
+  constructor(private router: Router) {}
 
-  isLoading = false;
-  searchQuery = '';
-  sortOption = 'newest';
-  viewMode: 'grid' | 'list' = 'grid';
+  ngOnInit() {
+    this.loadProperties();
+  }
+
+  async loadProperties() {
+    this.isLoading = true;
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      this.properties = [
+        {
+          id: '1',
+          title: 'Moderno Apartamento en Miraflores',
+          price: 250000,
+          location: 'Miraflores, Lima',
+          type: 'apartment',
+          status: 'available',
+          features: {
+            bedrooms: 3,
+            bathrooms: 2,
+            area: 120,
+          },
+          images: [
+            'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+            'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg',
+          ],
+        },
+        {
+          id: '2',
+          title: 'Casa Familiar en La Molina',
+          price: 450000,
+          location: 'La Molina, Lima',
+          type: 'house',
+          status: 'available',
+          features: {
+            bedrooms: 4,
+            bathrooms: 3,
+            area: 280,
+          },
+          images: [
+            'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
+            'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
+          ],
+        },
+        {
+          id: '3',
+          title: 'Oficina Prime en San Isidro',
+          price: 380000,
+          location: 'San Isidro, Lima',
+          type: 'office',
+          status: 'pending',
+          features: {
+            bedrooms: 0,
+            bathrooms: 2,
+            area: 150,
+          },
+          images: [
+            'https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg',
+            'https://images.pexels.com/photos/1743555/pexels-photo-1743555.jpeg',
+          ],
+        },
+        {
+          id: '4',
+          title: 'Penthouse de Lujo en Barranco',
+          price: 750000,
+          location: 'Barranco, Lima',
+          type: 'apartment',
+          status: 'available',
+          features: {
+            bedrooms: 4,
+            bathrooms: 4,
+            area: 320,
+          },
+          images: [
+            'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg',
+            'https://images.pexels.com/photos/1643385/pexels-photo-1643385.jpeg',
+          ],
+        },
+        {
+          id: '5',
+          title: 'Terreno Industrial en Lurín',
+          price: 850000,
+          location: 'Lurín, Lima',
+          type: 'land',
+          status: 'available',
+          features: {
+            bedrooms: 0,
+            bathrooms: 0,
+            area: 1500,
+          },
+          images: [
+            'https://images.pexels.com/photos/5407074/pexels-photo-5407074.jpeg',
+          ],
+        }
+      ];
+    } finally {
+      this.isLoading = false;
+    }
+  }
 
   async applyFilters() {
     this.isLoading = true;
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 800));
+      // Aplicar filtros
     } finally {
       this.isLoading = false;
     }
@@ -97,12 +164,19 @@ export class PropertyListComponent implements OnInit {
     this.applyFilters();
   }
 
-  async searchProperties() {
-    this.isLoading = true;
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } finally {
-      this.isLoading = false;
+  sortProperties(option: string) {
+    switch (option) {
+      case 'price_asc':
+        this.properties.sort((a, b) => a.price - b.price);
+        break;
+      case 'price_desc':
+        this.properties.sort((a, b) => b.price - a.price);
+        break;
+      case 'newest':
+        this.properties.sort((a, b) => b.id.localeCompare(a.id));
+        break;
+      default:
+        break;
     }
   }
 
@@ -110,55 +184,36 @@ export class PropertyListComponent implements OnInit {
     this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid';
   }
 
-  sortProperties(option: string) {
-    this.sortOption = option;
+  viewPropertyDetails(id: string) {
+    this.router.navigate(['/property', id]);
   }
 
-  ngOnInit() {
-    this.loadProperties();
+  // Mobile filters
+  openFilters() {
+    this.showMobileFilters = true;
   }
 
-  private async loadProperties() {
-    this.isLoading = true;
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      this.properties = [
-        {
-          id: '1',
-          title: 'Apartamento de Lujo en Centro',
-          price: 450000,
-          location: 'Centro Histórico',
-          type: 'apartment',
-          status: 'available',
-          features: {
-            bedrooms: 3,
-            bathrooms: 2,
-            area: 180,
-          },
-          images: [
-            'https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg',
-            'apartment2.jpg',
-          ],
-        },
-        {
-          id: '2',
-          title: 'Casa de Lujo en el Bosque',
-          price: 650000,
-          location: 'Bosque Residencial',
-          type: 'house',
-          status: 'available',
-          features: {
-            bedrooms: 4,
-            bathrooms: 3,
-            area: 250,
-          },
-          images: [
-            'https://static-propia.kiteprop.com/7491665/111796568579772748410681886334922168132930152113908593833892870557879181327816.jpg',
-          ],
-        },
-      ];
-    } finally {
-      this.isLoading = false;
-    }
+  closeMobileFilters() {
+    this.showMobileFilters = false;
   }
+
+  applyFiltersAndClose() {
+    this.applyFilters();
+    this.closeMobileFilters();
+  }
+}
+
+interface Property {
+  id: string;
+  title: string;
+  price: number;
+  location: string;
+  type: 'house' | 'apartment' | 'office' | 'land';
+  status: 'available' | 'sold' | 'pending';
+  features: {
+    bedrooms: number;
+    bathrooms: number;
+    area: number;
+  };
+  images: string[];
 }
