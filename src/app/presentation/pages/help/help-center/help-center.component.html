@@ -1,1 +1,36 @@
-<p>help-center works!</p>
+<main class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+  <!-- Hero Section -->
+  <section class="relative h-[70vh] flex items-center justify-center bg-gradient-to-b from-slate-50/30 to-white/90" @fadeIn>
+    <div class="text-center px-6 max-w-4xl mx-auto space-y-12">
+      <h1 class="text-6xl md:text-7xl font-medium tracking-tight leading-tight">
+        Centro de <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-slate-600 to-slate-700">Ayuda</span>
+      </h1>
+      <p class="text-2xl text-slate-500 font-light leading-relaxed tracking-wide">
+        Encuentra respuestas rápidas a tus preguntas más frecuentes
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section class="py-32 px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16">
+      <div *ngFor="let category of categories" 
+           class="group p-12 rounded-3xl transition-all duration-700 hover:bg-slate-50/50 hover:shadow-[0_0_60px_rgba(0,0,0,0.02)] backdrop-blur-sm"
+           @fadeIn>
+        <div class="space-y-10">
+          <h3 class="text-3xl font-medium text-slate-800 tracking-tight">{{category.title}}</h3>
+          <ul class="space-y-6">
+            <li *ngFor="let topic of category.topics" 
+                class="group/item">
+              <a [href]="topic.link" 
+                 class="flex items-center gap-5 text-slate-500 hover:text-slate-900 transition-all duration-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-200 transition-all duration-300 group-hover/item:bg-slate-400"></span>
+                <span>{{topic.title}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
