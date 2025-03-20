@@ -10,6 +10,7 @@ import { PropertyListComponent } from './presentation/pages/properties/property-
 import { AccountSetupFormComponent } from './presentation/pages/properties/publish-property/account-setup-form/account-setup-form.component';
 import { MainComponent } from './presentation/pages/properties/publish-property/main/main.component';
 import { RentalGuideComponent } from './presentation/pages/guides/rental-guide/rental-guide.component';
+import { HelpCenterComponent } from './presentation/pages/help/help-center/help-center.component';
 
 export const routes: Routes = [
   // Rutas principales
@@ -57,6 +58,15 @@ export const routes: Routes = [
           {
             path: 'rental',
             component: RentalGuideComponent,
+          },
+        ],
+      },
+      {
+        path: 'help',
+        children: [
+          {
+            path: '',
+            component: HelpCenterComponent,
           },
         ],
       },
