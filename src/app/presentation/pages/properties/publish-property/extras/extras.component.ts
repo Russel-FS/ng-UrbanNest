@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 interface Caracteristica {
   id: string;
@@ -12,8 +13,27 @@ interface Caracteristica {
 @Component({
   selector: 'app-extras',
   templateUrl: './extras.component.html',
+  styleUrls: ['./extras.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate(
+          '300ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'translateY(0)' }),
+        animate(
+          '300ms cubic-bezier(0.35, 0, 0.25, 1)',
+          style({ opacity: 0, transform: 'translateY(10px)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ExtrasComponent implements OnInit {
   searchQuery: string = '';
