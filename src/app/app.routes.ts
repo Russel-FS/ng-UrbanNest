@@ -34,12 +34,21 @@ export const routes: Routes = [
         component: AccountSetupFormComponent,
       },
       {
-        path: 'property-main',
-        component: MainComponent,
-      },
-      {
-        path: 'property-list',
-        component: PropertyListComponent,
+        path: 'property',
+        children: [
+          {
+            path: 'publish',
+            component: MainComponent,
+          },
+          {
+            path: 'list',
+            component: PropertyListComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'publish',
+          },
+        ],
       },
       {
         path: 'admin',

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home', 
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage,RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   animations: [
