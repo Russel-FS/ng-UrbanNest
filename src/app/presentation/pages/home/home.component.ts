@@ -12,9 +12,9 @@ interface Suggestion {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.css',  
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
