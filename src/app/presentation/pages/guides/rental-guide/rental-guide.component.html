@@ -1,1 +1,48 @@
-<p>rental-guide works!</p>
+<main class="min-h-screen bg-white">
+  <!-- Hero Section -->
+  <section class="relative h-[80vh] flex items-center justify-center" @fadeIn>
+    <div class="text-center px-6 max-w-3xl mx-auto space-y-8">
+      <h1 class="text-5xl md:text-6xl font-medium tracking-tight text-gray-900">
+        Guía de Alquiler
+      </h1>
+      <p class="text-xl text-gray-500 font-light leading-relaxed">
+        Simplificamos el proceso para que encuentres tu hogar ideal
+      </p>
+    </div>
+  </section>
+
+  <!-- Steps Section -->
+  <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+      <div *ngFor="let step of steps; let i = index" 
+           class="group p-10 rounded-3xl transition-all duration-500 hover:bg-gray-50/50" 
+           @fadeIn>
+        <div class="space-y-8">
+          <span class="text-6xl font-light text-black/10">{{i + 1}}</span>
+          <h3 class="text-2xl font-medium text-gray-900">{{step.title}}</h3>
+          <p class="text-gray-500 leading-relaxed">{{step.description}}</p>
+          <div class="pt-4">
+            <ul class="space-y-4">
+              <li *ngFor="let requirement of step.requirements" 
+                  class="flex items-center gap-4 text-gray-600">
+                <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                {{requirement}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 text-center" @fadeIn>
+    <a href="#" 
+       class="inline-flex items-center px-8 py-4 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors">
+      Comenzar búsqueda
+      <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+</main>
