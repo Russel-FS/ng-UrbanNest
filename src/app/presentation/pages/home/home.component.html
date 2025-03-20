@@ -116,9 +116,53 @@
                 </svg>
                 <input
                   type="text"
+                  [(ngModel)]="searchQuery"
+                  (input)="onSearchInput()"
                   placeholder="Buscar por ubicación, tipo de propiedad..."
                   class="w-full pl-12 pr-4 py-3.5 bg-black/[0.02] border-0 rounded-xl text-sm focus:ring-0 placeholder-gray-400 transition-all duration-300 hover:bg-black/[0.04] cursor-text outline-none"
                 />
+
+                <!-- Lista de sugerencias -->
+                <div
+                  *ngIf="showSuggestions && filteredSuggestions.length > 0"
+                  class="absolute z-50 w-full mt-1 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden"
+                >
+                  <div class="max-h-64 overflow-y-auto">
+                    <div
+                      *ngFor="let suggestion of filteredSuggestions"
+                      (click)="selectSuggestion(suggestion)"
+                    >
+                      <div
+                        @fadeIn
+                        class="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors flex items-center gap-3"
+                      >
+                        <svg
+                          class="w-4 h-4 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <div>
+                          <p class="text-sm text-gray-700">{{ suggestion.name }}</p>
+                          <p class="text-xs text-gray-400">{{ suggestion.type }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <button
