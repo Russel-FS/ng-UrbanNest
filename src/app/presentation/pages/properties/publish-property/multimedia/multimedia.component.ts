@@ -7,6 +7,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import { ProgressTrackerServiceService } from '../../../../../core/services/progress-tracker-service.service';
 
 interface ImageDimensions {
   width: number;
@@ -53,6 +54,8 @@ export class MultimediaComponent implements OnDestroy {
       errorMessage: '',
     },
   };
+
+  constructor(private progressTrackerService: ProgressTrackerServiceService) {}
 
   // getters
   get photoFiles(): File[] {
@@ -226,5 +229,15 @@ export class MultimediaComponent implements OnDestroy {
     Object.values(this.mediaState).forEach((media) => {
       media.previews.forEach((url) => URL.revokeObjectURL(url));
     });
+  }
+
+  // Continuar al siguiente paso
+  continue(): void {
+    this.progressTrackerService.nextStep();
+  }
+
+  // Volver al paso anterior
+  back(): void {
+    this.progressTrackerService.backStep();
   }
 }

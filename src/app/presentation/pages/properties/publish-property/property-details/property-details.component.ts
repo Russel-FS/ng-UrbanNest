@@ -19,7 +19,7 @@ import { ProgressTrackerServiceService } from '../../../../../core/services/prog
   styleUrls: ['./property-details.component.css'],
 })
 export class PropertyDetailsComponent implements OnInit {
-  currentStep: number = 3;
+  currentStep: number = 1;
   constructor(private progressTrackerService: ProgressTrackerServiceService) {}
 
   ngOnInit(): void {}

@@ -90,9 +90,9 @@ export class AccountSetupFormComponent {
       this.isSubmitting = true;
       try {
         const formData: ContactData = this.setupForm.value;
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simular envío
+        await new Promise(resolve => setTimeout(resolve, 1000)); 
         console.log('Datos enviados:', formData);
-        // Aquí iría la navegación al siguiente paso
+        
       } finally {
         this.isSubmitting = false;
       }
