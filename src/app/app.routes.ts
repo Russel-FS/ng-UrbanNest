@@ -11,16 +11,6 @@ import { AccountSetupFormComponent } from './presentation/pages/properties/publi
 import { MainComponent } from './presentation/pages/properties/publish-property/main/main.component';
 
 export const routes: Routes = [
-  // Rutas de administración
-  {
-    path: 'admin',
-    children: adminRoutes,
-  },
-  // Rutas de agentes
-  {
-    path: 'agent',
-    children: agentRoutes,
-  },
   // Rutas principales
   {
     path: '',
@@ -28,6 +18,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
         component: HomeComponent,
       },
       {
@@ -42,6 +37,18 @@ export const routes: Routes = [
         path: 'property-main',
         component: MainComponent,
       },
+      {
+        path: 'property-list',
+        component: PropertyListComponent,
+      },
+      {
+        path: 'admin',
+        children: adminRoutes,
+      },
+      {
+        path: 'agent',
+        children: agentRoutes,
+      },
     ],
   },
   // Rutas de autenticación
@@ -53,15 +60,9 @@ export const routes: Routes = [
     path: 'auth/register',
     component: RegisterComponent,
   },
+  // Wildcard route
   {
-    path: 'property-list',
-    component: PropertyListComponent,
-  },
-
-  // Redirección por defecto
-  {
-    path: '',
-    redirectTo: 'admin',
-    pathMatch: 'full',
+    path: '**',
+    redirectTo: 'home',
   },
 ];
