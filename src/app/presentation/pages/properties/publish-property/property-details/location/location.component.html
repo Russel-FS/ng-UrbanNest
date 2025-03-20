@@ -1,33 +1,11 @@
-<div class="min-h-screen bg-gray-50 p-4 md:p-8">
-  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+<div class="min-h-screen bg-gray-50  md:p-8">
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl md:shadow-sm ">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:p-6">
       <!-- Mapa -->
       <div class="space-y-4">
         <h2 class="text-2xl font-bold text-gray-800">Ubicación en el mapa</h2>
         <div class="relative rounded-xl overflow-hidden border border-gray-200">
-          <div id="map" class="h-[400px] w-full"></div>
-          <div class="absolute top-4 right-4 z-10">
-            <button
-              (click)="searchLocation()"
-              class="bg-white rounded-lg shadow-sm px-4 py-2 flex items-center space-x-2 hover:bg-gray-50 transition-all duration-200"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <span class="text-gray-700 font-medium">Buscar</span>
-            </button>
-          </div>
+          <div id="map" class="h-[400px] w-full"></div> 
         </div>
         <p class="text-sm text-gray-600">
           Haz clic en el mapa para marcar la ubicación exacta de tu inmueble
@@ -107,51 +85,20 @@
             </div>
           </div>
 
-          <!-- Botones de acción -->
-          <div class="flex justify-between items-center pt-6">
+          <!-- Botones de acción --> 
+          <div class="flex justify-between pt-4">
             <button
-              type="button"
               (click)="backStep()"
-              class="px-6 py-2.5 border-2 rounded-full text-[#1a327c] hover:bg-blue-50 transition-all duration-300 flex items-center space-x-2"
+              class="px-6 py-3 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-all duration-200 transform hover:scale-105"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              <span>Atrás</span>
+              Atras
             </button>
-
             <button
-              type="submit"
-              (click)="nextStep()"
               [disabled]="!locationForm.valid"
-              class="px-6 py-2.5 bg-gray-900 rounded-full text-white hover:bg-[#154f96] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+              (click)="nextStep()"
+              class="px-6 py-3 rounded-full bg-gray-900 text-white font-medium hover:from-blue-900 hover:to-blue-950 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
             >
-              <span>Continuar</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              Continuar
             </button>
           </div>
         </form>
