@@ -23,62 +23,7 @@ interface Property {
   templateUrl: './property-list.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule, PropertyCardComponent],
-  styles: [
-    `
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateX(-20px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1); }
-    }
-
-    :host {
-      display: block;
-      min-height: 100vh;
-      background: #f8fafc;
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .animate-slide-in {
-      animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .property-card {
-      transition: all 0.3s ease;
-    }
-
-    .property-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    }
-
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-  `,
-  ],
+  styleUrls: ['./property-list.component.css'],
 })
 export class PropertyListComponent implements OnInit {
   properties: Property[] = [
@@ -155,7 +100,7 @@ export class PropertyListComponent implements OnInit {
   async searchProperties() {
     this.isLoading = true;
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } finally {
       this.isLoading = false;
     }
@@ -193,6 +138,22 @@ export class PropertyListComponent implements OnInit {
           images: [
             'https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg',
             'apartment2.jpg',
+          ],
+        },
+        {
+          id: '2',
+          title: 'Casa de Lujo en el Bosque',
+          price: 650000,
+          location: 'Bosque Residencial',
+          type: 'house',
+          status: 'available',
+          features: {
+            bedrooms: 4,
+            bathrooms: 3,
+            area: 250,
+          },
+          images: [
+            'https://static-propia.kiteprop.com/7491665/111796568579772748410681886334922168132930152113908593833892870557879181327816.jpg',
           ],
         },
       ];
