@@ -161,7 +161,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Guía para alquilar -->
       <a
-        href="#"
+        [routerLink]="['/guides/rental']"
         class="group flex flex-col items-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-300"
       >
         <div
@@ -367,7 +367,8 @@
               Dashboard de seguimiento
             </li>
           </ul>
-          <button [routerLink]="['/property/publish']"
+          <button
+            [routerLink]="['/property/publish']"
             class="bg-black text-white px-8 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-gray-900"
           >
             Publicar propiedad

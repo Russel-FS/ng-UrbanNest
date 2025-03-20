@@ -9,6 +9,7 @@ import { agentRoutes } from './presentation/pages/agent/agent.routes';
 import { PropertyListComponent } from './presentation/pages/properties/property-list/property-list.component';
 import { AccountSetupFormComponent } from './presentation/pages/properties/publish-property/account-setup-form/account-setup-form.component';
 import { MainComponent } from './presentation/pages/properties/publish-property/main/main.component';
+import { RentalGuideComponent } from './presentation/pages/guides/rental-guide/rental-guide.component';
 
 export const routes: Routes = [
   // Rutas principales
@@ -47,6 +48,15 @@ export const routes: Routes = [
           {
             path: '**',
             redirectTo: 'publish',
+          },
+        ],
+      },
+      {
+        path: 'guides',
+        children: [
+          {
+            path: 'rental',
+            component: RentalGuideComponent,
           },
         ],
       },
