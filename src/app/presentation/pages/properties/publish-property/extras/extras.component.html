@@ -189,18 +189,28 @@
       </div>
     </div>
     <!-- Botones de navegación -->
-    <div class="flex justify-between pt-4">
+    
+
+    <div class="flex justify-between space-x-8 pt-8">
       <button
         (click)="back()"
-        class="px-6 py-3 rounded-lg bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-all duration-200 transform hover:scale-105"
+        class="group px-12 py-4 text-gray-500 font-light text-lg relative overflow-hidden"
       >
-        Atras
+        <span class="relative z-10 group-hover:text-gray-900 transition-colors duration-300"
+          >Regresar</span
+        >
+        <div
+          class="absolute inset-0 w-0 bg-white transition-all duration-300 ease-out group-hover:w-full"
+        ></div>
       </button>
       <button
         (click)="continue()"
-        class="bg-gradient-to-r from-blue-900 to-blue-950 text-white font-medium hover:from-blue-900 hover:to-blue-950 px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
+        class="group px-12 py-4 bg-gradient-to-r from-blue-900 to-blue-900 text-white font-light text-lg rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 relative overflow-hidden"
       >
-        Continuar
+        <span class="relative z-10">Continuar</span>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-[#0b1430] to-[#0b1430] transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"
+        ></div>
       </button>
     </div>
   </div>
