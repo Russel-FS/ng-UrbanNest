@@ -18,7 +18,7 @@
           <a href="#" class="text-gray-800 hover:-translate-y-0.5 transition-all duration-200 py-3">
             Comprar
           </a>
-          <button 
+          <button
             (click)="toggleAlquilerMenu()"
             class="text-gray-800 hover:-translate-y-0.5 transition-all duration-200 flex items-center cursor-pointer py-3"
           >
@@ -43,22 +43,25 @@
           </a>
         </div>
 
-        <div class="hidden md:flex items-center space-x-8">
+        <div class="hidden md:flex items-center space-x-6">
           <a
             [routerLink]="['/auth/login']"
-            class="text-sm font-medium text-gray-800 hover:-translate-y-0.5 transition-all duration-200"
+            class="text-[15px] font-medium text-gray-600 hover:text-black transition-colors duration-300"
           >
             Acceder
           </a>
           <a
             [routerLink]="['/property-main']"
-            class="bg-black hover:scale-105 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shadow-lg shadow-gray-200/50"
+            class="px-5 py-2.5 bg-gray-900 hover:bg-black text-[15px] font-medium text-white rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-black/[0.08]"
           >
             Publicar Propiedad
           </a>
         </div>
 
-        <button class="md:hidden p-2 hover:bg-black/5 rounded-full transition-colors">
+        <button
+          class="md:hidden p-2 hover:bg-black/5 rounded-full transition-colors"
+          (click)="toggleMobileMenu()"
+        >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -159,6 +162,123 @@
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Aside -->
+  <aside *ngIf="isMobileMenuOpen" class="fixed inset-0 z-50 md:hidden">
+    <!-- Overlay -->
+    <div
+      class="fixed inset-0 bg-black/30 backdrop-blur-md"
+      (click)="toggleMobileMenu()"
+      @fadeOverlay
+    ></div>
+
+    <!-- Panel lateral-->
+    <div
+      [@slideInOut]
+      class="fixed inset-y-0 left-0 w-[85%] max-w-[360px] bg-white/95 backdrop-blur-xl shadow-2xl"
+    >
+      <div class="flex flex-col h-full">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-100">
+          <div class="flex items-center space-x-3">
+            <img src="logo/logo.svg" alt="image" class="h-8 w-8" />
+            <h2
+              class="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+            >
+              Bro<span class="font-bold">ker</span>
+            </h2>
+          </div>
+          <button
+            (click)="toggleMobileMenu()"
+            class="p-2.5 rounded-xl hover:bg-black/[0.03] active:bg-black/[0.06] transition-colors duration-300"
+          >
+            <svg class="w-5 h-5 stroke-[1.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Navegación  -->
+        <nav class="flex-1 overflow-y-auto px-6 py-8">
+          <div class="space-y-1.5">
+            <a
+              href="#"
+              class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
+            >
+              <span>Comprar</span>
+              <svg
+                class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 group-hover:translate-x-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+            <a
+              href="#"
+              class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
+            >
+              <span>Alquilar</span>
+              <svg
+                class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 group-hover:translate-x-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+            <a
+              href="#"
+              class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
+            >
+              <span>Proyectos</span>
+              <svg
+                class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 group-hover:translate-x-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Footer -->
+        <div class="p-6 border-t border-gray-100/70 space-y-3">
+          <a
+            [routerLink]="['/auth/login']"
+            class="flex items-center justify-center w-full px-4 py-3.5 rounded-xl border border-gray-200/70 text-[15px] font-medium text-gray-700 hover:text-black hover:border-gray-300 hover:bg-black/[0.02] active:bg-black/[0.05] transition-all duration-300"
+          >
+            Acceder
+          </a>
+          <a
+            [routerLink]="['/property-main']"
+            class="flex items-center justify-center w-full px-4 py-3.5 bg-gray-900 hover:bg-black text-[15px] font-medium text-white rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-black/[0.08]"
+          >
+            Publicar Propiedad
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- Main Content -->
   <main class="flex-1 pt-15 min-h-screen">
