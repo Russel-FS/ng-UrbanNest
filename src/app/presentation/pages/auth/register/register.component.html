@@ -66,21 +66,21 @@
           />
         </div>
 
-        <!-- Tipo de usuario -->
+        <!-- DNI -->
         <div class="relative group">
           <img
-            src="icons/building.svg"
+            src="icons/id-card.svg"
             class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-300 group-hover:text-gray-600"
-            alt="building icon"
+            alt="id card icon"
           />
-          <select
-            formControlName="userType"
-            class="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-100 rounded-2xl text-base focus:ring-2 focus:ring-black/5 focus:border-gray-200 placeholder-gray-400 transition-all duration-300 hover:bg-gray-50/80 appearance-none"
-          >
-            <option value="" disabled selected>Selecciona el tipo de usuario</option>
-            <option value="buyer">Comprador</option>
-            <option value="seller">Vendedor</option>
-          </select>
+          <input
+            formControlName="dni"
+            type="text"
+            class="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-100 rounded-2xl text-base focus:ring-2 focus:ring-black/5 focus:border-gray-200 placeholder-gray-400 transition-all duration-300 hover:bg-gray-50/80"
+            placeholder="DNI"
+            required
+            maxlength="8"
+          />
         </div>
 
         <!-- Contraseña -->
