@@ -1,71 +1,76 @@
-<div class="min-h-screen bg-white">
-  <div class="max-w-5xl mx-auto px-4 py-24">
-    <!-- Header con animación sutil -->
-    <div class="space-y-6 mb-16 text-center">
-      <h2 class="text-5xl font-light tracking-tight text-gray-900">
-        Todo listo para publicar
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+  <div class="max-w-5xl mx-auto px-4 py-32">
+    <!-- Header Elegante -->
+    <div class="space-y-8 mb-20 text-center">
+      <span class="block text-blue-600 text-sm font-medium tracking-wider uppercase">Último paso</span>
+      <h2 class="text-6xl font-light tracking-tight text-gray-900 leading-tight">
+        Tu propiedad está<br/>lista para brillar
       </h2>
-      <p class="text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
-        Revisa los detalles una última vez antes de hacer visible tu propiedad al mundo
-      </p>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full"></div>
     </div>
 
-    <!-- Resumen con diseño minimalista -->
-    <div class="grid gap-12">
-      <!-- Sección de Información Principal -->
-      <div class="space-y-8">
-        <div class="flex items-baseline border-b border-gray-100 pb-6">
-          <h3 class="text-4xl font-light text-gray-900">{{ property.type }}</h3>
-          <span class="ml-4 text-lg text-gray-400">{{ property.location }}</span>
+    <!-- Contenedor Principal -->
+    <div class="backdrop-blur-lg bg-white/70 rounded-3xl shadow-2xl border border-white/20 p-12 space-y-16">
+      <!-- Información Principal -->
+      <div class="grid gap-16">
+        <div class="flex items-baseline space-x-4">
+          <h3 class="text-5xl font-extralight text-gray-900">{{ property.type }}</h3>
+          <span class="text-xl text-blue-500 font-light">{{ property.location }}</span>
         </div>
 
-        <!-- Grid de detalles -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Grid de Detalles  -->
+        <div class="grid md:grid-cols-2 gap-16">
           <!-- Características -->
-          <div class="space-y-6">
-            <h4 class="text-sm uppercase tracking-wider text-gray-400">Características</h4>
-            <ul class="space-y-4">
+          <div class="space-y-8">
+            <h4 class="text-xs uppercase tracking-[0.2em] text-gray-400 font-medium">Características</h4>
+            <ul class="space-y-6">
               <li *ngFor="let char of property.characteristics" 
-                  class="text-lg text-gray-600 font-light flex items-center space-x-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                <span>{{ char }}</span>
+                  class="text-xl text-gray-600 font-light flex items-center space-x-3 group">
+                <span class="w-2 h-2 rounded-full bg-blue-500 group-hover:scale-150 transition-transform duration-300"></span>
+                <span class="group-hover:text-gray-900 transition-colors duration-300">{{ char }}</span>
               </li>
             </ul>
           </div>
 
-          <!-- Multimedia -->
-          <div class="space-y-6">
-            <h4 class="text-sm uppercase tracking-wider text-gray-400">Multimedia</h4>
-            <div class="space-y-4">
-              <p class="text-lg text-gray-600 font-light flex items-center space-x-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                <span>{{ property.photos.length }} fotografías</span>
+          <!-- Multimedia  -->
+          <div class="space-y-8">
+            <h4 class="text-xs uppercase tracking-[0.2em] text-gray-400 font-medium">Multimedia</h4>
+            <div class="space-y-6">
+              <p class="text-xl text-gray-600 font-light flex items-center space-x-3 group">
+                <span class="w-2 h-2 rounded-full bg-blue-500 group-hover:scale-150 transition-transform duration-300"></span>
+                <span class="group-hover:text-gray-900 transition-colors duration-300">
+                  {{ property.photos.length }} fotografías profesionales
+                </span>
               </p>
-              <p class="text-lg text-gray-600 font-light flex items-center space-x-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                <span>{{ property.plans.length }} planos</span>
+              <p class="text-xl text-gray-600 font-light flex items-center space-x-3 group">
+                <span class="w-2 h-2 rounded-full bg-blue-500 group-hover:scale-150 transition-transform duration-300"></span>
+                <span class="group-hover:text-gray-900 transition-colors duration-300">
+                  {{ property.plans.length }} planos arquitectónicos
+                </span>
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Mensaje de éxito con animación -->
+      <!-- Mensaje de Éxito -->
       <div *ngIf="publishMessage" 
-           class="bg-green-50 rounded-2xl p-8 text-center transform transition-all duration-500 ease-out"
+           class="py-8 text-center transform"
            [@fadeInOut]>
-        <p class="text-green-600 text-xl font-light">{{ publishMessage }}</p>
+        <p class="text-2xl text-blue-600 font-light">{{ publishMessage }}</p>
       </div>
 
-      <!-- Botones con diseño minimalista -->
-      <div class="flex justify-center space-x-6 pt-8">
+      <!-- Botones  -->
+      <div class="flex justify-center space-x-8 pt-8">
         <button (click)="back()"
-                class="px-12 py-4 text-gray-600 hover:text-gray-900 font-light text-lg transition-colors duration-300">
-          Regresar
+                class="group px-12 py-4 text-gray-500 font-light text-lg relative overflow-hidden">
+          <span class="relative z-10 group-hover:text-gray-900 transition-colors duration-300">Regresar</span>
+          <div class="absolute inset-0 w-0 bg-gray-50 transition-all duration-300 ease-out group-hover:w-full"></div>
         </button>
         <button (click)="publish()"
-                class="px-8 py-2 bg-gray-900 text-white font-light text-lg rounded-full hover:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-          Publicar ahora
+                class="group px-12 py-4 bg-gradient-to-r from-blue-900 to-blue-900 text-white font-light text-lg rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 relative overflow-hidden">
+          <span class="relative z-10">Publicar ahora</span>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0b1430] to-[#0b1430] transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
         </button>
       </div>
     </div>
