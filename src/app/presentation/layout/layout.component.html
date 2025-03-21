@@ -1,6 +1,6 @@
 <div class="min-h-screen flex flex-col bg-[#f5f5f7]">
   <!-- Header/Nav -->
-  <nav class="backdrop-blur-2xl bg-white/90 fixed w-full z-30 border-b border-white/10">
+  <nav class="backdrop-blur-2xl bg-white/90 fixed w-full z-50 border-b border-white/10">
     <div class="max-w-[1500px] mx-auto relative">
       <div class="flex items-center justify-between px-8 py-3">
         <div class="flex items-center cursor-pointer" [routerLink]="['/home']">
@@ -21,11 +21,14 @@
           >
             Inicio
           </a>
-          <a href="#" class="text-gray-800 hover:-translate-y-0.5 transition-all duration-200 py-3">
+          <a
+            [routerLink]="['/property/search']"
+            class="text-gray-800 hover:-translate-y-0.5 transition-all duration-200 py-3"
+          >
             Comprar
           </a>
           <button
-            (click)="toggleAlquilerMenu()"
+            (click)="toggleAlquilerMenu()" 
             class="text-gray-800 hover:-translate-y-0.5 transition-all duration-200 flex items-center cursor-pointer py-3"
           >
             Alquilar
@@ -84,9 +87,9 @@
         *ngIf="isAlquilerOpen"
         @fade
         (mouseleave)="hideAlquilerMenu()"
-        class="absolute left-0 right-0 top-full max-w-7xl mx-auto"
+        class="absolute left-0 right-0 top-full max-w-7xl mx-auto z-[60]"
       >
-        <div class="relative z-20 mx-auto px-4 py-2">
+        <div class="relative mx-auto px-4 py-2">
           <div
             class="relative bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] mx-auto w-full max-w-7xl rounded-2xl border border-white/20"
           >
@@ -208,6 +211,7 @@
         <nav class="flex-1 overflow-y-auto px-6 py-8">
           <div class="space-y-1.5">
             <a
+              (click)="toggleMobileMenu()"
               [routerLink]="['/home']"
               class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
             >
@@ -227,7 +231,8 @@
               </svg>
             </a>
             <a
-              href="#"
+              (click)="toggleMobileMenu()"
+              [routerLink]="['/property/search']"
               class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
             >
               <span>Comprar</span>
@@ -246,7 +251,8 @@
               </svg>
             </a>
             <a
-              href="#"
+              (click)="toggleMobileMenu()"
+              [routerLink]="['/property/search']"
               class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
             >
               <span>Alquilar</span>
@@ -265,6 +271,7 @@
               </svg>
             </a>
             <a
+              (click)="toggleMobileMenu()"
               href="#"
               class="group flex items-center px-4 py-3.5 rounded-xl text-[15px] text-gray-600 hover:text-black hover:bg-black/[0.03] active:bg-black/[0.06] transition-all duration-300"
             >
