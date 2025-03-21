@@ -81,86 +81,87 @@
           </svg>
         </button>
       </div>
+    </div>
+  </nav>
+  <!-- Menú desplegable -->
+  <div class="relative">
+    <div
+      *ngIf="isAlquilerOpen"
+      @fade
+      (mouseleave)="hideAlquilerMenu()"
+      class="absolute left-0 right-0 top-16 max-w-7xl mx-auto z-[90]"
+    >
+      <!--Overlay-->
 
-      <!-- Menú desplegable -->
-      <div
-        *ngIf="isAlquilerOpen"
-        @fade
-        (mouseleave)="hideAlquilerMenu()"
-        class="absolute left-0 right-0 top-full max-w-7xl mx-auto z-[90]"
-      >
-        <div class="relative mx-auto px-4 py-2">
-          <div
-            class="relative overflow-hidden bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)] mx-auto w-full max-w-7xl rounded-3xl border border-white/40"
-          >
-            <div class="relative p-12">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
-                <!-- Columna Tipo -->
-                <div class="space-y-8">
-                  <h3 class="font-medium text-gray-900 text-lg">Por tipo</h3>
-                  <div class="space-y-4">
-                    <a href="#" class="group flex items-center space-x-2 text-gray-600">
-                      <span class="text-sm transition-all duration-300 group-hover:text-black"
-                        >Apartamentos</span
-                      >
-                      <svg
-                        class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M5 12h14m-7-7l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
+      <div class="relative mx-auto px-4 py-2">
+        <div
+          class="relative overflow-hidden bg-white/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.08)] mx-auto w-full max-w-7xl rounded-3xl border border-white/40"
+        >
+          <div class="relative p-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
+              <!-- Columna Tipo -->
+              <div class="space-y-8">
+                <h3 class="font-medium text-gray-900 text-lg">Por tipo</h3>
+                <div class="space-y-4">
+                  <a href="#" class="group flex items-center space-x-2 text-gray-600">
+                    <span class="text-sm transition-all duration-300 group-hover:text-black"
+                      >Apartamentos</span
+                    >
+                    <svg
+                      class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M5 12h14m-7-7l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
                 </div>
+              </div>
 
-                <!-- Columna Zona -->
-                <div class="space-y-8">
-                  <h3 class="font-medium text-gray-900 text-lg">Por zona</h3>
-                  <div class="space-y-4">
-                    <a href="#" class="group flex items-center space-x-2 text-gray-600">
-                      <span class="text-sm transition-all duration-300 group-hover:text-black"
-                        >Lima Moderna</span
-                      >
-                      <svg
-                        class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M5 12h14m-7-7l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
+              <!-- Columna Zona -->
+              <div class="space-y-8">
+                <h3 class="font-medium text-gray-900 text-lg">Por zona</h3>
+                <div class="space-y-4">
+                  <a href="#" class="group flex items-center space-x-2 text-gray-600">
+                    <span class="text-sm transition-all duration-300 group-hover:text-black"
+                      >Lima Moderna</span
+                    >
+                    <svg
+                      class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M5 12h14m-7-7l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
                 </div>
+              </div>
 
-                <!-- Destacados -->
-                <div class="space-y-8">
-                  <h3 class="font-medium text-gray-900 text-lg">Destacados</h3>
-                  <div class="relative overflow-hidden rounded-2xl group">
-                    <img
-                      src="https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg"
-                      alt="Propiedad destacada"
-                      class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div
-                      class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"
-                    ></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h4 class="font-medium">Apartamento Lima</h4>
-                      <p class="text-sm text-white/80 mt-1">Desde $1,200/mes</p>
-                    </div>
+              <!-- Destacados -->
+              <div class="space-y-8">
+                <h3 class="font-medium text-gray-900 text-lg">Destacados</h3>
+                <div class="relative overflow-hidden rounded-2xl group">
+                  <img
+                    src="https://limasabe.pe/wp-content/uploads/2021/07/comprar-un-departamento-en-Lima.jpg"
+                    alt="Propiedad destacada"
+                    class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h4 class="font-medium">Apartamento Lima</h4>
+                    <p class="text-sm text-white/80 mt-1">Desde $1,200/mes</p>
                   </div>
                 </div>
               </div>
@@ -169,8 +170,7 @@
         </div>
       </div>
     </div>
-  </nav>
-
+  </div>
   <!-- Mobile Aside -->
   <aside *ngIf="isMobileMenuOpen" class="fixed inset-0 z-50 md:hidden">
     <!-- Overlay -->
