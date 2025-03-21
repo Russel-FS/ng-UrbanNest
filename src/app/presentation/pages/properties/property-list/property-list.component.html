@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-[#f8fafc]">
   <!-- Header compacto -->
-  <div class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 py-3">
+  <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center gap-6">
         <!-- Logo -->
         <a routerLink="/" class="text-xl font-semibold text-gray-900"> UrbanNest </a>
@@ -258,16 +258,28 @@
   </div>
 
   <!-- Modal de filtros (móvil) -->
-  <div *ngIf="showMobileFilters" class="fixed inset-0 z-50 lg:hidden" (click)="closeMobileFilters()">
+  <div
+    *ngIf="showMobileFilters"
+    class="fixed inset-0 z-50 lg:hidden"
+    (click)="closeMobileFilters()"
+  >
     <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
-    <div class="absolute inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl" (click)="$event.stopPropagation()">
+    <div
+      class="absolute inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl"
+      (click)="$event.stopPropagation()"
+    >
       <div class="h-full flex flex-col">
         <!-- Header del modal -->
         <div class="flex items-center justify-between p-4 border-b">
           <h2 class="text-lg font-medium text-gray-900">Filtros</h2>
           <button (click)="closeMobileFilters()" class="p-2 text-gray-400 hover:text-gray-500">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -279,11 +291,13 @@
             <div class="space-y-2">
               <label class="text-sm font-medium text-gray-700">Tipo de propiedad</label>
               <div class="grid grid-cols-2 gap-2">
-                <div *ngFor="let type of propertyTypes" 
-                     class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer"
-                     [class.bg-black]="filterOptions.type === type.value"
-                     [class.text-white]="filterOptions.type === type.value"
-                     (click)="filterOptions.type = type.value">
+                <div
+                  *ngFor="let type of propertyTypes"
+                  class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer"
+                  [class.bg-gray-900]="filterOptions.type === type.value"
+                  [class.text-white]="filterOptions.type === type.value"
+                  (click)="filterOptions.type = type.value"
+                >
                   <span class="text-sm">{{ type.label }}</span>
                 </div>
               </div>
@@ -294,14 +308,26 @@
               <label class="text-sm font-medium text-gray-700">Rango de precio</label>
               <div class="flex items-center gap-2">
                 <div class="relative flex-1">
-                  <input type="number" [(ngModel)]="filterOptions.price.min"
-                         placeholder="Min" class="w-full pl-7 pr-2 py-3 bg-gray-50 border-0 rounded-xl text-sm"/>
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                  <input
+                    type="number"
+                    [(ngModel)]="filterOptions.price.min"
+                    placeholder="Min"
+                    class="w-full pl-7 pr-2 py-3 bg-gray-50 border-0 rounded-xl text-sm"
+                  />
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"
+                    >$</span
+                  >
                 </div>
                 <div class="relative flex-1">
-                  <input type="number" [(ngModel)]="filterOptions.price.max"
-                         placeholder="Max" class="w-full pl-7 pr-2 py-3 bg-gray-50 border-0 rounded-xl text-sm"/>
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                  <input
+                    type="number"
+                    [(ngModel)]="filterOptions.price.max"
+                    placeholder="Max"
+                    class="w-full pl-7 pr-2 py-3 bg-gray-50 border-0 rounded-xl text-sm"
+                  />
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"
+                    >$</span
+                  >
                 </div>
               </div>
             </div>
@@ -312,11 +338,13 @@
               <div>
                 <label class="text-sm font-medium text-gray-700">Habitaciones</label>
                 <div class="mt-2 grid grid-cols-5 gap-2">
-                  <button *ngFor="let n of [0,1,2,3,4,5]"
-                          (click)="filterOptions.features.minBedrooms = n"
-                          [class.bg-black]="filterOptions.features.minBedrooms === n"
-                          [class.text-white]="filterOptions.features.minBedrooms === n"
-                          class="p-2 text-sm bg-gray-50 rounded-lg">
+                  <button
+                    *ngFor="let n of [0, 1, 2, 3, 4, 5]"
+                    (click)="filterOptions.features.minBedrooms = n"
+                    [class.bg-gray-900]="filterOptions.features.minBedrooms === n"
+                    [class.text-white]="filterOptions.features.minBedrooms === n"
+                    class="p-2 text-sm bg-gray-50 rounded-lg"
+                  >
                     {{ n === 0 ? 'Todos' : n + '+' }}
                   </button>
                 </div>
@@ -326,11 +354,13 @@
               <div>
                 <label class="text-sm font-medium text-gray-700">Baños</label>
                 <div class="mt-2 grid grid-cols-5 gap-2">
-                  <button *ngFor="let n of [0,1,2,3,4]"
-                          (click)="filterOptions.features.minBathrooms = n"
-                          [class.bg-black]="filterOptions.features.minBathrooms === n"
-                          [class.text-white]="filterOptions.features.minBathrooms === n"
-                          class="p-2 text-sm bg-gray-50 rounded-lg">
+                  <button
+                    *ngFor="let n of [0, 1, 2, 3, 4]"
+                    (click)="filterOptions.features.minBathrooms = n"
+                    [class.bg-gray-900]="filterOptions.features.minBathrooms === n"
+                    [class.text-white]="filterOptions.features.minBathrooms === n"
+                    class="p-2 text-sm bg-gray-50 rounded-lg"
+                  >
                     {{ n === 0 ? 'Todos' : n + '+' }}
                   </button>
                 </div>
@@ -340,9 +370,15 @@
               <div>
                 <label class="text-sm font-medium text-gray-700">Área mínima</label>
                 <div class="relative mt-2">
-                  <input type="number" [(ngModel)]="filterOptions.features.minArea"
-                         placeholder="m²" class="w-full pl-3 pr-12 py-3 bg-gray-50 border-0 rounded-xl text-sm"/>
-                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">m²</span>
+                  <input
+                    type="number"
+                    [(ngModel)]="filterOptions.features.minArea"
+                    placeholder="m²"
+                    class="w-full pl-3 pr-12 py-3 bg-gray-50 border-0 rounded-xl text-sm"
+                  />
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"
+                    >m²</span
+                  >
                 </div>
               </div>
             </div>
@@ -352,12 +388,16 @@
         <!-- Footer con botones -->
         <div class="p-4 border-t bg-white">
           <div class="grid grid-cols-2 gap-3">
-            <button (click)="resetFilters()"
-                    class="px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200">
+            <button
+              (click)="resetFilters()"
+              class="px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200"
+            >
               Limpiar filtros
             </button>
-            <button (click)="applyFiltersAndClose()"
-                    class="px-4 py-3 text-sm font-medium text-white bg-black rounded-xl hover:bg-gray-900">
+            <button
+              (click)="applyFiltersAndClose()"
+              class="px-4 py-3 text-sm font-medium text-white bg-black rounded-xl hover:bg-gray-900"
+            >
               Aplicar filtros
             </button>
           </div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyCardComponent } from '../../../shared/components/property-card/property-card.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-property-list',
@@ -10,6 +11,14 @@ import { PropertyCardComponent } from '../../../shared/components/property-card/
   standalone: true,
   imports: [CommonModule, FormsModule, PropertyCardComponent],
   styleUrls: ['./property-list.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('void => visible', animate('500ms ease-in')),
+      transition('visible => void', animate('500ms ease-out')),
+    ]),
+  ],
 })
 export class PropertyListComponent implements OnInit {
   // Props y estado
@@ -48,7 +57,7 @@ export class PropertyListComponent implements OnInit {
   async loadProperties() {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       this.properties = [
         {
           id: '1',
@@ -130,10 +139,8 @@ export class PropertyListComponent implements OnInit {
             bathrooms: 0,
             area: 1500,
           },
-          images: [
-            'https://images.pexels.com/photos/5407074/pexels-photo-5407074.jpeg',
-          ],
-        }
+          images: ['https://images.pexels.com/photos/5407074/pexels-photo-5407074.jpeg'],
+        },
       ];
     } finally {
       this.isLoading = false;
@@ -143,7 +150,7 @@ export class PropertyListComponent implements OnInit {
   async applyFilters() {
     this.isLoading = true;
     try {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 800));
       // Aplicar filtros
     } finally {
       this.isLoading = false;
