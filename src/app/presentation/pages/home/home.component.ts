@@ -118,6 +118,8 @@ export class HomeComponent {
   ];
   filteredSuggestions: Suggestion[] = [];
 
+  selectedButton: 'alquilar' | 'comprar' | 'proyectos' = 'alquilar';
+
   onSearchInput() {
     if (this.searchQuery.length > 0) {
       this.filteredSuggestions = this.suggestions.filter((suggestion) =>
@@ -128,6 +130,10 @@ export class HomeComponent {
       this.showSuggestions = false;
       this.filteredSuggestions = [];
     }
+  }
+
+  selectButton(button: 'alquilar' | 'comprar' | 'proyectos') {
+    this.selectedButton = button;
   }
 
   selectSuggestion(suggestion: Suggestion) {
