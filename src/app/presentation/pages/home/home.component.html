@@ -29,31 +29,39 @@
       <div class="w-full max-w-4xl mx-auto" @fadeIn>
         <!-- Tabs -->
         <div class="flex justify-center mb-6">
-          <div class="inline-flex p-1 bg-white/10 backdrop-blur-md rounded-xl space-x-1">
+          <div
+            class="inline-flex flex-wrap gap-2 p-1.5 bg-white/10 backdrop-blur-md rounded-xl w-full sm:w-auto"
+          >
             <button
               type="button"
               (click)="selectButton('alquilar')"
-              [class]="selectedButton === 'alquilar' ? 
-                'px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95' : 
-                'px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'"
+              [class]="
+                selectedButton === 'alquilar'
+                  ? 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95'
+                  : 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'
+              "
             >
               Alquilar
             </button>
             <button
               type="button"
               (click)="selectButton('comprar')"
-              [class]="selectedButton === 'comprar' ? 
-                'px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95' : 
-                'px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'"
+              [class]="
+                selectedButton === 'comprar'
+                  ? 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95'
+                  : 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'
+              "
             >
               Comprar
             </button>
             <button
               type="button"
               (click)="selectButton('proyectos')"
-              [class]="selectedButton === 'proyectos' ? 
-                'px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95' : 
-                'px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'"
+              [class]="
+                selectedButton === 'proyectos'
+                  ? 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium bg-white shadow-md text-gray-900 transition-all duration-300 hover:shadow-lg active:scale-95'
+                  : 'flex-1 sm:flex-initial px-6 sm:px-8 py-3 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-all duration-300 active:scale-95'
+              "
             >
               Proyectos
             </button>
